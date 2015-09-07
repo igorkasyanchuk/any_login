@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <h1>Hello, <%= current_user.name %></h2>
+<% else %>
+  <h1>Please sign up...</h1>
+<% end %>
+
+<p>
+  <%= link_to 'Secret Page', '/about' %>
+</p>
