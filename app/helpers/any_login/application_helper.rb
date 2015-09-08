@@ -6,9 +6,9 @@ module AnyLogin
       options = {}
       #options = { :include_blank => true }
       if AnyLogin.login_on == :both
-        options[:onchange] = "jQuery(this).parents('form').submit()"
+        options[:onchange] = 'AnyLogin.on_select_change();'
       end
-      options[:prompt] = 'Select ...'
+      options[:prompt] = AnyLogin.select_prompt
       select_tag :loginable_id, options_for_select(select_options), options
     end
 

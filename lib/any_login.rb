@@ -32,10 +32,16 @@ module AnyLogin
   @@login_on = :both
 
   mattr_accessor :position
-  @@position = :top_right # top_left, top_right, bottom_left, bottom_right
+  @@position = :bottom_left # top_left, top_right, bottom_left, bottom_right
+
+  mattr_accessor :login_button_label
+  @@login_button_label = 'Login'
+
+  mattr_accessor :select_prompt
+  @@select_prompt = 'Select User'
 
   def self.setup
-    yield self
+    yield(self)
   end
 
   def self.collection
@@ -47,7 +53,7 @@ module AnyLogin
   end
 
   def self.assets
-    @@assets ||= ['any_login/init.js', 'any_login/init.css']
+    @@assets ||= ['any_login/person.png']
   end
 
 end

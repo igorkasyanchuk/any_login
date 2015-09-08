@@ -1,14 +1,25 @@
 <div id='any_login' class='<%= any_login_position %>'>
   <%= form_tag any_login.sign_in_path, :method => :post do %>
-    <%= image_tag 'any_login/person_small.png', onclick: "jQuery(this).parents('form').find('span').toggle(); jQuery('#any_login').toggleClass('any_login_visible');" %>
+    <%= image_tag 'any_login/person.png', onclick: "AnyLogin.on_image_click();" %>
     <span>
       <%= loginable_select %>
       or by
       <%= text_field_tag :id, '', :placeholder => "ID", size: 6 %>
-      <%= submit_tag 'Login' %>
+      <%= submit_tag AnyLogin.login_button_label %>
     </span>
   <% end %>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+  var AnyLogin = {};
+  AnyLogin.on_image_click = function() {
+    jQuery('#any_login').find('span').toggle();
+    jQuery('#any_login').toggleClass('any_login_visible');
+  }
+  AnyLogin.on_select_change = function() {
+    jQuery('#any_login form').submit();
+  }
+</script>
 
 <style type="text/css" media="screen">
   #any_login {
