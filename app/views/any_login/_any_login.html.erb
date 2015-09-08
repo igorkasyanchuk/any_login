@@ -1,4 +1,4 @@
-<div id='any_login' class='<%= any_login_position %>'>
+<div id='any_login' class='<%= any_login_klasses %>'>
   <%= form_tag any_login.sign_in_path, :method => :post do %>
     <%= image_tag 'any_login/person.png', onclick: "AnyLogin.on_image_click();" %>
     <span>
@@ -6,6 +6,8 @@
       or by
       <%= text_field_tag :id, '', :placeholder => "ID", size: 6 %>
       <%= submit_tag AnyLogin.login_button_label %>
+
+      <%= current_user_information %>
     </span>
   <% end %>
 </div>
@@ -29,6 +31,7 @@
     color: white;
     font-size: 16px;
     line-height: 20px;
+    height: 30px;
   }
   #any_login.any_login_top_left {
     top: 0;
@@ -50,7 +53,11 @@
     opacity: 1;
   }
   #any_login img {
+    cursor: pointer;
     vertical-align: middle;
+  }
+  #any_login:hover {
+    opacity: 1;
   }
   #any_login form {
     padding: 4px 6px;
@@ -58,5 +65,12 @@
   }
   #any_login span {
     display: none;
+    vertical-align: middle;
+  }
+  #any_login.any_login_auto_show span {
+    display: inline;
+  }
+  #any_login .any_login_user_information {
+    padding-left: 10px;
   }
 </style>
