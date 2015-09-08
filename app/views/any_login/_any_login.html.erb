@@ -1,1 +1,51 @@
-<h2>Any Login</h2>
+<div id='any_login' class='<%= any_login_position %>'>
+  <%= form_tag any_login.sign_in_path, :method => :post do %>
+    <%= image_tag 'any_login/person_small.png', onclick: "jQuery(this).parents('form').find('span').toggle(); jQuery('#any_login').toggleClass('any_login_visible');" %>
+    <span>
+      <%= loginable_select %>
+      or by
+      <%= text_field_tag :id, '', :placeholder => "ID", size: 6 %>
+      <%= submit_tag 'Login' %>
+    </span>
+  <% end %>
+</div>
+
+<style type="text/css" media="screen">
+  #any_login {
+    position: absolute;
+    opacity: 0.5;
+    background: #5c4383;
+    color: white;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  #any_login.any_login_top_left {
+    top: 0;
+    left: 0;
+  }
+  #any_login.any_login_top_right {
+    top: 0;
+    right: 0;
+  }
+  #any_login.any_login_bottom_left {
+    bottom: 0;
+    left: 0;
+  }
+  #any_login.any_login_bottom_right {
+    bottom: 0;
+    right: 0;
+  }
+  #any_login.any_login_visible {
+    opacity: 1;
+  }
+  #any_login img {
+    vertical-align: middle;
+  }
+  #any_login form {
+    padding: 4px 6px;
+    padding-bottom: 7px;
+  }
+  #any_login span {
+    display: none;
+  }
+</style>

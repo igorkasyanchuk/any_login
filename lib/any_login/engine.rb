@@ -7,19 +7,27 @@ module AnyLogin
     end
 
     initializer "any_login.helpers" do
+      if Object.const_defined?("Devise")
+        require "any_login/strategy/devise"
+      else
+        puts "Unidentified auths gem..."
+      end
+
       ActiveSupport.on_load(:action_controller) do
-        #ActionController::Base.send :include, Ckeditor::Helpers::Controllers
+        puts "action_controller loaded ..."
+        ActionController::Base.send :include, AnyLogin.strategy::Controller
+        AnyLogin::ApplicationController.send :include, AnyLogin.strategy::Controller
       end
 
       ActiveSupport.on_load :action_view do
+        puts "action_view loaded ..."
         ActionView::Base.send :include, AnyLogin::Helpers::ViewHelper
+        ActionView::Base.send :include, AnyLogin::ApplicationHelper
       end
     end
 
-    initializer "any_login.hooks" do
-      if Object.const_defined?("Devise")
-        require "any_login/auths/devise"
-      end
-    end
+    # initializer "any_login.hooks" do
+
+    # end
   end
 end
