@@ -7,7 +7,6 @@ module AnyLogin
     end
 
     initializer "any_login.helpers" do
-
       if Object.const_defined?("Devise")
         require "any_login/strategy/devise"
       else
@@ -19,7 +18,6 @@ module AnyLogin
       end
 
       ActiveSupport.on_load :action_view do
-        ActionView::Base.send :include, AnyLogin::Helpers::ViewHelper
         ActionView::Base.send :include, AnyLogin::ApplicationHelper
       end
     end

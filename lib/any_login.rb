@@ -2,11 +2,7 @@ require "any_login/engine"
 
 module AnyLogin
 
-  module Helpers
-    autoload :ViewHelper, 'any_login/helpers/view_helper'
-  end
-
-  module Hooks
+  module Strategy
     autoload :Devise, 'any_login/strategy/devise'
   end
 
@@ -24,6 +20,7 @@ module AnyLogin
 
   mattr_accessor :loginable_collection_method # .all, .active, .admins, etc ... need to return an array of users
   @@loginable_collection_method = :all
+  #@@loginable_collection_method = :groped_collection
 
   mattr_accessor :loginable_name_method # to format user name in dropdown list
   @@loginable_name_method = -> (e) { [format_loginable(e), e.id] }
@@ -49,12 +46,25 @@ module AnyLogin
   mattr_accessor :auto_show # show any_login box by default
   @@auto_show = false
 
+  mattr_accessor :collection_limit
+  @collection_limit = :none
+
   def self.setup
     yield(self)
   end
 
+  def self.grouped?
+    collection_type == :grouped
+  end
+
   def self.collection
-    AnyLogin.loginable_klass.send(AnyLogin.loginable_collection_method)
+    collection_raw.collect do |e|
+      if grouped?
+        [e[0], e[1].collect(&loginable_name_method)]
+      else
+        loginable_name_method.call(e)
+      end
+    end
   end
 
   def self.loginable_klass
@@ -67,6 +77,22 @@ module AnyLogin
 
   def self.format_loginable(user)
     user.email
+  end
+
+  private
+
+  def self.collection_raw
+    @@collection_raw ||= AnyLogin.loginable_klass.send(AnyLogin.loginable_collection_method).to_a
+  end
+
+  def self.collection_type
+    @@collection_type ||=
+                          if collection_raw[1].is_a?(Array)
+                            :grouped
+                          else
+                            :single
+                          end
+    @@collection_type
   end
 
 end
