@@ -1,12 +1,11 @@
 <div id='any_login' class='<%= any_login_klasses %>'>
   <%= form_tag any_login.sign_in_path, :method => :post do %>
-    <%= image_tag 'any_login/person.png', onclick: "AnyLogin.on_image_click();" %>
+    <%= image_tag 'any_login/person.png', :onclick => "AnyLogin.on_image_click();" %>
     <span>
-      <%= loginable_select %>
+      <%= any_login_select %>
       or by
-      <%= text_field_tag :id, '', :placeholder => "ID", size: 6 %>
-      <%= submit_tag AnyLogin.login_button_label %>
-
+      <%= any_login_id_input %>
+      <%= any_login_submit %>
       <%= current_user_information %>
     </span>
   <% end %>
@@ -17,10 +16,10 @@
   AnyLogin.on_image_click = function() {
     jQuery('#any_login').find('span').toggle();
     jQuery('#any_login').toggleClass('any_login_visible');
-  }
+  };
   AnyLogin.on_select_change = function() {
     jQuery('#any_login form').submit();
-  }
+  };
 </script>
 
 <style type="text/css" media="screen">
@@ -61,7 +60,6 @@
   }
   #any_login form {
     padding: 4px 6px;
-    padding-bottom: 7px;
   }
   #any_login span {
     display: none;
@@ -72,5 +70,8 @@
   }
   #any_login .any_login_user_information {
     padding-left: 10px;
+  }
+  #any_login #any_login_id_input {
+    width: 30px;
   }
 </style>

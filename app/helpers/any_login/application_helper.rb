@@ -10,7 +10,15 @@ module AnyLogin
         end
       end
 
-      def loginable_select
+      def any_login_id_input
+        text_field_tag :id, '', :placeholder => "ID", :id => 'any_login_id_input'
+      end
+
+      def any_login_submit
+        submit_tag AnyLogin.login_button_label
+      end
+
+      def any_login_select
         collection = AnyLogin.collection
         select_options =
                         if AnyLogin.grouped?
@@ -18,10 +26,10 @@ module AnyLogin
                         else
                           options_for_select(collection)
                         end
-        select_tag :loginable_id, select_options, loginable_select_html_options
+        select_tag :selected_id, select_options, select_html_options
       end
 
-      def loginable_select_html_options
+      def select_html_options
         options = {}
         #options = { :include_blank => true }
         options[:onchange] = 'AnyLogin.on_select_change();' if AnyLogin.login_on == :both
@@ -39,7 +47,7 @@ module AnyLogin
       def current_user_information
         if respond_to?(AnyLogin.current_user_method) && user = send(AnyLogin.current_user_method)
           content_tag :span, :class => 'any_login_user_information' do
-            raw("Current #{AnyLogin.loginable_klass_name}: #{h(AnyLogin.format_loginable(user))} &mdash; ID: #{user.id}")
+            raw("Current #{AnyLogin.klass_name}: #{h(AnyLogin.format(user))} &mdash; ID: #{user.id}")
           end
         end
       end

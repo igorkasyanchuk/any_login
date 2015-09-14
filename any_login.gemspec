@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = AnyLogin::VERSION
   s.authors     = ["Igor Kasyanchuk"]
   s.email       = ["igorkasyanchuk@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of AnyLogin."
-  s.description = "TODO: Description of AnyLogin."
+  s.homepage    = "https://github.com/igorkasyanchuk"
+  s.summary     = "AnyLogin is created to speedup development process and allow developer's quickly login as any user in DB."
+  s.description = ""
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
