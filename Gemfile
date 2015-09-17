@@ -12,3 +12,15 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+
+
+# To run tests
+group :test do
+  gem "sqlite3"
+  gem "devise"
+  gem "jquery-rails"
+  gem "quiet_assets"
+  gem "pry"
+  gem "pry-rails"
+  gem "pry-byebug"
+end
