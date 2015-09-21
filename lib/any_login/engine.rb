@@ -2,15 +2,15 @@ module AnyLogin
   class Engine < ::Rails::Engine
     isolate_namespace AnyLogin
 
-    initializer "any_login.assets_precompile", :group => :all do |app|
+    initializer 'any_login.assets_precompile', :group => :all do |app|
       app.config.assets.precompile += AnyLogin.assets
     end
 
-    initializer "any_login.helpers" do
-      if Object.const_defined?("Devise")
-        require "any_login/strategy/devise"
+    initializer 'any_login.helpers' do
+      if Object.const_defined?('Devise')
+        require 'any_login/strategy/devise'
       else
-        throw "Unidentified auth gem..."
+        throw 'Please use this gem with Devise.'
       end
 
       ActiveSupport.on_load :action_controller do
