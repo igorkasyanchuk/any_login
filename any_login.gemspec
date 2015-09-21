@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
+  s.required_ruby_version = '>= 1.9.3'
+
   s.add_runtime_dependency 'rails', '~> 4.0', '>= 4.0.0'
 
   # to remove warning
@@ -24,8 +26,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency "devise", '>= 0'
   s.add_development_dependency "jquery-rails", '>= 0'
   s.add_development_dependency "quiet_assets", '>= 0'
-  if RUBY_VERSION >= '2.0'
-    s.add_development_dependency "pry", '>= 0'
-    s.add_development_dependency "pry-rails", '>= 0'
-  end
 end

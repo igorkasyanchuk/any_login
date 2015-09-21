@@ -20,7 +20,9 @@ group :test do
   gem "devise"
   gem "jquery-rails"
   gem "quiet_assets"
-  gem "pry"
-  gem "pry-rails"
-  gem "pry-byebug"
+  if RUBY_VERSION >= '2.0'
+    gem "pry"
+    gem "pry-rails"
+    gem "pry-byebug"
+  end
 end
