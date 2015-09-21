@@ -6,19 +6,21 @@
 AnyLogin is created to speedup development process and allow developer's quickly login as any user in DB.
 
 == Requirements
-Ruby - 1.9.3, 2.X.
-Rails - >= 4.0.
-Right now works only in pair with Devise gem.
+Ruby: 1.9.3, 2.X, Rails: >= 4.0. Right now works only in pair with Devise gem.
 
 == Installation
-[1]. Add to your Gemfile:
+*1* - Add to your Gemfile:
   gem 'any_login'
-[2]. Execute
+*2* - Execute in console:
   bundle install
-[3]. In application layout (for example app/views/layouts/application.html.erb) add in the bottom of the page:
+*3* - In application layout (for example app/views/layouts/application.html.erb) add in the bottom of the page:
   <%= any_login_here %>  
-[4]. Open your app and on the bottom left corner you will see semi-transparent user icon. Click on it and now you can select any user to login without password.
+*4* - Open your app and on the bottom left corner you will see semi-transparent user icon. Click on it and now you can select any user to login without password.
 
+== Customization
+If you want to customize gem run in console:
+  rails g any_login initializer
+If will create file config/initializers/any_login.rb.
 
 == Future Plans
 1. Add more tests.
