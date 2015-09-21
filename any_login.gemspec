@@ -26,5 +26,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency "quiet_assets", '>= 0'
   s.add_development_dependency "pry", '>= 0'
   s.add_development_dependency "pry-rails", '>= 0'
-  s.add_development_dependency "pry-byebug", '>= 0'
 end

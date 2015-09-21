@@ -1,6 +1,5 @@
 AnyLogin.setup do |config|
   config.enabled = true # enabled or not
-  config.strategy = nil # current strategy, depends on auth gem
   config.klass_name = 'User' # Account, User, Person, etc
   config.collection_method = :all   # .all, .active, .admins, .groped_collection, etc ... need to return an array (or hash with arrays) of users
   config.name_method = -> (e) { [format(e), e.id] } # to format user name in dropdown list

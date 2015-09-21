@@ -1,5 +1,5 @@
 AnyLogin.setup do |config|
-  config.login_button_label = 'Sign up'
+  config.login_button_label = 'Sign in'
   config.klass_name = 'User'
-  config.collection_method = :groped_collection
+  config.collection_method = :all
 end
