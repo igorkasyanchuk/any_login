@@ -1,4 +1,4 @@
-require "any_login/engine"
+require 'any_login/engine'
 
 module AnyLogin
 
@@ -23,7 +23,7 @@ module AnyLogin
   @@collection_method = :all
 
   mattr_accessor :name_method # to format user name in dropdown list
-  @@name_method = -> (e) { [format(e), e.id] }
+  @@name_method = proc { |e| [format(e), e.id] }
 
   mattr_accessor :redirect_path_after_login # after logging in redirect user to path
   @@redirect_path_after_login = :root_path

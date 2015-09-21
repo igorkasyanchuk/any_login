@@ -26,4 +26,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "devise", '>= 0'
   s.add_development_dependency "jquery-rails", '>= 0'
   s.add_development_dependency "quiet_assets", '>= 0'
+  if RUBY_VERSION >= '2.0'
+    s.add_development_dependency "pry", '>= 0'
+    s.add_development_dependency "pry-rails", '>= 0'
+  end
 end
