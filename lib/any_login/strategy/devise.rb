@@ -6,7 +6,7 @@ module AnyLogin
 
         def any_login_sign_in
           @loginable = AnyLogin.klass.find(params[:selected_id].presence || params[:id])
-          sign_in @loginable
+          sign_in AnyLogin.klass.to_s.underscore.to_sym, @loginable
           redirect_to main_app.send(AnyLogin.redirect_path_after_login)
         end
 
