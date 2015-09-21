@@ -5,6 +5,8 @@
 == Description
 AnyLogin is created to speedup development process and allow developer's quickly login as any user in DB.
 
+Demo available on: https://any-login.herokuapp.com/ (source code for demo https://github.com/igorkasyanchuk/any_login_test)
+
 == Requirements
 Ruby: 1.9.3, 2.X, Rails: >= 4.0. Right now works only in pair with Devise gem.
 
