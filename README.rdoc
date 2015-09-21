@@ -28,6 +28,14 @@ If you want to customize gem run in console:
   rails g any_login initializer
 If will create file config/initializers/any_login.rb.
 
+== Production
+If you want to disable gem in production add following code in your config/environments/production.rb file.
+  AnyLogin.setup do |config|
+    config.enabled = false
+  end
+
+
+
 == Future Plans
 1. Add more tests.
 2. Add support for more authentication gems like Devise.
