@@ -19,15 +19,15 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.3'
 
-  s.add_runtime_dependency 'rails', '~> 4.0', '>= 4.0.0'
+  s.add_runtime_dependency 'rails', '>= 4.0.0'
 
   # to remove warning
-  s.add_development_dependency "sqlite3", '>= 0'
-  s.add_development_dependency "devise", '>= 0'
-  s.add_development_dependency "jquery-rails", '>= 0'
-  s.add_development_dependency "quiet_assets", '>= 0'
+  s.add_development_dependency "sqlite3"
+  s.add_development_dependency "devise"
+  s.add_development_dependency "jquery-rails"
+  s.add_development_dependency "quiet_assets"
   if RUBY_VERSION >= '2.0'
-    s.add_development_dependency "pry", '>= 0'
-    s.add_development_dependency "pry-rails", '>= 0'
+    s.add_development_dependency "pry"
+    s.add_development_dependency "pry-rails"
   end
 end
