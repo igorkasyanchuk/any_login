@@ -1,14 +1,23 @@
 = AnyLogin
-
 {<img src="https://travis-ci.org/igorkasyanchuk/any_login.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/igorkasyanchuk/any_login]
 {<img src="https://codeclimate.com/github/igorkasyanchuk/any_login/badges/gpa.svg" />}[https://codeclimate.com/github/igorkasyanchuk/any_login]
 
 == Description
-
 AnyLogin is created to speedup development process and allow developer's quickly login as any user in DB.
 
+== Requirements
+Right now works only in pair with Devise gem.
+
 == Installation
+1. Add to your Gemfile:
+  gem 'any_login'
+2. Execute
+  bundle install
+3. In application layout (for example app/views/layouts/application.html.erb) add in the bottom of the page:
+  <%= any_login_here %>  
+4. Open your app and on the bottom left corner you will see semi-transparent user icon. Click on it and now you can select any user to login without password.
 
-Add to your Gemfile:
 
-`gem 'any_login'`
+== Future Plans
+1. Add more tests.
+2. Add support for more authentication gems like Devise.
