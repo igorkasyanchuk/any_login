@@ -95,4 +95,5 @@ module AnyLogin
 end
 
 require 'any_login/engine'
+require 'any_login/routes'
 require 'any_login/version'

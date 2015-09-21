@@ -13,7 +13,7 @@ module AnyLogin
         throw "Unidentified auth gem..."
       end
 
-      ActiveSupport.on_load(:action_controller) do
+      ActiveSupport.on_load :action_controller do
         AnyLogin::ApplicationController.send :include, AnyLogin.strategy::Controller
       end
 

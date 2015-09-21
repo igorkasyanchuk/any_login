@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dummy</title>
+    <title>AnyLogin Dummy</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
 
-  <%= yield %>
-
-  <hr/>
-
-  <%= link_to 'Home', root_path %> |
-  <% if user_signed_in? %>
-    <%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" } %>
-  <% else %>
-    <%= link_to 'Sign up', new_user_registration_path %> |
-    <%= link_to 'Sign in', new_user_session_path %>
-  <% end %>
-
-  <%= any_login_here %>
-
+  <body role="document">
+    <%= render '/shared/header' %>
+    <div class="container theme-showcase" role="main">
+      <%= yield %>
+    </div>
+    <%= render '/shared/footer' %>
   </body>
 </html>

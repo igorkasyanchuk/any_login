@@ -1,0 +1,8 @@
+Description:
+    Generate configuration file.
+
+Example:
+    rails generate any_login initializer
+
+    This will create:
+        config/any_login.rb
