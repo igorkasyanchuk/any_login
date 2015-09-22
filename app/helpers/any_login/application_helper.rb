@@ -2,16 +2,14 @@ module AnyLogin
   module ApplicationHelper
     extend ActiveSupport::Concern
 
+    def any_login_here
+      render 'any_login/any_login' if AnyLogin.enabled
+    end
+
     if AnyLogin.enabled
 
-      def any_login_here
-        if AnyLogin.enabled
-          render 'any_login/any_login'
-        end
-      end
-
       def any_login_id_input
-        text_field_tag :id, '', :placeholder => "ID", :id => 'any_login_id_input'
+        text_field_tag :id, '', :placeholder => 'ID', :id => 'any_login_id_input'
       end
 
       def any_login_submit
@@ -47,7 +45,7 @@ module AnyLogin
       def current_user_information
         if respond_to?(AnyLogin.current_user_method) && user = send(AnyLogin.current_user_method)
           content_tag :span, :class => 'any_login_user_information' do
-            raw("Current #{AnyLogin.klass_name}: #{h(AnyLogin.format(user))} &mdash; ID: #{user.id}")
+            raw("Current #{AnyLogin.klass_name}: #{h(AnyLogin.name_method.call(user)[0])} &mdash; ID: #{user.id}")
           end
         end
       end

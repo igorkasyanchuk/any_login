@@ -6,45 +6,57 @@ module AnyLogin
     autoload :Devise, 'any_login/strategy/devise'
   end
 
+  # enable in development mode only
   mattr_accessor :enabled
-  @@enabled = true
+  @@enabled = Rails.env.to_s == 'development'
 
-  mattr_accessor :strategy # current strategy, depends on auth gem
+  # current strategy, depends on auth gem
+  mattr_accessor :strategy
   @@strategy = nil
 
-  mattr_accessor :assets # assets which we need to build for production
-  @@assets = nil
-
-  mattr_accessor :klass_name # Account, User, Person, etc
+  # Account, User, Person, etc
+  mattr_accessor :klass_name
   @@klass_name = 'User'
 
   # .all, .active, .admins, .groped_collection, etc ... need to return an array (or hash with arrays) of users
   mattr_accessor :collection_method
   @@collection_method = :all
 
-  mattr_accessor :name_method # to format user name in dropdown list
-  @@name_method = proc { |e| [format(e), e.id] }
+  # to format user name in dropdown list
+  mattr_accessor :name_method
+  @@name_method = proc { |e| [e.email, e.id] }
 
-  mattr_accessor :redirect_path_after_login # after logging in redirect user to path
+  # after logging in redirect user to path
+  mattr_accessor :redirect_path_after_login
   @@redirect_path_after_login = :root_path
 
-  mattr_accessor :login_on # login on select change event OR click on button, or BOTH
+  # login on select change event OR click on button, or BOTH
+  mattr_accessor :login_on
   @@login_on = :both
 
+  # position of any_login box top_left, top_right, bottom_left, bottom_right
   mattr_accessor :position
-  @@position = :bottom_left # position of any_login box top_left, top_right, bottom_left, bottom_right
+  @@position = :bottom_left
 
+  # label on Login button
   mattr_accessor :login_button_label
-  @@login_button_label = 'Login' # label on Login button
+  @@login_button_label = 'Login'
 
+  # prompt message in select
   mattr_accessor :select_prompt
-  @@select_prompt = "Select #{AnyLogin.klass_name}" # prompt message in select
+  @@select_prompt = "Select #{AnyLogin.klass_name}"
 
+  # method to return current_user logged in
   mattr_accessor :current_user_method
-  @@current_user_method = :current_user # method to return current_user logged in
+  @@current_user_method = :current_user
 
-  mattr_accessor :auto_show # show any_login box by default
+  # show any_login box by default
+  mattr_accessor :auto_show
   @@auto_show = false
+
+  # limit, integer or :none
+  mattr_accessor :limit
+  @@limit = 10
 
   def self.setup
     yield(self)
@@ -68,18 +80,21 @@ module AnyLogin
     @@klass ||= AnyLogin.klass_name.constantize
   end
 
-  def self.assets
-    @@assets ||= ['any_login/person.png']
-  end
-
-  def self.format(user)
-    user.email
-  end
-
   private
 
   def self.collection_raw
-    @@collection_raw ||= AnyLogin.klass.send(AnyLogin.collection_method).to_a
+    @@collection_raw ||= begin
+      result = AnyLogin.klass.send(AnyLogin.collection_method)
+      if limit == :none
+        result
+      elsif result.is_a?(ActiveRecord::Relation)
+        result.limit(limit)
+      elsif result.is_a?(Array)
+        result.take(limit)
+      else
+        result
+      end
+    end
   end
 
   def self.collection_type
