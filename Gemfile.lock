@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    any_login (0.0.2)
+    any_login (0.0.3)
       rails (>= 4.0.0)
 
 GEM
@@ -144,6 +144,3 @@ DEPENDENCIES
   pry-rails
   quiet_assets
   sqlite3
-
-BUNDLED WITH
-   1.10.6

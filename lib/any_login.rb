@@ -46,10 +46,6 @@ module AnyLogin
   mattr_accessor :select_prompt
   @@select_prompt = "Select #{AnyLogin.klass_name}"
 
-  # method to return current_user logged in
-  mattr_accessor :current_user_method
-  @@current_user_method = :current_user
-
   # show any_login box by default
   mattr_accessor :auto_show
   @@auto_show = false
@@ -91,6 +87,8 @@ module AnyLogin
         result.limit(limit)
       elsif result.is_a?(Array)
         result.take(limit)
+      elsif result.is_a?(Hash) || result.is_a?(OrderedHash)
+        result.to_a
       else
         result
       end

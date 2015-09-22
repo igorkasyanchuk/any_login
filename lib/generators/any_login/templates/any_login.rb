@@ -26,13 +26,9 @@ AnyLogin.setup do |config|
   # # prompt message in select
   # config.select_prompt = "Select #{AnyLogin.klass_name}"
 
-  # # method to return current_user logged in
-  # config.current_user_method = :current_user
-
   # # show any_login box by default
   # config.auto_show = false
 
   # # limit, integer or :none
-  # mattr_accessor :limit
-  # @@limit = 10
+  # config.limit = 10
 end
