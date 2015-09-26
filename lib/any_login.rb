@@ -54,6 +54,18 @@ module AnyLogin
   mattr_accessor :limit
   @@limit = 10
 
+  # Enable http basic authentication
+  mattr_accessor :http_basic_authentication_enabled
+  @@http_basic_authentication_enabled = false
+
+  # Enable http basic authentication
+  mattr_accessor :http_basic_authentication_user_name
+  @@http_basic_authentication_user_name = 'any_login'
+
+  # Enable http basic authentication
+  mattr_accessor :http_basic_authentication_password
+  @@http_basic_authentication_password = 'password'
+
   def self.setup
     yield(self)
   end

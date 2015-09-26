@@ -31,4 +31,13 @@ AnyLogin.setup do |config|
 
   # # limit, integer or :none
   # config.limit = 10
+
+  # # Enable http basic authentication
+  # config.http_basic_authentication_enabled = false
+
+  # # Enable http basic authentication
+  # config.http_basic_authentication_user_name = 'any_login'
+
+  # # Enable http basic authentication
+  # config.ttp_basic_authentication_password = 'password'
 end
