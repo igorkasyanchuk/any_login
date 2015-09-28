@@ -1,0 +1,421 @@
+  [1m[36m (6.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (4.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsers (20150907190739)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "age" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150907190739"]]
+  [1m[35m (6.9ms)[0m  commit transaction
+Migrating to AddDeviseToUsers (20150907190846)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "email" varchar DEFAULT '' NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "reset_password_token" varchar
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "reset_password_sent_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "remember_created_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "current_sign_in_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "last_sign_in_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "current_sign_in_ip" varchar
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "last_sign_in_ip" varchar[0m
+  [1m[35m (21.6ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150907190846"]]
+  [1m[35m (7.8ms)[0m  commit transaction
+Migrating to PopulateTestUsers (20150909210357)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "role" varchar
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob6@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 76"], ["age", 73], ["email", "bob6@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$3Mzp3P4vTv5HCx7VaGKLdOV8TA55JLN0n/nXXCRMmwbTv7WglS29e"], ["created_at", "2015-09-14 15:44:04.877347"], ["updated_at", "2015-09-14 15:44:04.877347"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn34@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "MichaelJohn 65"], ["age", 73], ["email", "michaeljohn34@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$z0a0V3jZ2HyfpGDj4WfhwO9SCRi.u1kRE49jEDZYr5cJrHby/6d9C"], ["created_at", "2015-09-14 15:44:04.881165"], ["updated_at", "2015-09-14 15:44:04.881165"]]
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris86@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 44"], ["age", 8], ["email", "kris86@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$8WYnx2Qmvo0Yowz0AeHqMeQGiVK6ki.A5uaVZN8sCqqsJqru3BCKi"], ["created_at", "2015-09-14 15:44:04.884581"], ["updated_at", "2015-09-14 15:44:04.884581"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob16@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 87"], ["age", 72], ["email", "bob16@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$D34ymqN4H0rN9uIdC8YOgOUG60J1SEvcol8UTeh2wq2.zkOu3XK2a"], ["created_at", "2015-09-14 15:44:04.887434"], ["updated_at", "2015-09-14 15:44:04.887434"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan62@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 36"], ["age", 70], ["email", "alan62@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$OdbmJPy/dgY7nxgf2qqT1ud.9lT76jHykb0UVOFr3yZ3ogjkh06ia"], ["created_at", "2015-09-14 15:44:04.890339"], ["updated_at", "2015-09-14 15:44:04.890339"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn38@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 14"], ["age", 47], ["email", "michaeljohn38@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$sgpj.K1go5Q7UPyLv8ye8elHxXIpY2g59.cZElIidB.QL/83gp2Eq"], ["created_at", "2015-09-14 15:44:04.893669"], ["updated_at", "2015-09-14 15:44:04.893669"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob27@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Stan 50"], ["age", 15], ["email", "bob27@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$VX5Kdc2Szb/flCiWT0uff.lg6MU3mi9nqb3dFbwXDNMoLYIpp.DlK"], ["created_at", "2015-09-14 15:44:04.896875"], ["updated_at", "2015-09-14 15:44:04.896875"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris42@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Bob 59"], ["age", 50], ["email", "kris42@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$72MPLMTLg4HV/VUNUVBoaekj9ai8MXzebsC3TmT4.Pq2/X5/y6/M2"], ["created_at", "2015-09-14 15:44:04.899705"], ["updated_at", "2015-09-14 15:44:04.899705"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan49@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 49"], ["age", 89], ["email", "alan49@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$Pd.XHxjMrjBdKERlgBgDhev0JxULpEq3jY5yn/4aEj7EPUIU4L65C"], ["created_at", "2015-09-14 15:44:04.902481"], ["updated_at", "2015-09-14 15:44:04.902481"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris60@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "MichaelJohn 28"], ["age", 25], ["email", "kris60@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$jhsdYNDaifH/ZMha7T4gWuIfIeSjmNmupj9EhZYxSaFwnt55D1Txi"], ["created_at", "2015-09-14 15:44:04.905213"], ["updated_at", "2015-09-14 15:44:04.905213"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan30@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 90"], ["age", 29], ["email", "alan30@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$tlOoyCYccenfFXsKAyWKVOvOeRv63p/iM8XYPuU3OlR1keD9wSKh."], ["created_at", "2015-09-14 15:44:04.907926"], ["updated_at", "2015-09-14 15:44:04.907926"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris96@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 35"], ["age", 31], ["email", "kris96@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$UxmgBMIbklVGkK7WSFDq1eOdXZ9Ia3QfcrsQYF.7dxzrQRjyeWQhG"], ["created_at", "2015-09-14 15:44:04.910734"], ["updated_at", "2015-09-14 15:44:04.910734"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn77@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 40"], ["age", 67], ["email", "michaeljohn77@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$ZIN955Drz6PgRmLKNGfhcukRsB9Woqkx55n7L1WSNNM.P59S5Lc1C"], ["created_at", "2015-09-14 15:44:04.913705"], ["updated_at", "2015-09-14 15:44:04.913705"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris98@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 40"], ["age", 44], ["email", "kris98@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$ZEqawvMMWy71rjBo/FVah.Dy2CD9BstO/krFTRTisWN8vlRUtncBO"], ["created_at", "2015-09-14 15:44:04.916482"], ["updated_at", "2015-09-14 15:44:04.916482"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'igor23@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 2"], ["age", 47], ["email", "igor23@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$YcKR6CSrdXManofq0V/mhuOhtjypIm1FmAkLJuhGxa55YcrXg1dEO"], ["created_at", "2015-09-14 15:44:04.919213"], ["updated_at", "2015-09-14 15:44:04.919213"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob35@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 98"], ["age", 57], ["email", "bob35@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$CI/8Jvtm5kA1xd3l8ow5OONnOOYSMaBZimwLC/9UONSGDAFYmQ6f2"], ["created_at", "2015-09-14 15:44:04.922076"], ["updated_at", "2015-09-14 15:44:04.922076"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan49@gmail.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob48@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Alan 73"], ["age", 2], ["email", "bob48@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$tthNRA7LCMHqgk9OoYyz0uWORkDUNjC0.pHmegU1PsgW3G7dW2gzO"], ["created_at", "2015-09-14 15:44:04.932230"], ["updated_at", "2015-09-14 15:44:04.932230"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'igor97@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "MichaelJohn 35"], ["age", 31], ["email", "igor97@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$tiOZwgtCOWPJSlzAdMzSZu0dTsRne2WQatwAR5FsNMW/nIWeCU9M6"], ["created_at", "2015-09-14 15:44:04.935306"], ["updated_at", "2015-09-14 15:44:04.935306"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn81@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "MichaelJohn 94"], ["age", 11], ["email", "michaeljohn81@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$Dy6V3SIgurQ0.aa9f9gSeu1eyBpqdy073LPP9drNlEglfAtPWfHJ."], ["created_at", "2015-09-14 15:44:04.938146"], ["updated_at", "2015-09-14 15:44:04.938146"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob61@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Kris 93"], ["age", 62], ["email", "bob61@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$RYnjUqQ.ILU/LpW31EJhsOx8PD3s0NDHifM7vBWVzo6atTNp.iHee"], ["created_at", "2015-09-14 15:44:04.940959"], ["updated_at", "2015-09-14 15:44:04.940959"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan30@gmail.com' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris10@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 79"], ["age", 27], ["email", "kris10@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$vb2L0pya/tCYhfcYCgSyAO4b2j6aJc0apkLuM3GDdjQOCtpunjIPW"], ["created_at", "2015-09-14 15:44:04.946475"], ["updated_at", "2015-09-14 15:44:04.946475"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob17@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 52"], ["age", 99], ["email", "bob17@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$QVIHIfsV5gW8bvBlkAZP7OrgaxXX.cVMnopQSPzbf9HW41dq1olTK"], ["created_at", "2015-09-14 15:44:04.949330"], ["updated_at", "2015-09-14 15:44:04.949330"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn76@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 14"], ["age", 18], ["email", "michaeljohn76@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$1mGyLBILZ3iwvUm8MYywY.tnPY62mELbycwM5WXPGmm6PB84cCdnS"], ["created_at", "2015-09-14 15:44:04.952329"], ["updated_at", "2015-09-14 15:44:04.952329"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan15@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 65"], ["age", 34], ["email", "stan15@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$2FXAV2FmRRgCM7GNWnfxGOyTvUIaVT9ID0NoduUMYMqqGWA.i9b9u"], ["created_at", "2015-09-14 15:44:04.955245"], ["updated_at", "2015-09-14 15:44:04.955245"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'igor92@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 32"], ["age", 9], ["email", "igor92@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$CWvLZbOEp.KHE3gvzvFoKeaOaX9c1V2muCataCscXC/yQxs3TUCY2"], ["created_at", "2015-09-14 15:44:04.958158"], ["updated_at", "2015-09-14 15:44:04.958158"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn58@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 22"], ["age", 80], ["email", "michaeljohn58@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$ad/VQnucnBUEmPm/SwIbdeX6Dcsa0CY6Mehd0VzKegeofJfzZroIS"], ["created_at", "2015-09-14 15:44:04.961079"], ["updated_at", "2015-09-14 15:44:04.961079"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob60@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 74"], ["age", 78], ["email", "bob60@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$dgO1yRLIGh0WJJkO5h.1LuZJu6.2LqPYoVRkQPtz6zG6gvCKVzms6"], ["created_at", "2015-09-14 15:44:04.964139"], ["updated_at", "2015-09-14 15:44:04.964139"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'igor66@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "MichaelJohn 10"], ["age", 1], ["email", "igor66@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$d7TousVaopKn6VgZgbx26uZRFtjxXqTXgOI5jhe5eJQVDF2Q4WZFC"], ["created_at", "2015-09-14 15:44:04.967044"], ["updated_at", "2015-09-14 15:44:04.967044"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan42@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 63"], ["age", 73], ["email", "alan42@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$OVj9CzdXD06lpDiaxQxveOoSaQgrpDpbCfiWAr.Z3BIrNgQ0Mya3O"], ["created_at", "2015-09-14 15:44:04.970063"], ["updated_at", "2015-09-14 15:44:04.970063"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob88@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Stan 76"], ["age", 8], ["email", "bob88@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$qNC9.JKTKs3bOK6Bh56NguRp5HWYALjQpdrdGVrFEMN55cmxM4zcS"], ["created_at", "2015-09-14 15:44:04.973074"], ["updated_at", "2015-09-14 15:44:04.973074"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris27@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 2"], ["age", 29], ["email", "kris27@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$hHuR2/SApHxIUaWQhsvtgeygzx/SZqJghFY60Uc.Wu3heMw2tfVfW"], ["created_at", "2015-09-14 15:44:04.976062"], ["updated_at", "2015-09-14 15:44:04.976062"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn26@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "MichaelJohn 82"], ["age", 77], ["email", "michaeljohn26@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$lu/2TANa.7TVVDgR9zeCU.qGNmL2V3J1AMHDS9mcbyw5uIEHMs3re"], ["created_at", "2015-09-14 15:44:04.979056"], ["updated_at", "2015-09-14 15:44:04.979056"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn38@gmail.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris54@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Bob 53"], ["age", 65], ["email", "kris54@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$o7sN6K0xRatBtJbrtElVB.DmD6Ay445Kb8BAUE2TPgU5Csl4AyECa"], ["created_at", "2015-09-14 15:44:04.986540"], ["updated_at", "2015-09-14 15:44:04.986540"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris88@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Kris 6"], ["age", 15], ["email", "kris88@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$qDqn3PsGrd9FRT9H0fkmLOKq98eJmKaemumTalJqdj36xe5LUlmCG"], ["created_at", "2015-09-14 15:44:04.990853"], ["updated_at", "2015-09-14 15:44:04.990853"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan38@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Alan 46"], ["age", 96], ["email", "stan38@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$qLMgg0GXojLpujHbRRdVbuygUbMpiIOYRk37Qv1gZ2Aibg0os9BB."], ["created_at", "2015-09-14 15:44:04.994285"], ["updated_at", "2015-09-14 15:44:04.994285"]]
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob71@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "MichaelJohn 62"], ["age", 92], ["email", "bob71@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$lWPLvAScVaOaS7Mzs8/.aO.9xGV6WRoMi2vMvZFdgLpYgj9MF.7Yu"], ["created_at", "2015-09-14 15:44:04.998007"], ["updated_at", "2015-09-14 15:44:04.998007"]]
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn32@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Alan 88"], ["age", 0], ["email", "michaeljohn32@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$2UWHYvo2Zr4bXgA.K8QHAu1Z27ibOARIh4XQE8XqDS/d5mDCBteGC"], ["created_at", "2015-09-14 15:44:05.002549"], ["updated_at", "2015-09-14 15:44:05.002549"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob99@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Kris 92"], ["age", 60], ["email", "bob99@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$0U6tfBinBb3UUMurRBAYEuoSEkH41as9S/L5CVeHcZgicEDG59R6O"], ["created_at", "2015-09-14 15:44:05.006931"], ["updated_at", "2015-09-14 15:44:05.006931"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'igor16@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Stan 29"], ["age", 27], ["email", "igor16@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$LEy1uwcdjTQyzKkGUbi7x.tKvS3Gk.24uIssgVmd4bYyHh.ggx9n."], ["created_at", "2015-09-14 15:44:05.011013"], ["updated_at", "2015-09-14 15:44:05.011013"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan79@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Stan 29"], ["age", 98], ["email", "alan79@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$QvpkyY3feR/pcy1jbDIrNOMrHcfwVo8CVa3gGLRbuiJJBE5WFlZr6"], ["created_at", "2015-09-14 15:44:05.014780"], ["updated_at", "2015-09-14 15:44:05.014780"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan86@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Kris 83"], ["age", 42], ["email", "stan86@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$SPB4hHhAA3hb3yw2kJblfOOaGIs8SI3v7GGg0HTYKyvgzp0YYg6bW"], ["created_at", "2015-09-14 15:44:05.017829"], ["updated_at", "2015-09-14 15:44:05.017829"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob59@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Bob 14"], ["age", 95], ["email", "bob59@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$fWeLbDG70B5PhF.RKe0a8uIx6qQxx8xMUuKnPOTliFz/l24UrIKf6"], ["created_at", "2015-09-14 15:44:05.020780"], ["updated_at", "2015-09-14 15:44:05.020780"]]
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob33@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Stan 69"], ["age", 15], ["email", "bob33@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$yN0599Jto8B96hLweFmazulswt34PLvwbfKno5dOnuSwDKQbbul0u"], ["created_at", "2015-09-14 15:44:05.029495"], ["updated_at", "2015-09-14 15:44:05.029495"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris36@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Kris 64"], ["age", 16], ["email", "kris36@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$XeQ1qV9KnDWEm.W2t10HZ.PSnKSPNSOANvXxXfMJ4uNKpQotvcg.u"], ["created_at", "2015-09-14 15:44:05.032542"], ["updated_at", "2015-09-14 15:44:05.032542"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'igor31@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Kris 22"], ["age", 98], ["email", "igor31@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$UqbRkRIFPHGUbSauVXLBbODhH9tYvv4GeIhi5AQc766hXmdM.JYmK"], ["created_at", "2015-09-14 15:44:05.035459"], ["updated_at", "2015-09-14 15:44:05.035459"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn26@gmail.com' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan62@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 75"], ["age", 45], ["email", "stan62@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$bIqqDfVqJI1qGApxl7p4O.2MT99YtJBwffIy0DoxCt5EZsU.oJc1W"], ["created_at", "2015-09-14 15:44:05.040626"], ["updated_at", "2015-09-14 15:44:05.040626"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn80@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Bob 8"], ["age", 48], ["email", "michaeljohn80@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$Vb9OcSA2/jqVhXF.yO2Ot.snY5kELFZQIENqGjeWgjff6U7OO1L92"], ["created_at", "2015-09-14 15:44:05.043615"], ["updated_at", "2015-09-14 15:44:05.043615"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan43@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 59"], ["age", 70], ["email", "stan43@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$4tHcfNfSS6GWBFgAbwUX.eI3xG74sgbnQ5u.IFL/5rzpq0gIzkfta"], ["created_at", "2015-09-14 15:44:05.046415"], ["updated_at", "2015-09-14 15:44:05.046415"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan6@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 10"], ["age", 34], ["email", "alan6@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$/nCWJFOLevwdSRw/0ma2JO2dPwPRutVyGCrWWOhNOg4IVPsOn/GJi"], ["created_at", "2015-09-14 15:44:05.049159"], ["updated_at", "2015-09-14 15:44:05.049159"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris7@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 99"], ["age", 22], ["email", "kris7@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$GQ11bVXsbB7K3j9eTN0eo.9J/IWPS87W6PCPLgu6lNzaUeAK/q9bO"], ["created_at", "2015-09-14 15:44:05.052082"], ["updated_at", "2015-09-14 15:44:05.052082"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob90@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 68"], ["age", 64], ["email", "bob90@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$ycbD5Sr9smXOiiblOsWl4.nMmKo9/.q.mS7wfmq1CvBLf6/Ku0zjq"], ["created_at", "2015-09-14 15:44:05.055014"], ["updated_at", "2015-09-14 15:44:05.055014"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan50@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 46"], ["age", 66], ["email", "stan50@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$8XZ04S86oJB9Vi4TPh.c3eU/haptIDY.9O2F/iS2STNcFbCEMEFMS"], ["created_at", "2015-09-14 15:44:05.057931"], ["updated_at", "2015-09-14 15:44:05.057931"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan84@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Stan 15"], ["age", 27], ["email", "alan84@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$CSfvGs3yi3Ax/kS3qRNuiukEzYy4qRR.fpJuL2s6jv/.L28ZLx4Oy"], ["created_at", "2015-09-14 15:44:05.060690"], ["updated_at", "2015-09-14 15:44:05.060690"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan74@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Stan 23"], ["age", 50], ["email", "alan74@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$DECaX24D1B7tothbi2ISIeg8Oxgyja5zAEz/VJwv7/Yg5QaPhJqGG"], ["created_at", "2015-09-14 15:44:05.063559"], ["updated_at", "2015-09-14 15:44:05.063559"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan77@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 36"], ["age", 61], ["email", "alan77@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$yDPiK20qhdjjWcTab6EppePgC5zZBXJQMX5YkqBzvzM/TCbSL6hGa"], ["created_at", "2015-09-14 15:44:05.066513"], ["updated_at", "2015-09-14 15:44:05.066513"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob69@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Bob 56"], ["age", 46], ["email", "bob69@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$WMeJ/iOtzts3jTQEPgSNVeqwY1hxyIuR90YljRRruEtrFiDA33Vdu"], ["created_at", "2015-09-14 15:44:05.069300"], ["updated_at", "2015-09-14 15:44:05.069300"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'igor12@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 97"], ["age", 0], ["email", "igor12@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$lSswRZ6FCA.Ts41b/fdkRupMr5XWaaYe2jZ5n8/vD59852bO0B0lK"], ["created_at", "2015-09-14 15:44:05.072309"], ["updated_at", "2015-09-14 15:44:05.072309"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan65@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "MichaelJohn 59"], ["age", 60], ["email", "stan65@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$ww8QKpupVlfqp3CjuyGh9up1cS9f92jgYlcMx4kNhEpLhvnnvMOXG"], ["created_at", "2015-09-14 15:44:05.075127"], ["updated_at", "2015-09-14 15:44:05.075127"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn23@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Bob 98"], ["age", 23], ["email", "michaeljohn23@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$NsW2mwkTtu.jcUVQmBM1KubzehL8iqGgu09Rzd4i9nqk/4TpC3oZ."], ["created_at", "2015-09-14 15:44:05.077908"], ["updated_at", "2015-09-14 15:44:05.077908"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn95@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "MichaelJohn 48"], ["age", 31], ["email", "michaeljohn95@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$3KxO5FG3PaneuKqoi64aP.wNUc3a6cr.sA9PFA24rI7LgnSX2iHlC"], ["created_at", "2015-09-14 15:44:05.080657"], ["updated_at", "2015-09-14 15:44:05.080657"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris31@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 48"], ["age", 36], ["email", "kris31@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$wZE/Ld39ULoaqrfREhT9O.p/fb5dSSW.h4C9W/Leemjf1h5tIS/ke"], ["created_at", "2015-09-14 15:44:05.083549"], ["updated_at", "2015-09-14 15:44:05.083549"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan81@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Stan 36"], ["age", 75], ["email", "stan81@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$RN0krMRXcvWpweUaa9UV3ersJCJXqRG0gANAFTOHsaJhi4G9.WaI6"], ["created_at", "2015-09-14 15:44:05.086408"], ["updated_at", "2015-09-14 15:44:05.086408"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob52@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Stan 54"], ["age", 66], ["email", "bob52@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$/kRiJ7C.nfPSCxUUSXTIhOw2LeOrUdqkSG10BE7yolMdl9ULVjnNK"], ["created_at", "2015-09-14 15:44:05.089217"], ["updated_at", "2015-09-14 15:44:05.089217"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob51@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 14"], ["age", 61], ["email", "bob51@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$v/qqDB4T4rgQmE7etmOEgOYefdvWpaRWLfwi1SZDrN917VVJ8bbIq"], ["created_at", "2015-09-14 15:44:05.092258"], ["updated_at", "2015-09-14 15:44:05.092258"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn44@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "MichaelJohn 11"], ["age", 26], ["email", "michaeljohn44@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$3EJVznLXmPFUVkfcoUJgHOoHIDDBLit0urrkI04DKgLGGFSjUmO2y"], ["created_at", "2015-09-14 15:44:05.095040"], ["updated_at", "2015-09-14 15:44:05.095040"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob31@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 86"], ["age", 16], ["email", "bob31@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$I0MIUzi2RrUjlvIeF2tnduEfGT18eSBvheQ9VDc2RMgxXfErYFsRC"], ["created_at", "2015-09-14 15:44:05.097845"], ["updated_at", "2015-09-14 15:44:05.097845"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn98@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Bob 26"], ["age", 96], ["email", "michaeljohn98@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$cULfjAi3TU8D.cLh/6.5M.df.JGTxheqdX1v2DzHVCNsFIvE.PJDK"], ["created_at", "2015-09-14 15:44:05.100681"], ["updated_at", "2015-09-14 15:44:05.100681"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn5@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 63"], ["age", 50], ["email", "michaeljohn5@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$drhdqMZsxO.P6WRq95.OxOrj.P9W6R/om5JgqOkg6LqyYbvzRqjUy"], ["created_at", "2015-09-14 15:44:05.103620"], ["updated_at", "2015-09-14 15:44:05.103620"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan71@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Stan 38"], ["age", 42], ["email", "alan71@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$6UfDRfQ1fJw56r9kwGOIHOUm4EWzrnpG5.z8FgXzgzf.l9LyONlxW"], ["created_at", "2015-09-14 15:44:05.106501"], ["updated_at", "2015-09-14 15:44:05.106501"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob5@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 33"], ["age", 1], ["email", "bob5@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$1jfTTTtFR0F.e3KQurHjtOP51k8.kucThVNmnu6l0XJRLi39ZVGsa"], ["created_at", "2015-09-14 15:44:05.109378"], ["updated_at", "2015-09-14 15:44:05.109378"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan81@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Alan 70"], ["age", 6], ["email", "alan81@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$soObp3r99UUFV8WCLomqJuhOMKbZISCtsg.wEftQ06D/eDDuW5taq"], ["created_at", "2015-09-14 15:44:05.112454"], ["updated_at", "2015-09-14 15:44:05.112454"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan67@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 95"], ["age", 48], ["email", "stan67@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$BSn1fM2xxzdB86IK.M2Vweq5Xfxn7Q73HJbmgAEzz/tuqdJfTQtpW"], ["created_at", "2015-09-14 15:44:05.115363"], ["updated_at", "2015-09-14 15:44:05.115363"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob81@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 48"], ["age", 80], ["email", "bob81@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$bhkuhgn95yBbVVN4.8h8u.qharspKI5c2IwUh8P8sfB1FEUuRllJ6"], ["created_at", "2015-09-14 15:44:05.118155"], ["updated_at", "2015-09-14 15:44:05.118155"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan36@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 85"], ["age", 66], ["email", "stan36@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$eptcy3j9Sd1fakniEPHyROUrvl/mQ2bEaHOyhM2oQaDUWYSjbcULq"], ["created_at", "2015-09-14 15:44:05.120940"], ["updated_at", "2015-09-14 15:44:05.120940"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn51@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Stan 39"], ["age", 29], ["email", "michaeljohn51@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$JR8A2yPmCUNQVkxGRTExLuxkfGLQ03Fv8tK51RFdkFRoE45wMyHnS"], ["created_at", "2015-09-14 15:44:05.123758"], ["updated_at", "2015-09-14 15:44:05.123758"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob59@gmail.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn50@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Alan 30"], ["age", 55], ["email", "michaeljohn50@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$bdj68ZWr2GTNzfeYAJxp9eqwGsBnQKj/r4ypDaw3E0mDMIHaj3eOS"], ["created_at", "2015-09-14 15:44:05.128985"], ["updated_at", "2015-09-14 15:44:05.128985"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'igor72@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "MichaelJohn 80"], ["age", 30], ["email", "igor72@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$Bp8/1N8MWIiFJtdZzYRJ.OpIz3hGrMLEQXA3Cmmsa5hm9aZpi4p9K"], ["created_at", "2015-09-14 15:44:05.131827"], ["updated_at", "2015-09-14 15:44:05.131827"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob68@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Bob 93"], ["age", 9], ["email", "bob68@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$xekcRNrspPMtA9tOGE.BweK.5XQTFjVvmAhzfmRikVi9sHdNJtoQi"], ["created_at", "2015-09-14 15:44:05.134761"], ["updated_at", "2015-09-14 15:44:05.134761"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan18@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "MichaelJohn 10"], ["age", 48], ["email", "stan18@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$CgQZ8sABf4ol039GX5mideREtBNy5Q31GxOou8L/a.jHHGUw99bpu"], ["created_at", "2015-09-14 15:44:05.137563"], ["updated_at", "2015-09-14 15:44:05.137563"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan32@gmail.com' LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Alan 42"], ["age", 51], ["email", "stan32@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$K.mdr0h6Lv5eesObTpqb.ubDJgIdbBZVcxmLUnu0DOppJcfsiVl9W"], ["created_at", "2015-09-14 15:44:05.140284"], ["updated_at", "2015-09-14 15:44:05.140284"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan83@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "MichaelJohn 94"], ["age", 17], ["email", "stan83@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$BUx5tXP9SrGWd77JyActT.HZxyyLrAUGFXDOBsSSNlX6/dc5YBRui"], ["created_at", "2015-09-14 15:44:05.143047"], ["updated_at", "2015-09-14 15:44:05.143047"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'stan32@gmail.com' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn29@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Stan 56"], ["age", 67], ["email", "michaeljohn29@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$vbzWxx.IQWD6bLZzwm8jf.NUhb71nsTNUGrW1fU1DV6FZ8aTgcrE2"], ["created_at", "2015-09-14 15:44:05.148140"], ["updated_at", "2015-09-14 15:44:05.148140"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan90@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 0"], ["age", 47], ["email", "alan90@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$x.FafBn6yFOrg6M5ss2WZOyJdpPU1oHndQBpcEdKzBqDGx/8iIWOq"], ["created_at", "2015-09-14 15:44:05.151039"], ["updated_at", "2015-09-14 15:44:05.151039"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob72@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Bob 30"], ["age", 1], ["email", "bob72@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$7.pApFHqPG/b6ZnfGzeqOeF4.T4qSnmaM44clGiTMa8Um9K5yY836"], ["created_at", "2015-09-14 15:44:05.153913"], ["updated_at", "2015-09-14 15:44:05.153913"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris73@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Bob 61"], ["age", 47], ["email", "kris73@gmail.com"], ["role", "moderator"], ["encrypted_password", "$2a$04$k.xXK29gv4bFCBMRQely9e8ME3UwGT5WV6AOiFx9p/YOLqAd31o3S"], ["created_at", "2015-09-14 15:44:05.156813"], ["updated_at", "2015-09-14 15:44:05.156813"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn19@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Kris 30"], ["age", 66], ["email", "michaeljohn19@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$PKT9RJHQx1n4mWPKMqEgzeF5KbjvCyl6QYCRNkU37Wvy/SP0m/vqW"], ["created_at", "2015-09-14 15:44:05.159605"], ["updated_at", "2015-09-14 15:44:05.159605"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn44@gmail.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'kris5@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Bob 1"], ["age", 41], ["email", "kris5@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$Ehs4heNEdd5RmNqHN1.om.N.Lia/kZM3r5EO5QCLxp6VBdC5uZ2ue"], ["created_at", "2015-09-14 15:44:05.164850"], ["updated_at", "2015-09-14 15:44:05.164850"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob27@gmail.com' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob35@gmail.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob96@gmail.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Kris 23"], ["age", 69], ["email", "bob96@gmail.com"], ["role", "user"], ["encrypted_password", "$2a$04$JaTS36tRtSj8indrrjhweuETrU9OjC80HOO6lsFpCpWvgXNbtgGWi"], ["created_at", "2015-09-14 15:44:05.172061"], ["updated_at", "2015-09-14 15:44:05.172061"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'alan74@gmail.com' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bob38@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "Igor 55"], ["age", 0], ["email", "bob38@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$Q5/nYFOAPKKMWvPKnsRAi.Bai4GCWxaC.bJKkgB2rQKvFCJjYDWOG"], ["created_at", "2015-09-14 15:44:05.177084"], ["updated_at", "2015-09-14 15:44:05.177084"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michaeljohn53@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("name", "age", "email", "role", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "MichaelJohn 84"], ["age", 41], ["email", "michaeljohn53@gmail.com"], ["role", "admin"], ["encrypted_password", "$2a$04$bmYPLG4eL4MtcAuunbtvwugIhlEVgH/OzjXsjHjjS8p5lHjQFYwkW"], ["created_at", "2015-09-14 15:44:05.179876"], ["updated_at", "2015-09-14 15:44:05.179876"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150909210357"]]
+  [1m[35m (6.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------
+AnyLoginTest: test_truth
+------------------------
+  [1m[36m (0.5ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_about
+-----------------------------------------
+Processing by HomeController#about as HTML
+Completed 401 Unauthorized in 18ms (ActiveRecord: 0.0ms)
+  Rendered text template (0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_index
+-----------------------------------------
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (28.9ms)
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (51.5ms)
+Completed 200 OK in 508ms (Views: 506.5ms | ActiveRecord: 1.5ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------
+AnyLoginTest: test_truth
+------------------------
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_about
+-----------------------------------------
+Processing by HomeController#about as HTML
+Completed 401 Unauthorized in 5ms (ActiveRecord: 0.0ms)
+  Rendered text template (0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_index
+-----------------------------------------
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.4ms)
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (21.2ms)
+  Rendered shared/_footer.html.erb (23.1ms)
+Completed 500 Internal Server Error in 259ms (ActiveRecord: 1.1ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_about
+-----------------------------------------
+Processing by HomeController#about as HTML
+Completed 401 Unauthorized in 6ms (ActiveRecord: 0.0ms)
+  Rendered text template (0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_index
+-----------------------------------------
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.6ms)
+  Rendered shared/_header.html.erb (0.3ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (16.0ms)
+  Rendered shared/_footer.html.erb (17.6ms)
+Completed 500 Internal Server Error in 134ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+------------------------
+AnyLoginTest: test_truth
+------------------------
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------
+AnyLoginTest: test_truth
+------------------------
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_about
+-----------------------------------------
+Processing by HomeController#about as HTML
+Completed 401 Unauthorized in 6ms (ActiveRecord: 0.0ms)
+  Rendered text template (0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_index
+-----------------------------------------
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.7ms)
+  Rendered shared/_header.html.erb (0.3ms)
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (16.2ms)
+  Rendered shared/_footer.html.erb (17.6ms)
+Completed 500 Internal Server Error in 132ms (ActiveRecord: 1.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------
+AnyLoginTest: test_truth
+------------------------
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_about
+-----------------------------------------
+Processing by HomeController#about as HTML
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms)
+  Rendered text template (0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_index
+-----------------------------------------
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (2.8ms)
+  Rendered shared/_header.html.erb (0.4ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (16.8ms)
+  Rendered shared/_footer.html.erb (18.4ms)
+Completed 200 OK in 153ms (Views: 151.3ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------
+AnyLoginTest: test_truth
+------------------------
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_about
+-----------------------------------------
+Processing by HomeController#about as HTML
+Completed 401 Unauthorized in 6ms (ActiveRecord: 0.0ms)
+  Rendered text template (0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_index
+-----------------------------------------
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (2.6ms)
+  Rendered shared/_header.html.erb (0.4ms)
+  Rendered shared/_footer.html.erb (0.9ms)
+Completed 200 OK in 242ms (Views: 241.9ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------
+AnyLoginTest: test_truth
+------------------------
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_about
+-----------------------------------------
+Processing by HomeController#about as HTML
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms)
+  Rendered text template (0.0ms)
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------
+HomeControllerTest: test_should_get_index
+-----------------------------------------
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (3.0ms)
+  Rendered shared/_header.html.erb (0.3ms)
+  Rendered shared/_footer.html.erb (0.8ms)
+Completed 200 OK in 131ms (Views: 130.6ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m

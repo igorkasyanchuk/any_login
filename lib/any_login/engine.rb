@@ -7,7 +7,9 @@ module AnyLogin
     end
 
     initializer 'any_login.helpers' do
-      if Object.const_defined?('Devise')
+      if Object.const_defined?('Authlogic')
+        require 'any_login/strategy/authlogic'
+      elsif Object.const_defined?('Devise')
         require 'any_login/strategy/devise'
       else
         throw 'Please use this gem with Devise.'

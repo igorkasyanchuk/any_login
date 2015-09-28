@@ -1,0 +1,11 @@
+<%= form_for @user, url: user_session_path, method: :post, html: { class: 'form-horizontal', role: 'form' } do |f| %>
+  <div class='form-group'>
+    <label>Login</label>
+    <%= f.text_field :login, class: 'form-control', placeholder: 'Login' %>
+  </div>
+  <div class='form-group'>
+    <label>Password</label>
+    <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+  </div>
+  <%= f.submit 'Login', class: 'btn btn-primary' %>
+<% end %>

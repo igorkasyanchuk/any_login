@@ -4,6 +4,7 @@ module AnyLogin
 
   module Strategy
     autoload :Devise, 'any_login/strategy/devise'
+    autoload :Authlogic, 'any_login/strategy/authlogic'
   end
 
   # enable in development mode only
