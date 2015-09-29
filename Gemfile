@@ -17,7 +17,7 @@ gemspec
 # To run tests
 group :test do
   gem "sqlite3"
-  #gem "devise"
+  gem "devise"
   gem "authlogic"
   gem "jquery-rails"
   gem "quiet_assets"

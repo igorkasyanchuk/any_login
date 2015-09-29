@@ -2891,3 +2891,181 @@ Processing by HomeController#index as HTML
   Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (2.7ms)
   Rendered shared/_footer.html.erb (3.6ms)
 Completed 200 OK in 42ms (Views: 36.3ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/" for 192.168.217.1 at 2015-09-29 04:26:39 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 9]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_request_at", "2015-09-29 11:26:39.201597"], ["updated_at", "2015-09-29 11:26:39.202535"], ["id", 9]]
+  [1m[36m (6.0ms)[0m  [1mcommit transaction[0m
+  Rendered home/index.html.erb within layouts/application (78.6ms)
+  Rendered shared/_header.html.erb (0.4ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" LIMIT 10
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (6.6ms)
+  Rendered shared/_footer.html.erb (8.0ms)
+Completed 200 OK in 367ms (Views: 358.7ms | ActiveRecord: 7.7ms)
+
+
+Started POST "/any_login/any_login/sign_in" for 192.168.217.1 at 2015-09-29 04:26:43 -0700
+Processing by AnyLogin::ApplicationController#any_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XtdkVy3Nf1oSAbfsJb649hvwUQuo2oSJZ5kkLbvwN3fFzSkLaWGYTnNg4cr0pZGQR985HDiz6lEoQf/n54zEfw==", "selected_id"=>"4", "id"=>""}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "login_count" = ?, "failed_login_count" = ?, "current_login_at" = ?, "current_login_ip" = ?, "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["login_count", 1], ["failed_login_count", 0], ["current_login_at", "2015-09-29 11:26:43.562171"], ["current_login_ip", "192.168.217.1"], ["last_request_at", "2015-09-29 11:26:43.562372"], ["updated_at", "2015-09-29 11:26:43.563746"], ["id", 4]]
+  [1m[35m (5.3ms)[0m  commit transaction
+Redirected to http://cn.com:3000/
+Completed 302 Found in 13ms (ActiveRecord: 5.7ms)
+
+
+Started GET "/" for 192.168.217.1 at 2015-09-29 04:26:43 -0700
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_request_at", "2015-09-29 11:26:43.587915"], ["updated_at", "2015-09-29 11:26:43.588748"], ["id", 4]]
+  [1m[35m (5.7ms)[0m  commit transaction
+  Rendered home/index.html.erb within layouts/application (12.4ms)
+  Rendered shared/_header.html.erb (0.0ms)
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (4.8ms)
+  Rendered shared/_footer.html.erb (6.6ms)
+Completed 200 OK in 66ms (Views: 59.4ms | ActiveRecord: 6.2ms)
+
+
+Started POST "/any_login/any_login/sign_in" for 192.168.217.1 at 2015-09-29 04:26:47 -0700
+Processing by AnyLogin::ApplicationController#any_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yYa54FygABemBkf8eONhOCuPuhfJoR7kUcEcFpNe1SFSnPS8GAznA8dnEdqp+Ehed6DSAFnIcDweGcfczyImKQ==", "selected_id"=>"7", "id"=>""}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "login_count" = ?, "failed_login_count" = ?, "current_login_at" = ?, "current_login_ip" = ?, "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["login_count", 1], ["failed_login_count", 0], ["current_login_at", "2015-09-29 11:26:47.791768"], ["current_login_ip", "192.168.217.1"], ["last_request_at", "2015-09-29 11:26:47.791953"], ["updated_at", "2015-09-29 11:26:47.793768"], ["id", 7]]
+  [1m[35m (4.6ms)[0m  commit transaction
+Redirected to http://cn.com:3000/
+Completed 302 Found in 12ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/" for 192.168.217.1 at 2015-09-29 04:26:47 -0700
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_request_at", "2015-09-29 11:26:47.819091"], ["updated_at", "2015-09-29 11:26:47.820798"], ["id", 7]]
+  [1m[35m (4.7ms)[0m  commit transaction
+  Rendered home/index.html.erb within layouts/application (12.9ms)
+  Rendered shared/_header.html.erb (0.1ms)
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (7.1ms)
+  Rendered shared/_footer.html.erb (9.9ms)
+Completed 200 OK in 82ms (Views: 76.2ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/" for 192.168.217.1 at 2015-09-29 04:27:51 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 7]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_request_at", "2015-09-29 11:27:51.187748"], ["updated_at", "2015-09-29 11:27:51.188589"], ["id", 7]]
+  [1m[36m (4.5ms)[0m  [1mcommit transaction[0m
+  Rendered home/index.html.erb within layouts/application (100.0ms)
+  Rendered shared/_header.html.erb (0.3ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" LIMIT 10
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (6.0ms)
+  Rendered shared/_footer.html.erb (7.5ms)
+Completed 200 OK in 283ms (Views: 275.7ms | ActiveRecord: 6.5ms)
+
+
+Started POST "/any_login/any_login/sign_in" for 192.168.217.1 at 2015-09-29 04:27:54 -0700
+Processing by AnyLogin::ApplicationController#any_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"J6gsgiXrzT6YE2xAwta6vxv6l/339abGL0DvQbLXGxe8smHeYUcqKvlyOmYTzZPZR9X/6mecyB5gmDSL7qvoHw==", "selected_id"=>"4", "id"=>""}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "login_count" = ?, "last_login_at" = ?, "current_login_at" = ?, "last_login_ip" = ?, "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["login_count", 2], ["last_login_at", "2015-09-29 11:26:43.562171"], ["current_login_at", "2015-09-29 11:27:54.882254"], ["last_login_ip", "192.168.217.1"], ["last_request_at", "2015-09-29 11:27:54.882543"], ["updated_at", "2015-09-29 11:27:54.885053"], ["id", 4]]
+  [1m[35m (5.7ms)[0m  commit transaction
+Redirected to http://cn.com:3000/
+Completed 302 Found in 15ms (ActiveRecord: 6.3ms)
+
+
+Started GET "/" for 192.168.217.1 at 2015-09-29 04:27:54 -0700
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_request_at", "2015-09-29 11:27:54.911206"], ["updated_at", "2015-09-29 11:27:54.911792"], ["id", 4]]
+  [1m[35m (6.6ms)[0m  commit transaction
+  Rendered home/index.html.erb within layouts/application (13.7ms)
+  Rendered shared/_header.html.erb (0.0ms)
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (6.9ms)
+  Rendered shared/_footer.html.erb (8.5ms)
+Completed 200 OK in 78ms (Views: 70.7ms | ActiveRecord: 7.1ms)
+
+
+Started POST "/any_login/any_login/sign_in" for 192.168.217.1 at 2015-09-29 04:27:57 -0700
+Processing by AnyLogin::ApplicationController#any_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ka6ljYn5ZHsVJqjVfEaeaQz+43ENciLk1FsMwVqu0YEKtOjRzVWDb3RH/vOtXbcPUNGLZp0bTDybg9cLBtIiiQ==", "selected_id"=>"3", "id"=>""}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "login_count" = ?, "failed_login_count" = ?, "current_login_at" = ?, "current_login_ip" = ?, "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["login_count", 1], ["failed_login_count", 0], ["current_login_at", "2015-09-29 11:27:57.291838"], ["current_login_ip", "192.168.217.1"], ["last_request_at", "2015-09-29 11:27:57.291987"], ["updated_at", "2015-09-29 11:27:57.293531"], ["id", 3]]
+  [1m[35m (6.7ms)[0m  commit transaction
+Redirected to http://cn.com:3000/
+Completed 302 Found in 14ms (ActiveRecord: 7.2ms)
+
+
+Started GET "/" for 192.168.217.1 at 2015-09-29 04:27:57 -0700
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_request_at", "2015-09-29 11:27:57.318139"], ["updated_at", "2015-09-29 11:27:57.318906"], ["id", 3]]
+  [1m[35m (3.7ms)[0m  commit transaction
+  Rendered home/index.html.erb within layouts/application (10.7ms)
+  Rendered shared/_header.html.erb (0.2ms)
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (3.2ms)
+  Rendered shared/_footer.html.erb (4.2ms)
+Completed 200 OK in 48ms (Views: 42.9ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/" for 192.168.217.1 at 2015-09-29 04:29:47 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_request_at", "2015-09-29 11:29:47.149933"], ["updated_at", "2015-09-29 11:29:47.150983"], ["id", 3]]
+  [1m[36m (4.9ms)[0m  [1mcommit transaction[0m
+  Rendered home/index.html.erb within layouts/application (92.4ms)
+  Rendered shared/_header.html.erb (0.3ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" LIMIT 10
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (5.2ms)
+  Rendered shared/_footer.html.erb (6.7ms)
+Completed 200 OK in 244ms (Views: 236.8ms | ActiveRecord: 6.7ms)
+
+
+Started GET "/" for 192.168.217.1 at 2015-09-29 04:29:48 -0700
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_request_at", "2015-09-29 11:29:48.082980"], ["updated_at", "2015-09-29 11:29:48.083848"], ["id", 3]]
+  [1m[35m (6.1ms)[0m  commit transaction
+  Rendered home/index.html.erb within layouts/application (12.2ms)
+  Rendered shared/_header.html.erb (0.0ms)
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (3.7ms)
+  Rendered shared/_footer.html.erb (4.9ms)
+Completed 200 OK in 52ms (Views: 45.5ms | ActiveRecord: 6.5ms)
+
+
+Started POST "/any_login/any_login/sign_in" for 192.168.217.1 at 2015-09-29 04:29:50 -0700
+Processing by AnyLogin::ApplicationController#any_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RWRWTtiHyWfJBiH9UJGkC4+yt/ECyOE1DUzgxnqX0xTefhsSnCsuc6hnd9uBio1t053f5pKhj+1ClDsMJusgHA==", "selected_id"=>"9", "id"=>""}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "login_count" = ?, "last_login_at" = ?, "current_login_at" = ?, "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["login_count", 4], ["last_login_at", "2015-09-28 13:52:03.056287"], ["current_login_at", "2015-09-29 11:29:50.551588"], ["last_request_at", "2015-09-29 11:29:50.551997"], ["updated_at", "2015-09-29 11:29:50.553842"], ["id", 9]]
+  [1m[35m (4.7ms)[0m  commit transaction
+Redirected to http://cn.com:3000/
+Completed 302 Found in 14ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/" for 192.168.217.1 at 2015-09-29 04:29:50 -0700
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_request_at", "2015-09-29 11:29:50.581007"], ["updated_at", "2015-09-29 11:29:50.581788"], ["id", 9]]
+  [1m[35m (5.8ms)[0m  commit transaction
+  Rendered home/index.html.erb within layouts/application (15.4ms)
+  Rendered shared/_header.html.erb (0.0ms)
+  Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (3.1ms)
+  Rendered shared/_footer.html.erb (4.3ms)
+Completed 200 OK in 78ms (Views: 69.6ms | ActiveRecord: 7.1ms)

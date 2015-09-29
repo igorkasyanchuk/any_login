@@ -7,16 +7,16 @@ module AnyLogin
     end
 
     initializer 'any_login.helpers' do
-      if Object.const_defined?('Authlogic')
-        require 'any_login/strategy/authlogic'
-      elsif Object.const_defined?('Devise')
-        require 'any_login/strategy/devise'
+      if (AnyLogin.provider.nil? && Object.const_defined?('Authlogic')) || AnyLogin.provider == :authlogic
+        require 'any_login/providers/authlogic'
+      elsif (AnyLogin.provider.nil? && Object.const_defined?('Devise')) || AnyLogin.provider == :devise
+        require 'any_login/providers/devise'
       else
         throw 'Please use this gem with Devise.'
       end
 
       ActiveSupport.on_load :action_controller do
-        AnyLogin::ApplicationController.send :include, AnyLogin.strategy::Controller
+        AnyLogin::ApplicationController.send :include, AnyLogin.provider::Controller
       end
 
       ActiveSupport.on_load :action_view do

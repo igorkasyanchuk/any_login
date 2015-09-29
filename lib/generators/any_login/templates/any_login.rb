@@ -1,4 +1,7 @@
 AnyLogin.setup do |config|
+  # # provider (:devise, :authlogic). Provider can be identified automatically based on your Gemfile
+  # config.provider = nil
+
   # # enabled or not
   # config.enabled = Rails.env.to_s == 'development'
 
