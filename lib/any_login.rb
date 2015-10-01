@@ -2,17 +2,18 @@ require 'any_login/engine'
 
 module AnyLogin
 
-  module Strategy
-    autoload :Devise, 'any_login/strategy/devise'
+  module Provider
+    autoload :Devise, 'any_login/providers/devise'
+    autoload :Authlogic, 'any_login/providers/authlogic'
   end
 
   # enable in development mode only
   mattr_accessor :enabled
   @@enabled = Rails.env.to_s == 'development'
 
-  # current strategy, depends on auth gem
-  mattr_accessor :strategy
-  @@strategy = nil
+  # current provider, depends on auth gem
+  mattr_accessor :provider
+  @@provider = nil
 
   # Account, User, Person, etc
   mattr_accessor :klass_name

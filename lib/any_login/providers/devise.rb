@@ -1,11 +1,11 @@
 module AnyLogin
-  module Strategy
+  module Provider
     module Devise
 
       module Controller
 
         def self.any_login_current_user_method
-          :current_user
+          @@any_login_current_user_method ||= "current_#{AnyLogin.klass.to_s.underscore}".to_sym
         end
 
         def any_login_sign_in
@@ -20,4 +20,4 @@ module AnyLogin
   end
 end
 
-AnyLogin.strategy = AnyLogin::Strategy::Devise
+AnyLogin.provider = AnyLogin::Provider::Devise

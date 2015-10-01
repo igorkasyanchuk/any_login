@@ -43,8 +43,8 @@ module AnyLogin
       end
 
       def current_user_information
-        if respond_to?(AnyLogin.strategy::Controller.any_login_current_user_method) &&
-           user = send(AnyLogin.strategy::Controller.any_login_current_user_method)
+        if respond_to?(AnyLogin.provider::Controller.any_login_current_user_method) &&
+           user = send(AnyLogin.provider::Controller.any_login_current_user_method)
           content_tag :span, :class => 'any_login_user_information' do
             raw("Current #{AnyLogin.klass_name}: #{h(AnyLogin.name_method.call(user)[0])} &mdash; ID: #{user.id}")
           end

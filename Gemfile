@@ -18,6 +18,7 @@ gemspec
 group :test do
   gem "sqlite3"
   gem "devise"
+  gem "authlogic"
   gem "jquery-rails"
   gem "quiet_assets"
   if RUBY_VERSION >= '2.0'
