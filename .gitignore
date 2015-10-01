@@ -13,3 +13,5 @@ test/dummy*/tmp/
 test/dummy*/.sass-cache
 *.gem
 **/*.sqlite3
+test/dummy-authlogic/db/*.sqlite3
+test/dummy-authlogic/db/development.sqlite3

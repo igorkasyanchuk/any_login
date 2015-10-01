@@ -3069,3 +3069,119 @@ Processing by HomeController#index as HTML
   Rendered /root/projects/any_login/app/views/any_login/_any_login.html.erb (3.1ms)
   Rendered shared/_footer.html.erb (4.3ms)
 Completed 200 OK in 78ms (Views: 69.6ms | ActiveRecord: 7.1ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+
+
+Started GET "/" for ::1 at 2015-10-01 21:01:47 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (218.2ms)
+  Rendered shared/_header.html.erb (0.5ms)
+  [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users" LIMIT 10
+  Rendered /Users/igorkasyanchuk/Projects/any_login/app/views/any_login/_any_login.html.erb (48.9ms)
+  Rendered shared/_footer.html.erb (53.3ms)
+Completed 200 OK in 810ms (Views: 806.8ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/any_login/any_login/sign_in" for ::1 at 2015-10-01 21:01:52 +0300
+Processing by AnyLogin::ApplicationController#any_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"i75col8GRDWZlbGpmQdggUn0MACabeLL/m5MIF6jw+HwLI/KmPS+XKsiuFyb2rZh9mXqffyKsZQhkZfkKEPSyw==", "selected_id"=>"3", "id"=>""}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE "users" SET "login_count" = ?, "last_login_at" = ?, "current_login_at" = ?, "last_login_ip" = ?, "current_login_ip" = ?, "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["login_count", 2], ["last_login_at", "2015-09-29 11:27:57.291838"], ["current_login_at", "2015-10-01 18:01:52.978584"], ["last_login_ip", "192.168.217.1"], ["current_login_ip", "::1"], ["last_request_at", "2015-10-01 18:01:52.978920"], ["updated_at", "2015-10-01 18:01:52.981509"], ["id", 3]]
+  [1m[35m (1.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 30ms (ActiveRecord: 2.8ms)
+
+
+Started GET "/" for ::1 at 2015-10-01 21:01:53 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_request_at", "2015-10-01 18:01:53.023336"], ["updated_at", "2015-10-01 18:01:53.024831"], ["id", 3]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  Rendered home/index.html.erb within layouts/application (10.2ms)
+  Rendered shared/_header.html.erb (0.1ms)
+  Rendered /Users/igorkasyanchuk/Projects/any_login/app/views/any_login/_any_login.html.erb (6.0ms)
+  Rendered shared/_footer.html.erb (10.3ms)
+Completed 200 OK in 84ms (Views: 82.4ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/" for ::1 at 2015-10-01 21:15:25 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.4ms)[0m  UPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_request_at", "2015-10-01 18:15:26.091355"], ["updated_at", "2015-10-01 18:15:26.092831"], ["id", 3]]
+  [1m[36m (3.8ms)[0m  [1mcommit transaction[0m
+  Rendered home/index.html.erb within layouts/application (174.9ms)
+  Rendered shared/_header.html.erb (0.5ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" LIMIT 10
+  Rendered /Users/igorkasyanchuk/Projects/any_login/app/views/any_login/_any_login.html.erb (9.4ms)
+  Rendered shared/_footer.html.erb (14.5ms)
+Completed 200 OK in 504ms (Views: 496.9ms | ActiveRecord: 6.8ms)
+
+
+Started POST "/any_login/any_login/sign_in" for ::1 at 2015-10-01 21:15:29 +0300
+Processing by AnyLogin::ApplicationController#any_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"bTyufGigTOvrP46oTTjxz24WnKyE7PGeRbdFh8LX9GIWrn0Ur1K2gtmIh11P5Scv0YdG0eILosGaSJ5DtDflSA==", "selected_id"=>"3", "id"=>""}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE "users" SET "login_count" = ?, "last_login_at" = ?, "current_login_at" = ?, "last_login_ip" = ?, "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["login_count", 3], ["last_login_at", "2015-10-01 18:01:52.978584"], ["current_login_at", "2015-10-01 18:15:29.554890"], ["last_login_ip", "::1"], ["last_request_at", "2015-10-01 18:15:29.555207"], ["updated_at", "2015-10-01 18:15:29.557233"], ["id", 3]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 13ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/" for ::1 at 2015-10-01 21:15:29 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.1ms)[0m  [1mUPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_request_at", "2015-10-01 18:15:29.596763"], ["updated_at", "2015-10-01 18:15:29.597824"], ["id", 3]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  Rendered home/index.html.erb within layouts/application (12.3ms)
+  Rendered shared/_header.html.erb (0.1ms)
+  Rendered /Users/igorkasyanchuk/Projects/any_login/app/views/any_login/_any_login.html.erb (7.5ms)
+  Rendered shared/_footer.html.erb (14.2ms)
+Completed 200 OK in 110ms (Views: 105.4ms | ActiveRecord: 3.3ms)
+
+
+Started POST "/any_login/any_login/sign_in" for ::1 at 2015-10-01 21:15:33 +0300
+Processing by AnyLogin::ApplicationController#any_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2jy2/w0h4/IiMLBSa2SIOt9EAbXZEOOk8YKCFGO8c9ShrmWXytMZmxCHuadpuV7aYNXbyL/3sPsufVnQFVxi/g==", "selected_id"=>"9", "id"=>""}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.2ms)[0m  [1mUPDATE "users" SET "login_count" = ?, "last_login_at" = ?, "current_login_at" = ?, "current_login_ip" = ?, "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["login_count", 5], ["last_login_at", "2015-09-29 11:29:50.551588"], ["current_login_at", "2015-10-01 18:15:33.490682"], ["current_login_ip", "::1"], ["last_request_at", "2015-10-01 18:15:33.491235"], ["updated_at", "2015-10-01 18:15:33.493828"], ["id", 9]]
+  [1m[35m (4.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 17ms (ActiveRecord: 6.5ms)
+
+
+Started GET "/" for ::1 at 2015-10-01 21:15:33 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "last_request_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_request_at", "2015-10-01 18:15:33.550210"], ["updated_at", "2015-10-01 18:15:33.553316"], ["id", 9]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  Rendered home/index.html.erb within layouts/application (14.6ms)
+  Rendered shared/_header.html.erb (0.1ms)
+  Rendered /Users/igorkasyanchuk/Projects/any_login/app/views/any_login/_any_login.html.erb (6.7ms)
+  Rendered shared/_footer.html.erb (11.4ms)
+Completed 200 OK in 124ms (Views: 121.2ms | ActiveRecord: 2.0ms)

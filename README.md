@@ -21,7 +21,7 @@ Video demo: https://youtu.be/978DlHvufSY
 Give it a try and if you like it share with friends. In case you have any suggestions please feel free to contact me.
 
 ## Requirements
-Ruby: 1.9.3, 2.X, Rails: >= 4.0. Right now works only in pair with Devise gem.
+Ruby: 1.9.3, 2.X, Rails: >= 4.0. Works in pair with **Devise** or **Authlogic** gems.
 
 ## Installation
 
@@ -38,6 +38,17 @@ Ruby: 1.9.3, 2.X, Rails: >= 4.0. Right now works only in pair with Devise gem.
         <%= any_login_here %>
 
  4. Open your app and on the bottom left corner you will see semi-transparent user icon. Click on it and now you can select any user to login without password.
+
+## Integrations
+
+### Devise
+
+By default doesn't require any additional steps to make it works with Devise gem. If you have model `User` everything should works fine. In case you have other model you need to set it in options (see Customization section).
+
+### Authlogic
+
+By default doesn't require any additional steps to make it works with Authlogic gem. If you have model `User` and you have `current_user` method in application controller everything should works fine. In case you have other model you need to set it in options (see Customization section).
+
 
 ## Customization
 If you want to customize gem run in console:
@@ -97,5 +108,5 @@ You can also try to debug you application in production and secure any_login wit
 
 ## Future Plans
 1.  Add tests.
-2.  Add support for more authentication gems like Devise (authlogic, clearance, etc)
+2.  Add support for more authentication gems like Devise (clearance, etc)
 
