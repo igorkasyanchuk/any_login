@@ -33,7 +33,7 @@ Ruby: 1.9.3, 2.X, Rails: >= 4.0. Works in pair with **Devise** or **Authlogic** 
 
         bundle install
 
- 3. In application layout (for example app/views/layouts/application.html.erb) add in the bottom of the page:
+ 3. In application layout (for example `app/views/layouts/application.html.erb`) add in the bottom of the page:
 
         <%= any_login_here %>
 
@@ -48,6 +48,10 @@ By default doesn't require any additional steps to make it works with Devise gem
 ### Authlogic
 
 By default doesn't require any additional steps to make it works with Authlogic gem. If you have model `User` and you have `current_user` method in application controller everything should works fine. In case you have other model you need to set it in options (see Customization section).
+
+### Clearance
+
+By default doesn't require any additional steps to make it works with Clearance gem. If you have model `User` and you have `current_user` method in application controller everything should works fine. In case you have other model you need to set it in options (see Customization section).
 
 
 ## Customization
@@ -107,6 +111,6 @@ config/environments/production.rb file.
 You can also try to debug you application in production and secure any_login with HTTP_BASIC authentication. See Options sections for more details.
 
 ## Future Plans
-1.  Add tests.
+1.  Add tests
 2.  Add support for more authentication gems like Devise (clearance, etc)
 
