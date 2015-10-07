@@ -15,3 +15,7 @@ test/dummy*/.sass-cache
 **/*.sqlite3
 test/dummy-authlogic/db/*.sqlite3
 test/dummy-authlogic/db/development.sqlite3
+test/dummy-clearance/db/*.sqlite3
+test/dummy-clearance/db/development.sqlite3
+.DS_Store
+**/.DS_Store

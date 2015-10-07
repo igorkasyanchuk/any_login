@@ -3,8 +3,9 @@ require 'any_login/engine'
 module AnyLogin
 
   module Provider
-    autoload :Devise, 'any_login/providers/devise'
+    autoload :Devise,    'any_login/providers/devise'
     autoload :Authlogic, 'any_login/providers/authlogic'
+    autoload :Clearance, 'any_login/providers/clearance'
   end
 
   # enable in development mode only

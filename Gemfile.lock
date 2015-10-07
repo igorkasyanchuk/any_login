@@ -52,6 +52,10 @@ GEM
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
+    clearance (1.11.0)
+      bcrypt
+      email_validator (~> 1.4)
+      rails (>= 3.1)
     coderay (1.1.0)
     columnize (0.9.0)
     devise (3.5.2)
@@ -61,6 +65,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    email_validator (1.6.0)
+      activemodel
     erubis (2.7.0)
     ffi (1.9.10)
     ffi-compiler (0.1.3)
@@ -152,6 +158,7 @@ DEPENDENCIES
   any_login!
   authlogic
   bcrypt
+  clearance
   devise
   jquery-rails
   pry

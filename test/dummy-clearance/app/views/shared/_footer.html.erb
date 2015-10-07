@@ -1,0 +1,15 @@
+<div class="container">
+  <br/>
+  <br/>
+  <br/>
+  <hr/>
+
+  <%= link_to 'Home', root_path %> |
+  <% if signed_in? %>
+    <%= link_to 'Sign out', sign_out_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" } %>
+  <% else %>
+    <%= link_to 'Sign in', sign_in_path %>
+  <% end %>
+
+  <%= any_login_here %>
+</div>

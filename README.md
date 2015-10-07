@@ -13,15 +13,15 @@ src="https://badge.fury.io/rb/any_login.svg" alt="Gem Version"
 AnyLogin is created to speedup development process and allow developer's
 quickly login as any user in DB.
 
-Demo available on: https://any-login.herokuapp.com (source code for demo
+**Demo** available on: https://any-login.herokuapp.com (source code for demo
 https://github.com/igorkasyanchuk/any_login_test)
 
-Video demo: https://youtu.be/978DlHvufSY
+**Video Demo**: https://youtu.be/978DlHvufSY
 
 Give it a try and if you like it share with friends. In case you have any suggestions please feel free to contact me.
 
 ## Requirements
-Ruby: 1.9.3, 2.X, Rails: >= 4.0. Works in pair with **Devise** or **Authlogic** gems.
+Ruby: 1.9.3, 2.X, Rails: >= 4.0. Works in pair with **Devise**, **Authlogic** or **Clearance** gems.
 
 ## Installation
 
@@ -51,7 +51,7 @@ By default doesn't require any additional steps to make it works with Authlogic 
 
 ### Clearance
 
-By default doesn't require any additional steps to make it works with Clearance gem. If you have model `User` and you have `current_user` method in application controller everything should works fine. In case you have other model you need to set it in options (see Customization section).
+By default doesn't require any additional steps to make it works with Clearance gem. If you have model `User` everything should works fine. In case you have other model you need to set it in options (see Customization section).
 
 
 ## Customization
@@ -112,5 +112,5 @@ You can also try to debug you application in production and secure any_login wit
 
 ## Future Plans
 1.  Add tests
-2.  Add support for more authentication gems like Devise (clearance, etc)
+2.  Add support for more authentication gems like Devise, Authlogic, Clearance (restful_authentication, sorcery, monban, letmein)
 
