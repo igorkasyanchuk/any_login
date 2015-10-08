@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20151007170422) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "role"
+    t.string   "remember_token",         limit: 128
     t.string   "login"
     t.string   "crypted_password"
     t.string   "password_salt"
@@ -41,7 +42,6 @@ ActiveRecord::Schema.define(version: 20151007170422) do
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.string   "confirmation_token",     limit: 128
-    t.string   "remember_token",         limit: 128
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

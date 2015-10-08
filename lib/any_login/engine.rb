@@ -18,15 +18,28 @@ module AnyLogin
       end
     end
 
+    private
+
     def load_provider
-      if (AnyLogin.provider.nil? && Object.const_defined?('Authlogic')) || AnyLogin.provider == :authlogic
+      case AnyLogin.provider || provider
+      when :authlogic
         require 'any_login/providers/authlogic'
-      elsif (AnyLogin.provider.nil? && Object.const_defined?('Devise')) || AnyLogin.provider == :devise
+      when :devise
         require 'any_login/providers/devise'
-      elsif (AnyLogin.provider.nil? && Object.const_defined?('Clearance')) || AnyLogin.provider == :clearance
+      when :clearance
         require 'any_login/providers/clearance'
       else
         throw 'Please use this gem with any of the following gems: Devise, Authlogic or Clearance'
+      end
+    end
+
+    def provider
+      if AnyLogin.provider.nil? && Object.const_defined?('Authlogic')
+        :authlogic
+      elsif AnyLogin.provider.nil? && Object.const_defined?('Devise')
+        :devise
+      elsif AnyLogin.provider.nil? && Object.const_defined?('Clearance')
+        :clearance
       end
     end
 
