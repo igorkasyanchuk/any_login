@@ -7,16 +7,18 @@ src="https://badge.fury.io/rb/any_login.svg" alt="Gem Version"
 />](http://badge.fury.io/rb/any_login)
 
 ## Description
-[<img src="https://i.ytimg.com/vi/978DlHvufSY/hqdefault.jpg"
-/>](https://youtu.be/978DlHvufSY)
-
-AnyLogin is created to speedup development process and allow developer's
-quickly login as any user in DB.
 
 **Demo** available on: https://any-login.herokuapp.com (source code for demo
 https://github.com/igorkasyanchuk/any_login_test)
 
 **Video Demo**: https://youtu.be/978DlHvufSY
+
+
+[<img src="https://i.ytimg.com/vi/978DlHvufSY/hqdefault.jpg"
+/>](https://youtu.be/978DlHvufSY)
+
+AnyLogin is created to speedup development process and allow developer's
+quickly login as any user in DB.
 
 Give it a try and if you like it share with friends. In case you have any suggestions please feel free to contact me.
 
