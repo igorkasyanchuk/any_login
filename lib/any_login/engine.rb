@@ -28,6 +28,8 @@ module AnyLogin
         require 'any_login/providers/devise'
       when :clearance
         require 'any_login/providers/clearance'
+      when :sorcery
+        require 'any_login/providers/sorcery'
       else
         throw 'Please use this gem with any of the following gems: Devise, Authlogic or Clearance'
       end
@@ -40,6 +42,8 @@ module AnyLogin
         :devise
       elsif AnyLogin.provider.nil? && Object.const_defined?('Clearance')
         :clearance
+      elsif AnyLogin.provider.nil? && Object.const_defined?('Sorcery')
+        :sorcery
       end
     end
 

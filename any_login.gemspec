@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "devise"
   s.add_development_dependency "authlogic"
   s.add_development_dependency "clearance"
+  s.add_development_dependency "sorcery"
   s.add_development_dependency "bcrypt"
   s.add_development_dependency "jquery-rails"
   s.add_development_dependency "quiet_assets"

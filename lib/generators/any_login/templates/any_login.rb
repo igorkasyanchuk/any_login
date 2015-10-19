@@ -1,5 +1,5 @@
 AnyLogin.setup do |config|
-  # # provider (:devise, :authlogic). Provider can be identified automatically based on your Gemfile
+  # # provider (:devise, :authlogic, sorcery, clearance). Provider can be identified automatically based on your Gemfile
   # config.provider = nil
 
   # # enabled or not

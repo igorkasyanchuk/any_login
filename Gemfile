@@ -22,6 +22,7 @@ group :test do
   gem "clearance"
   gem "jquery-rails"
   gem "quiet_assets"
+  gem "sorcery"
   if RUBY_VERSION >= '2.0'
     gem "pry"
     gem "pry-rails"

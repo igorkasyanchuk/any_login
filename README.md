@@ -23,7 +23,7 @@ quickly login as any user in DB.
 Give it a try and if you like it share with friends. In case you have any suggestions please feel free to contact me.
 
 ## Requirements
-Ruby: 1.9.3, 2.X, Rails: >= 4.0. Works in pair with **Devise**, **Authlogic** or **Clearance** gems.
+Ruby: 1.9.3, 2.X, Rails: >= 4.0. Works in pair with **Devise**, **Authlogic**, **Clearance** or **Sorcery** gems.
 
 ## Installation
 
@@ -54,6 +54,10 @@ By default doesn't require any additional steps to make it works with Authlogic 
 ### Clearance
 
 By default doesn't require any additional steps to make it works with Clearance gem. If you have model `User` everything should works fine. In case you have other model you need to set it in options (see Customization section).
+
+### Sorcery
+
+By default doesn't require any additional steps to make it works with Sorcery gem. If you have model `User` everything should works fine. In case you have other model you need to set it in options (see Customization section).
 
 
 ## Customization
@@ -114,5 +118,5 @@ You can also try to debug you application in production and secure any_login wit
 
 ## Future Plans
 1.  Add tests
-2.  Add support for more authentication gems like Devise, Authlogic, Clearance (restful_authentication, sorcery, monban, letmein)
+2.  Add support for more authentication gems like Devise, Authlogic, Clearance (restful_authentication, monban, letmein)
 

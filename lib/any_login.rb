@@ -6,6 +6,7 @@ module AnyLogin
     autoload :Devise,    'any_login/providers/devise'
     autoload :Authlogic, 'any_login/providers/authlogic'
     autoload :Clearance, 'any_login/providers/clearance'
+    autoload :Sorcery,   'any_login/providers/sorcery'
   end
 
   # enable in development mode only
