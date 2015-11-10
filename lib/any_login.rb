@@ -82,41 +82,51 @@ module AnyLogin
       if grouped?
         [e[0], e[1].collect(&name_method)]
       else
-        name_method.call(e)
+        if name_method.is_a?(Symbol)
+          e.send(name_method)
+        else
+          name_method.call(e)
+        end
       end
     end
   end
 
   def self.klass
-    @@klass ||= AnyLogin.klass_name.constantize
+    @@klass = AnyLogin.klass_name.constantize
   end
 
   private
 
+  def self.format_collection_raw(result)
+    if result.is_a?(Hash) || (Object.const_defined?("OrderedHash") && result.is_a?(OrderedHash))
+      result.to_a
+    else
+      result
+    end
+  end
+
   def self.collection_raw
-    @@collection_raw ||= begin
+    @@collection_raw = begin
       result = AnyLogin.klass.send(AnyLogin.collection_method)
       if limit == :none
-        result
-      elsif result.is_a?(ActiveRecord::Relation)
-        result.limit(limit)
-      elsif result.is_a?(Array)
-        result.take(limit)
-      elsif result.is_a?(Hash) || result.is_a?(OrderedHash)
-        result.to_a
+        format_collection_raw(result)
       else
-        result
+        if result.is_a?(ActiveRecord::Relation)
+          format_collection_raw(result.limit(limit))
+        else
+          format_collection_raw(result.take(limit))
+        end
       end
     end
   end
 
   def self.collection_type
-    @@collection_type ||=
-                          if collection_raw[1].is_a?(Array)
-                            :grouped
-                          else
-                            :single
-                          end
+    @@collection_type =
+                        if collection_raw[1].is_a?(Array)
+                          :grouped
+                        else
+                          :single
+                        end
     @@collection_type
   end
 
