@@ -95,6 +95,7 @@ If will create file config/initializers/any_login.rb.
 ### Advanced Options
 If you want to add collection grouped for example by role you can do it with:
 
+```ruby
     def self.groped_collection_by_role
       {
         'admin' => User.limit(10),
@@ -102,6 +103,29 @@ If you want to add collection grouped for example by role you can do it with:
         'user' => User.limit(10)
       }
     end
+ ```
+   
+Or another sample:
+
+```ruby
+    # Initializer
+    config.collection_method = :grouped_users
+    # # to format user name in dropdown list
+    config.name_method = :any_login_name    
+ 
+    # User class
+    def any_login_name
+      [full_name + ' - ' + email + " Domains: #{domains.collect(&:short_code).join(',').presence || 'none'}; Role: #{role}; ID: #{id}", id]
+    end
+  
+    def self.grouped_users
+      Organization.ordered.includes(:employees).inject({}) do |res, org|
+        res[org.name] = org.employees.ordered.includes([:domains, :organization])
+        res
+      end
+    end
+```
+
 
 And in config/initializers/any_login.rb add `config.collection_method =
 :groped_collection_by_role`.
