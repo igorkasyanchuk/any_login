@@ -3,7 +3,7 @@ module AnyLogin
     extend ActiveSupport::Concern
 
     def any_login_here
-      render 'any_login/any_login' if AnyLogin.enabled
+      render 'any_login/any_login' if AnyLogin.enabled && AnyLogin.verify_access_proc.call(self.controller)
     end
 
     if AnyLogin.enabled
