@@ -45,5 +45,5 @@ AnyLogin.setup do |config|
   # config.http_basic_authentication_password = 'password'
 
   # # Use controller proc condition
-  # config.verify_access_proc{ |controller| true }
+  # config.verify_access_proc = proc { |controller| true }
 end
