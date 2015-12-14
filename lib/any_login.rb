@@ -69,6 +69,10 @@ module AnyLogin
   mattr_accessor :http_basic_authentication_password
   @@http_basic_authentication_password = 'password'
 
+  # Use controller proc condition
+  mattr_accessor :verify_access_proc
+  @@verify_access_proc = proc { |controller| true }
+
   def self.setup
     yield(self)
   end
