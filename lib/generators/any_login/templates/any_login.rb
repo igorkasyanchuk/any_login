@@ -42,5 +42,8 @@ AnyLogin.setup do |config|
   # config.http_basic_authentication_user_name = 'any_login'
 
   # # Enable http basic authentication
-  # config.ttp_basic_authentication_password = 'password'
+  # config.http_basic_authentication_password = 'password'
+
+  # # Use controller proc condition
+  # config.verify_access_proc{ |controller| true }
 end

@@ -90,7 +90,7 @@ If will create file config/initializers/any_login.rb.
 *   **http_basic_authentication_enabled** - Enable HTTP_BASIC authentication.
 *   **http_basic_authentication_user_name** - HTTP_BASIC authentication user name.
 *   **http_basic_authentication_password** - HTTP_BASIC authentication password.
-
+*   **verify_access_proc** - controller based access (condition on request.remote_ip, current_user, etc.)
 
 ### Advanced Options
 If you want to add collection grouped for example by role you can do it with:

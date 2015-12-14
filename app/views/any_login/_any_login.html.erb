@@ -1,130 +1,133 @@
-<div id='any_login' class='<%= any_login_klasses %>'>
-  <%= form_tag any_login.sign_in_path, :method => :post, :id => 'any_login_form' do %>
-    <%= image_tag 'any_login/person.png', :alt => AnyLogin.klass, :onclick => "AnyLogin.on_image_click();" %>
-    <span id='any_login_box' class='hidden_box'>
-      <%= any_login_select %>
-      or by
-      <%= any_login_id_input %>
-      <%= any_login_submit %>
-      <span id='current_user_information'><%= current_user_information %></span>
-    </span>
-  <% end %>
-</div>
+<%- if AnyLogin.verify_access_proc.call(self.controller) %>
 
-<script type="text/javascript" charset="utf-8">
-  Element.prototype.hasClass = function (className) {
-      return new RegExp(' ' + className + ' ').test(' ' + this.className + ' ');
-  };
+  <div id='any_login' class='<%= any_login_klasses %>'>
+    <%= form_tag any_login.sign_in_path, :method => :post, :id => 'any_login_form' do %>
+      <%= image_tag 'any_login/person.png', :alt => AnyLogin.klass, :onclick => "AnyLogin.on_image_click();" %>
+      <span id='any_login_box' class='hidden_box'>
+        <%= any_login_select %>
+        or by
+        <%= any_login_id_input %>
+        <%= any_login_submit %>
+        <span id='current_user_information'><%= current_user_information %></span>
+      </span>
+    <% end %>
+  </div>
 
-  Element.prototype.addClass = function (className) {
-      if (!this.hasClass(className)) {
-          this.className += ' ' + className;
-      }
-  };
+  <script type="text/javascript" charset="utf-8">
+    Element.prototype.hasClass = function (className) {
+        return new RegExp(' ' + className + ' ').test(' ' + this.className + ' ');
+    };
 
-  Element.prototype.removeClass = function (className) {
-      var newClass = ' ' + this.className.replace(/[\t\r\n]/g, ' ') + ' '
-      if (this.hasClass(className)) {
-          while (newClass.indexOf( ' ' + className + ' ') >= 0) {
-              newClass = newClass.replace(' ' + className + ' ', ' ');
-          }
-          this.className = newClass.replace(/^\s+|\s+$/g, ' ');
-      }
-  };
-  Element.prototype.toggleClass = function (className) {
-      var newClass = ' ' + this.className.replace(/[\t\r\n]/g, " ") + ' ';
-      if (this.hasClass(className)) {
-          while (newClass.indexOf(" " + className + " ") >= 0) {
-              newClass = newClass.replace(" " + className + " ", " ");
-          }
-          this.className = newClass.replace(/^\s+|\s+$/g, ' ');
-      } else {
-          this.className += ' ' + className;
-      }
-  };
+    Element.prototype.addClass = function (className) {
+        if (!this.hasClass(className)) {
+            this.className += ' ' + className;
+        }
+    };
 
-  var AnyLogin = {};
-  AnyLogin.on_image_click = function() {
-      var elem = document.getElementById('any_login_box');
-      elem.toggleClass("hidden_box");
-      elem.toggleClass("visible_box");
-  };
-  AnyLogin.on_select_change = function() {
-      document.getElementById('any_login_form').submit();
-  };
-</script>
+    Element.prototype.removeClass = function (className) {
+        var newClass = ' ' + this.className.replace(/[\t\r\n]/g, ' ') + ' '
+        if (this.hasClass(className)) {
+            while (newClass.indexOf( ' ' + className + ' ') >= 0) {
+                newClass = newClass.replace(' ' + className + ' ', ' ');
+            }
+            this.className = newClass.replace(/^\s+|\s+$/g, ' ');
+        }
+    };
+    Element.prototype.toggleClass = function (className) {
+        var newClass = ' ' + this.className.replace(/[\t\r\n]/g, " ") + ' ';
+        if (this.hasClass(className)) {
+            while (newClass.indexOf(" " + className + " ") >= 0) {
+                newClass = newClass.replace(" " + className + " ", " ");
+            }
+            this.className = newClass.replace(/^\s+|\s+$/g, ' ');
+        } else {
+            this.className += ' ' + className;
+        }
+    };
 
-<style type="text/css" media="screen">
-  #any_login {
-    position: fixed;
-    opacity: 0.5;
-    background: #5c4383;
-    color: white;
-    font-size: 16px;
-    line-height: 20px;
-    z-index: 10000;
-  }
-  #any_login form {
-    padding: 0;
-    margin: 0;
-  }
-  #any_login input, #any_login select {
-    color: black;
-    padding: 0;
-    margin: 0;
-  }
-  #any_login .hidden_box {
-    display: none;
-  }
-  #any_login .visible_box {
-    display: inline;
-  }
-  #any_login.any_login_top_left {
-    top: 0;
-    left: 0;
-  }
-  #any_login.any_login_top_right {
-    top: 0;
-    right: 0;
-  }
-  #any_login.any_login_bottom_left {
-    bottom: 0;
-    left: 0;
-  }
-  #any_login.any_login_bottom_right {
-    bottom: 0;
-    right: 0;
-  }
-  #any_login.any_login_visible {
-    opacity: 1;
-  }
-  #any_login img {
-    cursor: pointer;
-    vertical-align: middle;
-  }
-  #any_login:hover {
-    opacity: 1;
-  }
-  #any_login form {
-    padding: 4px 6px;
-  }
-  #any_login span {
-    display: none;
-    vertical-align: middle;
-  }
-  #any_login.any_login_auto_show span {
-    display: inline;
-  }
-  #any_login .any_login_user_information {
-    padding-left: 10px;
-  }
-  #any_login #any_login_id_input {
-    width: 30px;
-  }
-  #any_login span#current_user_information {
-    display: inline;
-  }
-  #any_login span#current_user_information span {
-    display: inline;
-  }
-</style>
+    var AnyLogin = {};
+    AnyLogin.on_image_click = function() {
+        var elem = document.getElementById('any_login_box');
+        elem.toggleClass("hidden_box");
+        elem.toggleClass("visible_box");
+    };
+    AnyLogin.on_select_change = function() {
+        document.getElementById('any_login_form').submit();
+    };
+  </script>
+
+  <style type="text/css" media="screen">
+    #any_login {
+      position: fixed;
+      opacity: 0.5;
+      background: #5c4383;
+      color: white;
+      font-size: 16px;
+      line-height: 20px;
+      z-index: 10000;
+    }
+    #any_login form {
+      padding: 0;
+      margin: 0;
+    }
+    #any_login input, #any_login select {
+      color: black;
+      padding: 0;
+      margin: 0;
+    }
+    #any_login .hidden_box {
+      display: none;
+    }
+    #any_login .visible_box {
+      display: inline;
+    }
+    #any_login.any_login_top_left {
+      top: 0;
+      left: 0;
+    }
+    #any_login.any_login_top_right {
+      top: 0;
+      right: 0;
+    }
+    #any_login.any_login_bottom_left {
+      bottom: 0;
+      left: 0;
+    }
+    #any_login.any_login_bottom_right {
+      bottom: 0;
+      right: 0;
+    }
+    #any_login.any_login_visible {
+      opacity: 1;
+    }
+    #any_login img {
+      cursor: pointer;
+      vertical-align: middle;
+    }
+    #any_login:hover {
+      opacity: 1;
+    }
+    #any_login form {
+      padding: 4px 6px;
+    }
+    #any_login span {
+      display: none;
+      vertical-align: middle;
+    }
+    #any_login.any_login_auto_show span {
+      display: inline;
+    }
+    #any_login .any_login_user_information {
+      padding-left: 10px;
+    }
+    #any_login #any_login_id_input {
+      width: 30px;
+    }
+    #any_login span#current_user_information {
+      display: inline;
+    }
+    #any_login span#current_user_information span {
+      display: inline;
+    }
+  </style>
+<%- end %>

@@ -10,6 +10,7 @@ module AnyLogin
 
 
       def any_login
+        head 403 && return unless AnyLogin.verify_access_proc.call(self)
         AnyLogin.provider::Controller.instance_method(:any_login_sign_in).bind(self).call
       end
     end
