@@ -37,7 +37,10 @@ Ruby: 1.9.3, 2.X, Rails: >= 4.0. Works in pair with **Devise**, **Authlogic**, *
 
  3. In application layout (for example `app/views/layouts/application.html.erb`) add in the bottom of the page:
 
-        <%= any_login_here %>
+
+```
+  = any_login_here if defined?(AnyLogin)
+``` 
 
  4. Open your app and on the bottom left corner you will see semi-transparent user icon. Click on it and now you can select any user to login without password.
 
