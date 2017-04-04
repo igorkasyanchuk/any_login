@@ -68,7 +68,7 @@ If you want to customize gem run in console:
 
     rails g any_login initializer
 
-If will create file config/initializers/any_login.rb.
+It will create file config/initializers/any_login.rb.
 
 ### Options
 *   **enabled** - enable of disable gem (by default this gem is enabled only in development mode).
