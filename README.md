@@ -17,131 +17,135 @@ https://github.com/igorkasyanchuk/any_login_test)
 [<img src="https://i.ytimg.com/vi/978DlHvufSY/hqdefault.jpg"
 />](https://youtu.be/978DlHvufSY)
 
-AnyLogin is created to speedup development process and allow developer's
-quickly login as any user in DB.
+AnyLogin was created to speed up the development process by allowing developers to quickly log in as any user.
 
-Give it a try and if you like it share with friends. In case you have any suggestions please feel free to contact me.
+Give it a try; if you like it please share AnyLogin with friends. If you have any suggestions please feel free to contact me.
 
 ## Requirements
-Ruby: 1.9.3, 2.X, Rails: >= 4.0. Works in pair with **Devise**, **Authlogic**, **Clearance** or **Sorcery** gems.
+Ruby: 1.9.3, 2.X, Rails: >= 4.0. Pre-configured to work with **Devise**, **Authlogic**, **Clearance** or **Sorcery** gems.
 
 ## Installation
 
- 1. List  Add to your Gemfile:
+1. Add AnyLogin to your Gemfile:
 
         gem 'any_login'
 
- 2. Execute in console:
+2. Execute in console:
 
         bundle install
 
- 3. In application layout (for example `app/views/layouts/application.html.erb`) add in the bottom of the page:
+3. In application layout (for example `app/views/layouts/application.html.erb`) add the following to the bottom of the page:
 
+        = any_login_here if defined?(AnyLogin)
 
-```
-  = any_login_here if defined?(AnyLogin)
-``` 
-
- 4. Open your app and on the bottom left corner you will see semi-transparent user icon. Click on it and now you can select any user to login without password.
+ 4. Open your app and on the bottom left corner you will see semi-transparent user icon. Click on it and now you can select any user to log in as without a password.
 
 ## Integrations
 
 ### Devise
 
-By default doesn't require any additional steps to make it works with Devise gem. If you have model `User` everything should works fine. In case you have other model you need to set it in options (see Customization section).
+By default no additional steps are required to make it work with Devise gem. If you have a `User` model everything should work fine. If you have different user model you need to set it in options (see Customization section).
 
 ### Authlogic
 
-By default doesn't require any additional steps to make it works with Authlogic gem. If you have model `User` and you have `current_user` method in application controller everything should works fine. In case you have other model you need to set it in options (see Customization section).
+By default no additional steps are required to make it work with Authlogic gem. If you have a `User` model and a `current_user` method in application controller everything should work fine. If you have different user model you need to set it in options (see Customization section).
 
 ### Clearance
 
-By default doesn't require any additional steps to make it works with Clearance gem. If you have model `User` everything should works fine. In case you have other model you need to set it in options (see Customization section).
+By default no additional steps are required to make it work with Clearance gem. If you have a `User` model everything should work fine. If you have different user model you need to set it in options (see Customization section).
 
 ### Sorcery
 
-By default doesn't require any additional steps to make it works with Sorcery gem. If you have model `User` everything should works fine. In case you have other model you need to set it in options (see Customization section).
-
+By default no additional steps are required to make it work with Sorcery gem. If you have a `User` model everything should work fine. If you have different user model you need to set it in options (see Customization section).
 
 ## Customization
-If you want to customize gem run in console:
+If you want to customize gem execute in console:
 
     rails g any_login initializer
 
-It will create file config/initializers/any_login.rb.
+It will create the initializer file `config/initializers/any_login.rb`.
 
 ### Options
-*   **enabled** - enable of disable gem (by default this gem is enabled only in development mode).
-*   **klass_name** - class name for "User" object. Default to `User`.
+*   **enabled** - enable or disable gem (by default this gem is enabled only in development mode).
+*   **klass_name** - class name for "User" object. Defaults to `User`.
 *   **collection_method** - method which returns collection of users. Sample:
     `.all`, `.active`, `.admins`, `.groupped_users`. Value is a simple.
-    Default to `:all`.
+    Defaults to `:all`.
 *   **name_method** - default value is `proc { |e| [e.email, e.id] }`. You can
-    change label for select in dropdown. For example you can add roles,
+    change the label of users displayed in dropdown. For example you can add roles,
     permissions and any other important information.
 *   **limit** - limit number of records in dropdown. Default 10. You can put
-    `:none` if you don't want to limit number of users for select.
+    `:none` if you don't want to limit the number of users for select.
 *   **redirect_path_after_login** - redirect user to path. Default is
     `:root_path`.
 *   **login_on** - you can enable login with select field, ID input or both.
     Default: `:both`.
-*   **position** - position of any_login box on page. Possible values: `top_left`,
+*   **position** - position of AnyLogin box on page. Possible values: `top_left`,
     `top_right`, `bottom_left`, `bottom_right`. Default: `bottom_left`.
 *   **login_button_label** - login button label.
 *   **select_prompt** - select prompt message.
-*   **auto_show** - automatically show any_login box.
+*   **auto_show** - automatically show AnyLogin box.
 *   **http_basic_authentication_enabled** - Enable HTTP_BASIC authentication.
 *   **http_basic_authentication_user_name** - HTTP_BASIC authentication user name.
 *   **http_basic_authentication_password** - HTTP_BASIC authentication password.
 *   **verify_access_proc** - controller based access (condition on request.remote_ip, current_user, etc.)
 
 ### Advanced Options
-If you want to add collection grouped for example by role you can do it with:
+If you want to display users grouped by role you can do it with:
 
 ```ruby
-    def self.groped_collection_by_role
-      {
-        'admin' => User.limit(10),
-        'moderator' => User.limit(10),
-        'user' => User.limit(10)
-      }
-    end
+# Initializer: config/initializers/any_login.rb
+AnyLogin.setup do |config|
+  config.collection_method = :grouped_collection_by_role
+end
+
+# User class: app/models/user.rb
+class User < ActiveRecord::Base
+  def self.grouped_collection_by_role
+    {
+      'admin'     => User.limit(10),
+      'moderator' => User.limit(10),
+      'user'      => User.limit(10)
+    }
+  end
+end
  ```
    
 Or another sample:
 
 ```ruby
-    # Initializer
-    config.collection_method = :grouped_users
-    # # to format user name in dropdown list
-    config.name_method = :any_login_name    
- 
-    # User class
-    def any_login_name
-      [full_name + ' - ' + email + " Domains: #{domains.collect(&:short_code).join(',').presence || 'none'}; Role: #{role}; ID: #{id}", id]
+# Initializer: config/initializers/any_login.rb
+AnyLogin.setup do |config|
+  config.collection_method = :grouped_users
+  # to format user name in dropdown list
+  config.name_method = :any_login_name
+end
+
+# User class: app/models/user.rb
+class User < ActiveRecord::Base
+  def any_login_name
+    [full_name + ' - ' + email + " Domains: #{domains.collect(&:short_code).join(',').presence || 'none'}; Role: #{role}; ID: #{id}", id]
+  end
+
+  def self.grouped_users
+    Organization.ordered.includes(:employees).inject({}) do |res, org|
+      res[org.name] = org.employees.ordered.includes([:domains, :organization])
+      res
     end
-  
-    def self.grouped_users
-      Organization.ordered.includes(:employees).inject({}) do |res, org|
-        res[org.name] = org.employees.ordered.includes([:domains, :organization])
-        res
-      end
-    end
+  end
+end
 ```
 
-
-And in config/initializers/any_login.rb add `config.collection_method =
-:groped_collection_by_role`.
-
 ## Production
-If you want to completely disable gem in production add following code in your
-config/environments/production.rb file.
+If you want to completely disable gem in production add following code in your `config/environments/production.rb` file.
 
-    AnyLogin.setup do |config|
-       config.enabled = false
-    end
+```ruby
+AnyLogin.setup do |config|
+  config.enabled = false
+end
+```
 
-You can also try to debug you application in production and secure any_login with HTTP_BASIC authentication. See Options sections for more details.
+You can also try to debug your application in production and secure AnyLogin with HTTP_BASIC authentication. See Options sections for more details.
 
 ## Future Plans
 1.  Add tests
