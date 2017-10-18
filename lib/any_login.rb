@@ -21,6 +21,10 @@ module AnyLogin
   mattr_accessor :klass_name
   @@klass_name = 'User'
 
+  # Sign-in Method
+  mattr_accessor :sign_in
+  @@sign_in = nil
+
   # .all, .active, .admins, .groped_collection, etc ... need to return an array (or hash with arrays) of users
   mattr_accessor :collection_method
   @@collection_method = :all
