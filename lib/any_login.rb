@@ -81,22 +81,8 @@ module AnyLogin
     yield(self)
   end
 
-  def self.grouped?
-    collection_type == :grouped
-  end
-
   def self.collection
-    collection_raw.collect do |e|
-      if grouped?
-        [e[0], e[1].collect(&name_method)]
-      else
-        if name_method.is_a?(Symbol)
-          e.send(name_method)
-        else
-          name_method.call(e)
-        end
-      end
-    end
+    Collection.new(collection_raw)
   end
 
   def self.klass
@@ -128,18 +114,9 @@ module AnyLogin
     end
   end
 
-  def self.collection_type
-    @@collection_type =
-                        if collection_raw[1].is_a?(Array)
-                          :grouped
-                        else
-                          :single
-                        end
-    @@collection_type
-  end
-
 end
 
+require 'any_login/collection'
 require 'any_login/engine'
 require 'any_login/routes'
 require 'any_login/version'

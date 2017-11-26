@@ -19,10 +19,10 @@ module AnyLogin
       def any_login_select
         collection = AnyLogin.collection
         select_options =
-                        if AnyLogin.grouped?
-                          grouped_options_for_select(collection)
+                        if collection.grouped?
+                          grouped_options_for_select(collection.to_a)
                         else
-                          options_for_select(collection)
+                          options_for_select(collection.to_a)
                         end
         select_tag :selected_id, select_options, select_html_options
       end
