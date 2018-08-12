@@ -103,9 +103,9 @@ end
 class User < ActiveRecord::Base
   def self.grouped_collection_by_role
     {
-      'admin'     => User.limit(10),
-      'moderator' => User.limit(10),
-      'user'      => User.limit(10)
+      'admin'     => User.admins.limits(10),
+      'moderator' => User.moderators.limit(10),
+      'user'      => User.users.limit(10)
     }
   end
 end
