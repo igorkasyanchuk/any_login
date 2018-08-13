@@ -24,6 +24,8 @@ Give it a try; if you like it please share AnyLogin with friends. If you have an
 ## Requirements
 Ruby: 1.9.3, 2.X, Rails: >= 4.0. Pre-configured to work with **Devise**, **Authlogic**, **Clearance** or **Sorcery** gems.
 
+For Rails < 4.2.7 please use `gem 'any_login', '1.3'`.
+
 ## Installation
 
 1. Add AnyLogin to your Gemfile:
@@ -110,7 +112,7 @@ class User < ActiveRecord::Base
   end
 end
  ```
-   
+
 Or another sample:
 
 ```ruby

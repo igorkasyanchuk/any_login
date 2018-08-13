@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+input, select, label {
+  height: 80px;
+  padding: 10px;
+  margin: 10px;
+  float: right;
+}

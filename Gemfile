@@ -13,6 +13,12 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+# For development
+# group :development do
+#   gem 'devise'
+#   gem "jquery-rails"
+#   gem "quiet_assets"
+# end
 
 # To run tests
 group :test do
@@ -24,11 +30,7 @@ group :test do
   gem "quiet_assets"
   gem "sorcery"
 
-  if RUBY_VERSION >= '2.2'
-    gem 'json', '1.8.6'
-  else
-    gem 'json', '1.8.3'
-  end
+  gem 'json'
 
   if RUBY_VERSION >= '2.0'
     gem "pry"

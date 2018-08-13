@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.3'
 
-  s.add_runtime_dependency 'rails', '>= 4.0.0'
+  s.add_runtime_dependency 'rails', '>= 4.2.7'
 
   # to remove warning
   s.add_development_dependency "sqlite3"
