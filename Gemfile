@@ -23,6 +23,13 @@ group :test do
   gem "jquery-rails"
   gem "quiet_assets"
   gem "sorcery"
+
+  if RUBY_VERSION >= '2.2'
+    gem 'json', '1.8.6'
+  else
+    gem 'json', '1.8.3'
+  end
+
   if RUBY_VERSION >= '2.0'
     gem "pry"
     gem "pry-rails"
