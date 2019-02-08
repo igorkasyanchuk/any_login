@@ -91,7 +91,7 @@ It will create the initializer file `config/initializers/any_login.rb`.
 *   **http_basic_authentication_user_name** - HTTP_BASIC authentication user name.
 *   **http_basic_authentication_password** - HTTP_BASIC authentication password.
 *   **verify_access_proc** - controller based access (condition on request.remote_ip, current_user, etc.)
-*   **previous_limit** - specify limit of records for history.
+*   **previous_limit** - specify limit of records for history. Default: 6.
 
 ### Advanced Options
 If you want to display users grouped by role you can do it with:
