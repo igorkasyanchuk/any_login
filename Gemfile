@@ -18,6 +18,7 @@ gemspec
 #   gem 'devise'
 #   gem "jquery-rails"
 #   gem "quiet_assets"
+#   gem "pry"
 # end
 
 # To run tests

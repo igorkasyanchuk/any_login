@@ -61,6 +61,10 @@ module AnyLogin
   mattr_accessor :limit
   @@limit = 10
 
+  # Previous limit, integer or :none
+  mattr_accessor :previous_limit
+  @@previous_limit = 6
+
   # Enable http basic authentication
   mattr_accessor :http_basic_authentication_enabled
   @@http_basic_authentication_enabled = false
@@ -87,6 +91,10 @@ module AnyLogin
 
   def self.klass
     @@klass = AnyLogin.klass_name.constantize
+  end
+
+  def self.cookie_name
+    "any_login_previous_#{Rails.application.class.parent_name}".underscore
   end
 
   private

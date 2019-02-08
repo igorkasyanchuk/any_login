@@ -27,11 +27,34 @@ module AnyLogin
         select_tag :selected_id, select_options, select_html_options
       end
 
-      def select_html_options
+      def any_login_previous_select
+        ids = any_login_previous_ids
+        return if ids.blank?
+
+        users = ids.collect do |id|
+          AnyLogin.klass.where(AnyLogin.klass.primary_key => id).first
+        end.compact
+
+        collection = AnyLogin::Collection.new(users).to_a
+        if collection.any?
+          select_options = options_for_select(collection)
+          [
+            content_tag(:span, id: 'anylogin_back_to_user') do
+              "History: "
+            end,
+            select_tag(:back_to_previous_id, select_options, select_html_options("Back to:"))
+          ].join.html_safe
+        end
+      end
+
+      def any_login_previous_ids
+        (cookies[AnyLogin.cookie_name].presence || '').split(',').take(AnyLogin.previous_limit)
+      end
+
+      def select_html_options(prompt = AnyLogin.select_prompt)
         options = {}
-        #options = { :include_blank => true }
         options[:onchange] = 'AnyLogin.on_select_change();' if AnyLogin.login_on == :both
-        options[:prompt] = AnyLogin.select_prompt
+        options[:prompt] = prompt
         options
       end
 
