@@ -43,6 +43,20 @@ For Rails < 4.2.7 please use `gem 'any_login', '1.3'`.
  4. Open your app and on the bottom left corner you will see semi-transparent user icon. Click on it and now you can select any user to log in as without a password.
 
 ## Integrations
+### Mongoid
+After defining a class method called `primary_key`, `any_login` works seamlessly. Otherwise, you will see this error `undefined method 'primary_key' for User:Class`
+```ruby
+class User
+  ...
+  
+  class << self
+    def primary_key
+      # if your primary key is :id, if anything else use accordingly.
+      :id
+    end
+  end
+end
+```
 
 ### Devise
 
