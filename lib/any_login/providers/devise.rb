@@ -3,6 +3,11 @@ module AnyLogin
     module Devise
 
       module Controller
+        
+        extend ActiveSupport::Concern
+        included do
+          include Rails.application.routes.url_helpers
+        end
 
         DEFAULT_SIGN_IN = proc do |loginable|
           reset_session
