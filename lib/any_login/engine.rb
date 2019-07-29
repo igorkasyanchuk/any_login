@@ -10,6 +10,10 @@ module AnyLogin
       load_provider
 
       ActiveSupport.on_load :action_controller do
+        if Rails::VERSION::MAJOR >= 6
+          AnyLogin.provider::Controller.send :include, Rails.application.routes.url_helpers
+        end
+
         AnyLogin::ApplicationController.send :include, AnyLogin.provider::Controller
       end
 
