@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    any_login (1.4.0)
+    any_login (1.4.1)
       rails (>= 4.2.7)
 
 GEM
@@ -191,4 +191,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.17.1
+   1.17.3
