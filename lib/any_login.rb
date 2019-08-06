@@ -94,7 +94,12 @@ module AnyLogin
   end
 
   def self.cookie_name
-    "any_login_previous_#{Rails.application.class.parent_name}".underscore
+    module_parent_name = if Rails::VERSION::MAJOR >= 6
+                           Rails.application.class.module_parent_name
+                         else
+                           Rails.application.class.parent_name
+                         end
+    "any_login_previous_#{module_parent_name}".underscore
   end
 
   private
