@@ -145,7 +145,7 @@ GEM
       activesupport (= 4.2.11.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (12.2.1)
+    rake (13.0.1)
     request_store (1.4.1)
       rack (>= 1.4)
     responders (2.1.0)
