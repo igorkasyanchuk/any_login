@@ -9,7 +9,7 @@ module AnyLogin
     if AnyLogin.enabled
 
       def any_login_id_input
-        text_field_tag :id, '', :placeholder => 'ID', :id => 'any_login_id_input'
+        text_field_tag :id, '', :placeholder => 'ID', :id => 'any_login_id_input', :required => true
       end
 
       def any_login_submit
