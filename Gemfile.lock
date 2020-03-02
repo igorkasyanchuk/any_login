@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    any_login (1.4.2)
+    any_login (1.4.3)
       rails (>= 4.2.7)
 
 GEM
