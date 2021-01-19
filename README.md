@@ -5,6 +5,7 @@ src="https://codeclimate.com/github/igorkasyanchuk/any_login/badges/gpa.svg"
 />](https://codeclimate.com/github/igorkasyanchuk/any_login) [<img
 src="https://badge.fury.io/rb/any_login.svg" alt="Gem Version"
 />](http://badge.fury.io/rb/any_login)
+[![RailsJazz](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.railsjazz.com)
 
 ## Description
 
