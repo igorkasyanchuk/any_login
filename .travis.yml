@@ -6,6 +6,7 @@ rvm:
 before_install:
   - gem i bundler -v 1.17.3
   - gem i rake
+  - bundle
 
 cache: bundler
 
