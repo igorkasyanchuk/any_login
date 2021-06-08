@@ -170,6 +170,10 @@ You can also try to debug your application in production and secure AnyLogin wit
 1.  Add tests
 2.  Add support for more authentication gems like Devise, Authlogic, Clearance (restful_authentication, monban, letmein)
 
+## Contributors
+
+- @manastyretskyi
+
 ## Other
 
 [<img src="https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/more_gems.png?raw=true"
