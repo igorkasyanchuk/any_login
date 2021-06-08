@@ -172,7 +172,17 @@ You can also try to debug your application in production and secure AnyLogin wit
 
 ## Contributors
 
+- @incubus
+- @bbenezech
 - @manastyretskyi
+- @saiqulhaq
+- @zorab47
+- @shivabhusal
+- @eliotsykes
+- @sviatoslav-krupa
+- @daichirata
+- @linshaodongsam
+- @jr180180
 
 ## Other
 
