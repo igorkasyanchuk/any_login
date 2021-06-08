@@ -3,9 +3,7 @@ language: ruby
 rvm:
   - "2.5.1"
 
-before_install:
-  - gem install bundler
-  - gem install rake
+before_install: gem install rake bundler
 
 cache: bundler
 
