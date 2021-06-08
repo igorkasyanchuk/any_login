@@ -1,5 +1,5 @@
 module AnyLogin
-  module ApplicationHelper
+  module Helpers
     extend ActiveSupport::Concern
 
     def any_login_here
@@ -77,8 +77,6 @@ module AnyLogin
           end
         end
       end
-
     end
-
   end
 end

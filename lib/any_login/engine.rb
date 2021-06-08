@@ -13,12 +13,10 @@ module AnyLogin
         if Rails::VERSION::MAJOR >= 6
           AnyLogin.provider::Controller.send :include, Rails.application.routes.url_helpers
         end
-
-        AnyLogin::ApplicationController.send :include, AnyLogin.provider::Controller
       end
 
       ActiveSupport.on_load :action_view do
-        ActionView::Base.send :include, AnyLogin::ApplicationHelper
+        include AnyLogin::Helpers
       end
     end
 
