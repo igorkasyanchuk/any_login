@@ -1,6 +1,9 @@
 require 'any_login/engine'
 
 module AnyLogin
+  extend ActiveSupport::Autoload
+
+  autoload :Helpers
 
   module Provider
     autoload :Devise,    'any_login/providers/devise'

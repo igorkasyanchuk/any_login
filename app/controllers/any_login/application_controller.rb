@@ -1,5 +1,6 @@
 module AnyLogin
   class ApplicationController < ActionController::Base
+    include AnyLogin.provider::Controller
 
     if AnyLogin.enabled
       if AnyLogin.http_basic_authentication_enabled
