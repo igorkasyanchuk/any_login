@@ -1,15 +1,17 @@
 <div id='any_login' class='<%= any_login_klasses %>'>
-  <%= form_tag any_login.sign_in_path, :method => :post, :id => 'any_login_form' do %>
-    <%= image_tag 'any_login/person.png', :alt => AnyLogin.klass, :onclick => "AnyLogin.on_image_click();" %>
-    <span id='any_login_box' class='hidden_box'>
-      <%= any_login_select %>
-      or by
-      <%= any_login_id_input %>
-      <%= any_login_submit %>
-      <span class='current_user_information'><%= current_user_information %></span>
-      <%= any_login_previous_select %>
-    </span>
-  <% end %>
+  <%= image_tag 'any_login/person.png', :alt => AnyLogin.klass, :onclick => "AnyLogin.on_image_click();" %>
+  <div class="any_login_box">
+    <%= form_tag any_login.sign_in_path, :method => :post, :id => 'any_login_form' do %>
+      <span class='hidden_box'>
+        <%= any_login_select %>
+        or by
+        <%= any_login_id_input %>
+        <%= any_login_submit %>
+        <span class='current_user_information'><%= current_user_information %></span>
+        <%= any_login_previous_select %>
+      </span>
+    <% end %>
+  </div>
 </div>
 
 <script type="text/javascript" charset="utf-8">
@@ -46,7 +48,7 @@
 
   var AnyLogin = {};
   AnyLogin.on_image_click = function() {
-      var elem = document.getElementById('any_login_box');
+      var elem = document.querySelector('.any_login_box');
       elem.toggleClass("hidden_box");
       elem.toggleClass("visible_box");
   };
