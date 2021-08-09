@@ -58,9 +58,11 @@
   AnyLogin.on_select_change = function() {
       const forms = document.querySelectorAll('.any_login_form');
       forms.forEach(form => {
-        const select = form.querySelector('select');
-        select.addEventListener('change', () => {
-          form.submit();
+        const selects = form.querySelectorAll('select');
+        selects.forEach(select => {
+          select.addEventListener('change', () => {
+            form.submit();
+          })
         })
       })
   };
