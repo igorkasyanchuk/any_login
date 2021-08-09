@@ -6,7 +6,7 @@
       or by
       <%= any_login_id_input %>
       <%= any_login_submit %>
-      <span id='current_user_information'><%= current_user_information %></span>
+      <span class='current_user_information'><%= current_user_information %></span>
       <%= any_login_previous_select %>
     </span>
   <% end %>
@@ -129,13 +129,13 @@
     padding-left: 10px;
     color: yellow;
   }
-  #any_login #any_login_id_input {
+  #any_login .any_login_id_input {
     width: 30px;
   }
-  #any_login span#current_user_information {
+  #any_login span.current_user_information {
     display: inline;
   }
-  #any_login span#current_user_information span {
+  #any_login span.current_user_information span {
     display: inline;
   }
   #any_login span#anylogin_back_to_user {
