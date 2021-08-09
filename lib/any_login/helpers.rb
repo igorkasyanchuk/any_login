@@ -27,12 +27,12 @@ module AnyLogin
         select_tag :selected_id, select_options, select_html_options
       end
 
-      def any_login_previous_select
+      def any_login_previous_select(klass)
         ids = any_login_previous_ids
         return if ids.blank?
 
         users = ids.collect do |id|
-          AnyLogin.klass.where(AnyLogin.klass.primary_key => id).first
+          klass.where(klass.primary_key => id).first
         end.compact
 
         collection = AnyLogin::Collection.new(users).to_a
