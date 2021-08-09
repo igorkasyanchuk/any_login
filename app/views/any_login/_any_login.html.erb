@@ -1,17 +1,20 @@
 <div id='any_login' class='<%= any_login_klasses %>'>
   <%= image_tag 'any_login/person.png', :alt => AnyLogin.klass %>
-  <div class="any_login_box">
-    <%= form_tag any_login.sign_in_path, :method => :post, :class => 'any_login_form' do %>
-      <span class='hidden_box'>
-        <%= any_login_select %>
-        or by
-        <%= any_login_id_input %>
-        <%= any_login_submit %>
-        <span class='current_user_information'><%= current_user_information %></span>
-        <%= any_login_previous_select %>
-      </span>
-    <% end %>
-  </div>
+
+  <% AnyLogin.klasses.each do |klass| %>
+    <div class="any_login_box">
+      <%= form_tag any_login.sign_in_path(as: klass), :method => :post, :class => 'any_login_form' do %>
+        <span class='hidden_box'>
+          <%= any_login_select(klass) %>
+          or by
+          <%= any_login_id_input %>
+          <%= any_login_submit %>
+          <span class='current_user_information'><%= current_user_information(klass) %></span>
+          <%#= any_login_previous_select %>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <script type="text/javascript" charset="utf-8">

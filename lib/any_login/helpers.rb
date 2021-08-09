@@ -16,8 +16,8 @@ module AnyLogin
         submit_tag AnyLogin.login_button_label
       end
 
-      def any_login_select
-        collection = AnyLogin.collection
+      def any_login_select(klass)
+        collection = AnyLogin.collection(klass)
         select_options =
                         if collection.grouped?
                           grouped_options_for_select(collection.to_a)
@@ -65,9 +65,9 @@ module AnyLogin
         klasses.join(' ')
       end
 
-      def current_user_information
-        if respond_to?(AnyLogin.provider::Controller.any_login_current_user_method) &&
-           user = send(AnyLogin.provider::Controller.any_login_current_user_method)
+      def current_user_information(klass)
+        if respond_to?(AnyLogin.provider::Controller.any_login_current_user_method(klass)) &&
+           user = send(AnyLogin.provider::Controller.any_login_current_user_method(klass))
           content_tag :span, :class => 'any_login_user_information' do
             if AnyLogin.name_method.is_a?(Symbol)
               raw("Current #{AnyLogin.klass_name}: #{h(user.send(AnyLogin.name_method)[0])} &mdash; ID: #{user.id}")
