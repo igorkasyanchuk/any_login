@@ -1,7 +1,7 @@
 <div id='any_login' class='<%= any_login_klasses %>'>
-  <%= image_tag 'any_login/person.png', :alt => AnyLogin.klass, :onclick => "AnyLogin.on_image_click();" %>
+  <%= image_tag 'any_login/person.png', :alt => AnyLogin.klass %>
   <div class="any_login_box">
-    <%= form_tag any_login.sign_in_path, :method => :post, :id => 'any_login_form' do %>
+    <%= form_tag any_login.sign_in_path, :method => :post, :class => 'any_login_form' do %>
       <span class='hidden_box'>
         <%= any_login_select %>
         or by
@@ -53,8 +53,15 @@
       elem.toggleClass("visible_box");
   };
   AnyLogin.on_select_change = function() {
-      document.getElementById('any_login_form').submit();
+      const forms = document.querySelectorAll('.any_login_form');
+      forms.forEach(form => {
+        const select = form.querySelector('select');
+        select.addEventListener('change', () => {
+          form.submit();
+        })
+      })
   };
+  AnyLogin.on_select_change();
 </script>
 
 <style type="text/css" media="screen">
