@@ -10,7 +10,7 @@ module AnyLogin
         end
 
         def self.any_login_current_user_method(klass)
-          @@any_login_current_user_method ||= "current_#{klass.to_s.parameterize.underscore}".to_sym
+          @@any_login_current_user_method = "current_#{klass.to_s.parameterize.underscore}".to_sym
         end
 
         def any_login_sign_in
