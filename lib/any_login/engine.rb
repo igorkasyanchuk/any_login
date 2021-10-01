@@ -3,7 +3,9 @@ module AnyLogin
     isolate_namespace AnyLogin
 
     initializer 'any_login.assets_precompile', :group => :all do |app|
-      app.config.assets.precompile += ['any_login/person.png']
+      if defined?(Sprockets)
+        app.config.assets.precompile += ['any_login/person.png']
+      end
     end
 
     initializer 'any_login.helpers' do

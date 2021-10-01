@@ -1,6 +1,10 @@
 <div id='any_login' class='<%= any_login_klasses %>'>
   <%= form_tag any_login.sign_in_path, :method => :post, :id => 'any_login_form' do %>
-    <%= image_tag 'any_login/person.png', :alt => AnyLogin.klass, :onclick => "AnyLogin.on_image_click();" %>
+    <% if defined?(Sprockets) %>
+      <%= image_tag 'any_login/person.png', :alt => AnyLogin.klass, :onclick =>  %>
+    <% else %>
+      <button onclick="AnyLogin.on_image_click();"><%= AnyLogin.klass %></button>
+    <% end %>
     <span id='any_login_box' class='hidden_box'>
       <%= any_login_select %>
       or by
@@ -83,6 +87,11 @@
     font-size: auto;
     line-height: auto;
   }
+  #any_login button {
+    border-radius: 7px;
+    background: transparent;
+    color: white;
+  }
   #any_login .hidden_box {
     display: none;
   }
@@ -142,5 +151,5 @@
     padding-left: 15px;
     color: cyan;
     display: inline;
-  }  
+  }
 </style>
