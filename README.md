@@ -196,4 +196,4 @@ You can also try to debug your application in production and secure AnyLogin wit
 ## Other
 
 [<img src="https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/more_gems.png?raw=true"
-/>](https://www.railsjazz.com/)
+/>](https://www.railsjazz.com/?utm_source=github&utm_medium=bottom&utm_campaign=any_login)
