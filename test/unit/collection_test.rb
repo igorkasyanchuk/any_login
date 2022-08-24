@@ -1,4 +1,4 @@
-require "test_helper_devise"
+require "test_helper"
 
 module AnyLogin
   class CollectionTest < ActiveSupport::TestCase

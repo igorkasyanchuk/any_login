@@ -1,4 +1,4 @@
-require 'test_helper_devise'
+require 'test_helper'
 
 class NavigationTest < ActionDispatch::IntegrationTest
   # test "the truth" do

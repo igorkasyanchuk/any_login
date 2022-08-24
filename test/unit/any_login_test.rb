@@ -1,4 +1,4 @@
-require 'test_helper_devise'
+require 'test_helper'
 
 class AnyLoginTest < ActiveSupport::TestCase
   test "truth" do
