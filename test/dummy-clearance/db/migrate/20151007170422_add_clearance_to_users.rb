@@ -1,4 +1,4 @@
-class AddClearanceToUsers < ActiveRecord::Migration
+class AddClearanceToUsers < ActiveRecord::Migration[6.0]
   def self.up
     change_table :users do |t|
       t.string :confirmation_token, limit: 128

@@ -10,9 +10,6 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-# To use a debugger
-# gem 'byebug', group: [:development, :test]
-
 # For development
 # group :development do
 #   gem 'devise'
@@ -22,20 +19,17 @@ gemspec
 # end
 
 # To run tests
-group :test do
+group :development, :test do
   gem "sqlite3"
   gem "devise"
   gem "authlogic"
   gem "clearance"
-  gem "jquery-rails"
-  gem "quiet_assets"
+  gem 'sprockets-rails', :require => 'sprockets/railtie'
   gem "sorcery"
 
   gem 'json'
 
-  if RUBY_VERSION >= '2.0'
-    gem "pry"
-    gem "pry-rails"
-    gem "pry-byebug"
-  end
+  gem "pry"
+  gem "pry-rails"
+  gem "pry-byebug"
 end

@@ -1,4 +1,4 @@
-class PopulateTestUsers < ActiveRecord::Migration
+class PopulateTestUsers < ActiveRecord::Migration[6.0]
   def change
     add_column :users, :role, :string
     add_column :users, :remember_token, :string, limit: 128

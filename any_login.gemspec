@@ -17,21 +17,9 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.7'
 
-  s.add_runtime_dependency 'rails', '>= 4.2.7'
+  s.add_runtime_dependency 'rails', '>= 6.0'
 
-  # to remove warning
-  s.add_development_dependency "sqlite3"
-  s.add_development_dependency "devise"
-  s.add_development_dependency "authlogic"
-  s.add_development_dependency "clearance"
-  s.add_development_dependency "sorcery"
-  s.add_development_dependency "bcrypt"
-  s.add_development_dependency "jquery-rails"
-  s.add_development_dependency "quiet_assets"
-  if RUBY_VERSION >= '2.0'
-    s.add_development_dependency "pry"
-    s.add_development_dependency "pry-rails"
-  end
+  s.add_development_dependency "appraisal"
 end
