@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_filter :require_user, :only => [:about]
+  before_action :require_user, :only => [:about]
 
   def index
   end

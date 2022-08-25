@@ -20,5 +20,3 @@ module AnyLogin
     end
   end
 end
-
-AnyLogin.provider = AnyLogin::Provider::Sorcery

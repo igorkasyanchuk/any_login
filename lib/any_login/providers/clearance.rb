@@ -20,7 +20,3 @@ module AnyLogin
     end
   end
 end
-
-AnyLogin.provider = AnyLogin::Provider::Clearance
-
-AnyLogin::ApplicationController.send(:include, ::Clearance::Controller)

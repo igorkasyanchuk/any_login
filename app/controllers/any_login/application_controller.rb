@@ -1,6 +1,7 @@
 module AnyLogin
   class ApplicationController < ActionController::Base
-    include AnyLogin.provider::Controller
+    include AnyLogin.provider.constantize::Controller
+    include ::Clearance::Controller if AnyLogin.provider.eql?("AnyLogin::Provider::Clearance")
 
     if AnyLogin.enabled
       if AnyLogin.http_basic_authentication_enabled
@@ -13,7 +14,7 @@ module AnyLogin
       try_not_to_leak_any_login_is_installed
       head 403 && return unless AnyLogin.verify_access_proc.call(self)
       add_to_previous
-      AnyLogin.provider::Controller.instance_method(:any_login_sign_in).bind(self).call
+      AnyLogin.provider.constantize::Controller.instance_method(:any_login_sign_in).bind(self).call
     end
 
     private
