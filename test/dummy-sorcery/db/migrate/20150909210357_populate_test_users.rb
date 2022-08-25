@@ -1,4 +1,4 @@
-class PopulateTestUsers < ActiveRecord::Migration
+class PopulateTestUsers < ActiveRecord::Migration[6.0]
   def change
     add_column :users, :role, :string
     100.times { User.create(name: gen_name, age: rand(100), email: gen_email, role: gen_role, password: '12345678', password_confirmation: '12345678') }
