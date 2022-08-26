@@ -80,6 +80,28 @@ By default no additional steps are required to make it work with Clearance gem. 
 
 By default no additional steps are required to make it work with Sorcery gem. If you have a `User` model everything should work fine. If you have different user model you need to set it in options (see Customization section).
 
+### Custom Providers
+
+If you are utilizing a custom login strategy, you can also utilize it with this gem. Below is an example configuration if a user was utilizing OmniAuth and rails sessions directly as described in [this article](http://railscasts.com/episodes/241-simple-omniauth-revised):
+
+In `app/lib/anylogin_omniauth.rb`
+```
+module AnyloginOmniauth
+  module Controller
+    def self.any_login_current_user_method
+      @@any_login_current_user_method ||= "current_#{AnyLogin.klass.to_s.parameterize.underscore}".to_sym
+    end
+
+    def any_login_sign_in
+      session[:user_id] = user_id
+      redirect_to main_app.send(AnyLogin.redirect_path_after_login)
+    end
+  end
+end
+```
+
+Then in your initializer configure `provider` to your new class. In this example it would be `config.provider = "AnyloginOmniauth"`
+
 ## Customization
 
 If you want to customize gem execute in console:
@@ -114,6 +136,7 @@ It will create the initializer file `config/initializers/any_login.rb`.
 - **http_basic_authentication_password** - HTTP_BASIC authentication password.
 - **verify_access_proc** - controller based access (condition on request.remote_ip, current_user, etc.)
 - **previous_limit** - specify limit of records for history. Default: 6.
+- **provider** - Manually specify the login provider, one of Authlogic, Clearance, Devise, Sorcery, or a custom handler class name (as a string or symbol).
 
 ### Advanced Options
 

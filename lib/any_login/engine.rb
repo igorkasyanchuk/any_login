@@ -8,11 +8,8 @@ module AnyLogin
 
     initializer 'any_login.helpers' do
       load_provider
-
       ActiveSupport.on_load :action_controller do
-        if Rails::VERSION::MAJOR >= 6
-          AnyLogin.provider::Controller.send :include, Rails.application.routes.url_helpers
-        end
+        AnyLogin.provider.constantize::Controller.send :include, Rails.application.routes.url_helpers
       end
 
       ActiveSupport.on_load :action_view do
@@ -23,29 +20,29 @@ module AnyLogin
     private
 
     def load_provider
-      case AnyLogin.provider || provider
-      when :authlogic
-        require 'any_login/providers/authlogic'
-      when :devise
-        require 'any_login/providers/devise'
-      when :clearance
-        require 'any_login/providers/clearance'
-      when :sorcery
-        require 'any_login/providers/sorcery'
+      if (selected_provider = AnyLogin.provider || provider)
+        provider_with_module = "AnyLogin::Provider::#{selected_provider.to_s.capitalize}"
+        if Object.const_defined?(provider_with_module)
+          AnyLogin.provider = provider_with_module
+        else
+          AnyLogin.provider = selected_provider.to_s
+        end
       else
-        throw 'Please use this gem with any of the following gems: Devise, Authlogic or Clearance'
+        throw 'Please use this gem with Devise, Authlogic or Clearance or provide a custom handler class'
       end
     end
 
     def provider
-      if AnyLogin.provider.nil? && Object.const_defined?('Authlogic')
-        :authlogic
-      elsif AnyLogin.provider.nil? && Object.const_defined?('Devise')
-        :devise
-      elsif AnyLogin.provider.nil? && Object.const_defined?('Clearance')
-        :clearance
-      elsif AnyLogin.provider.nil? && Object.const_defined?('Sorcery')
-        :sorcery
+      if AnyLogin.provider.nil?
+        if Object.const_defined?('Authlogic')
+          :authlogic
+        elsif Object.const_defined?('Devise')
+          :devise
+        elsif Object.const_defined?('Clearance')
+          :clearance
+        elsif Object.const_defined?('Sorcery')
+          :sorcery
+        end
       end
     end
 
