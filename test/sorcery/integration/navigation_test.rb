@@ -15,7 +15,9 @@ class NavigationTest < ActionDispatch::IntegrationTest
     visit "/"
 
     find("#any_login_form").click
-    select(@user.email, from: 'selected_id')
+    within("#any_login") do
+      select(@user.email, from: 'selected_id')
+    end
 
     visit "/about"
 
