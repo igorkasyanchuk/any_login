@@ -7,7 +7,7 @@ require "rails/all"
 Bundler.require(*Rails.groups)
 require "any_login"
 
-module Dummy
+module DummyDevise
   class Application < Rails::Application
     config.load_defaults Rails::VERSION::STRING.to_f
 
