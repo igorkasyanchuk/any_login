@@ -3,7 +3,7 @@ require_relative '../test_helper_authlogic'
 
 class NavigationTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.create(name: "test", email: "test@test.com", role: "user")
+    @user = User.create(name: "test", email: "test@test.com", password: "password123", role: "user")
   end
 
   test "user cannot navigate to about page without login" do
