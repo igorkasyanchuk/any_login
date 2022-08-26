@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - master
-      - addTests
 jobs:
   test:
     runs-on: ubuntu-latest
