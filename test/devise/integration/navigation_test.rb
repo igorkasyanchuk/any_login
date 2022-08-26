@@ -2,7 +2,7 @@ require_relative "../test_helper_devise"
 
 class NavigationTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.create!(name: "test", email: "test@test.com", password: "password123", role: "user")
+    @user = User.create(name: "test", email: "test@test.com", password: "password123", role: "user")
   end
 
   test "user cannot navigate to about page without login" do
@@ -15,7 +15,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
     visit "/"
 
     find("#any_login_form").click
-    select(@user.email, from: 'selected_id', visible: :all)
+    find('#selected_id').select(@user.email)
 
     visit "/about"
 
