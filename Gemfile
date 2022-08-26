@@ -23,6 +23,7 @@ group :development, :test do
   gem "capybara"
   gem 'webdrivers', '~> 5.0', require: false
   gem "sqlite3"
+  gem "webrick"
   gem "devise"
   gem "authlogic"
   gem "clearance"
