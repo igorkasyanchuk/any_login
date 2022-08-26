@@ -1,6 +1,7 @@
 module AnyLogin
   class ApplicationController < ActionController::Base
     include AnyLogin.provider::Controller
+    include ::Clearance::Controller if AnyLogin.provider.to_s.eql?("AnyLogin::Provider::Clearance")
 
     if AnyLogin.enabled
       if AnyLogin.http_basic_authentication_enabled
