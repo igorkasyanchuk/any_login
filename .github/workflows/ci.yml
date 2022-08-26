@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - master
-      - updateTesting
+      - addTests
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -42,4 +42,7 @@ jobs:
         env:
           RAILS_ENV: test
         run: |
-          bundle exec rake test
+          bundle exec rake test_authlogic
+          bundle exec rake test_clearance
+          bundle exec rake test_devise
+          bundle exec rake test_sorcery
