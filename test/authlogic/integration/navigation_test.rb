@@ -1,8 +1,9 @@
 require_relative '../test_helper_authlogic'
 
+
 class NavigationTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.create(name: "test", email: "test@test.com", password: "password123", role: "user")
+    @user = User.create(name: "test", email: "test@test.com", role: "user")
   end
 
   test "user cannot navigate to about page without login" do
@@ -15,7 +16,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
     visit "/"
 
     find("#any_login_form").click
-    find('#selected_id').select(@user.email)
+    find('#selected_id option:last-of-type').select_option
 
     visit "/about"
 

@@ -15,7 +15,9 @@ class NavigationTest < ActionDispatch::IntegrationTest
     visit "/"
 
     find("#any_login_form").click
-    find('#selected_id').select(@user.email)
+    # There is an instability in the test suite where the option on the dropdown sometimes shows
+    # up as `1` and sometimes shows up as `test@test.com`. This works around the issue.
+    find('#selected_id option:last-of-type').select_option
 
     visit "/about"
 
