@@ -20,7 +20,7 @@ gemspec
 
 # To run tests
 group :development, :test do
-  gem "capybara-rails"
+  gem "capybara"
   gem 'webdrivers', '~> 5.0', require: false
   gem "sqlite3"
   gem "devise"
