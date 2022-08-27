@@ -66,8 +66,8 @@ module AnyLogin
       end
 
       def current_user_information
-        if respond_to?(AnyLogin.provider::Controller.any_login_current_user_method) &&
-           user = send(AnyLogin.provider::Controller.any_login_current_user_method)
+        if respond_to?(AnyLogin.provider.constantize::Controller.any_login_current_user_method) &&
+           user = send(AnyLogin.provider.constantize::Controller.any_login_current_user_method)
           content_tag :span, :class => 'any_login_user_information' do
             if AnyLogin.name_method.is_a?(Symbol)
               raw("Current #{AnyLogin.klass_name}: #{h(user.send(AnyLogin.name_method)[0])} &mdash; ID: #{user.id}")
