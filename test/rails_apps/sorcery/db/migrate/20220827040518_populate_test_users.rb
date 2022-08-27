@@ -1,6 +1,5 @@
-class PopulateTestUsers < ActiveRecord::Migration[6.0]
+class PopulateTestUsers < ActiveRecord::Migration[6.1]
   def change
-    add_column :users, :role, :string
     100.times { |t| User.create(name: gen_name(t), age: rand(100), email: gen_email(t), role: gen_role, password: '12345678') }
   end
 

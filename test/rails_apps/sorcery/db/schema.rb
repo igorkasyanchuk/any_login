@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_25_200321) do
+ActiveRecord::Schema.define(version: 2022_08_27_040518) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 2022_08_25_200321) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "role"
     t.string "crypted_password"
     t.string "salt"
-    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
