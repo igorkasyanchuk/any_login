@@ -1,7 +1,7 @@
 # AnyLogin Gem
 
-[<img src="https://travis-ci.org/igorkasyanchuk/any_login.svg?branch=master"
-alt="Build Status" />](https://travis-ci.org/igorkasyanchuk/any_login) [<img
+[![Tests](https://github.com/igorkasyanchuk/any_login/actions/workflows/ci.yml/badge.svg)](https://github.com/igorkasyanchuk/any_login/actions/workflows/ci.yml)
+[<img
 src="https://codeclimate.com/github/igorkasyanchuk/any_login/badges/gpa.svg"
 />](https://codeclimate.com/github/igorkasyanchuk/any_login) [<img
 src="https://badge.fury.io/rb/any_login.svg" alt="Gem Version"
