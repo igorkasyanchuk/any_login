@@ -48,6 +48,10 @@ module AnyLogin
   mattr_accessor :position
   @@position = :bottom_left
 
+  # Asset engine to use
+  mattr_accessor :asset_source
+  @@asset_source = :sprockets
+
   # label on Login button
   mattr_accessor :login_button_label
   @@login_button_label = 'Login'

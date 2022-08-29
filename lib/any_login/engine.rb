@@ -3,7 +3,13 @@ module AnyLogin
     isolate_namespace AnyLogin
 
     initializer 'any_login.assets_precompile', :group => :all do |app|
-      app.config.assets.precompile += ['any_login/person.png']
+      case AnyLogin.asset_source
+      when :sprockets
+        app.config.assets.precompile += %w[
+          any_login/application.css
+          any_login/application.js
+        ]
+      end
     end
 
     initializer 'any_login.helpers' do
