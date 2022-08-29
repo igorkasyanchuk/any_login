@@ -11,9 +11,6 @@ AnyLogin.setup do |config|
   #  # .all, .active, .admins, .groped_collection, etc ... need to return an array (or hash with arrays) of users
   # config.collection_method = :all
 
-  # # Asset source, :sprockets (default), :webpacker
-  # config.asset_source = :sprockets
-
   # # to format user name in dropdown list
   # config.name_method = proc { |e| [e.email, e.id] }
 

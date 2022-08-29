@@ -2,16 +2,6 @@ module AnyLogin
   class Engine < ::Rails::Engine
     isolate_namespace AnyLogin
 
-    initializer 'any_login.assets_precompile', :group => :all do |app|
-      case AnyLogin.asset_source
-      when :sprockets
-        app.config.assets.precompile += %w[
-          any_login/application.css
-          any_login/application.js
-        ]
-      end
-    end
-
     initializer 'any_login.helpers' do
       load_provider
       ActiveSupport.on_load :action_controller do
