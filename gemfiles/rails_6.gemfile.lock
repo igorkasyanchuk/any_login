@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    any_login (1.4.4)
+    any_login (1.5.0)
       rails (>= 6.0)
 
 GEM
@@ -138,6 +138,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     oauth (0.6.1)
@@ -237,6 +239,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -258,4 +261,4 @@ DEPENDENCIES
   webrick
 
 BUNDLED WITH
-   2.3.21
+   2.3.7

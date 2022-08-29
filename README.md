@@ -215,7 +215,16 @@ You can also try to debug your application in production and secure AnyLogin wit
 - @daichirata
 - @linshaodongsam
 - @jr180180
+- vmyts539
 - @rbclark
+
+## For CI
+
+Update gemspec:
+
+- BUNDLE_GEMFILE=./gemfiles/rails_6_1.gemfile bundle
+- BUNDLE_GEMFILE=./gemfiles/rails_6.gemfile bundle
+- BUNDLE_GEMFILE=./gemfiles/rails_7.gemfile bundle
 
 ## Other
 
