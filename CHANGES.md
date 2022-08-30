@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1
+
+- do not use image_tag without sprockets (removed image) + better CSP https://github.com/igorkasyanchuk/any_login/pull/50
+
 ## 1.5.0
 
   - @rbclark joined as core-contributor
