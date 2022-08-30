@@ -1,0 +1,96 @@
+#any_login {
+  position: fixed;
+  opacity: 0.5;
+  background: #5c4383;
+  color: white;
+  font-size: 16px;
+  line-height: 20px;
+  z-index: 10000;
+}
+
+#any_login form {
+  margin: 0;
+  height: auto;
+  padding: 4px 6px;
+}
+
+#any_login #any_login_box {
+  display: none;
+  vertical-align: middle;
+}
+
+#any_login_form_toggle {
+  display: none;
+}
+
+#any_login_form_toggle[type=checkbox]:checked ~ #any_login_box {
+  display: inline;
+}
+
+#any_login input,
+#any_login select {
+  color: black;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  float: none;
+  text-decoration: none;
+  position: unset;
+  left: auto;
+  top: auto;
+  font-size: auto;
+  line-height: auto;
+}
+
+#any_login.any_login_top_left {
+  top: 0;
+  left: 0;
+}
+
+#any_login.any_login_top_right {
+  top: 0;
+  right: 0;
+}
+
+#any_login.any_login_bottom_left {
+  bottom: 0;
+  left: 0;
+}
+
+#any_login.any_login_bottom_right {
+  bottom: 0;
+  right: 0;
+}
+
+#any_login svg {
+  cursor: pointer;
+  vertical-align: middle;
+  fill: #fff;
+}
+
+#any_login:hover {
+  opacity: 1;
+}
+
+#any_login .any_login_user_information {
+  padding-left: 10px;
+  color: yellow;
+}
+
+#any_login #any_login_id_input {
+  width: 30px;
+}
+
+#any_login span#current_user_information {
+  display: inline;
+}
+
+#any_login span#current_user_information span {
+  display: inline;
+}
+
+#any_login span#anylogin_back_to_user {
+  padding-left: 15px;
+  color: cyan;
+  display: inline;
+}

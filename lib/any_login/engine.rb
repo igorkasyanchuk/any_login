@@ -2,10 +2,6 @@ module AnyLogin
   class Engine < ::Rails::Engine
     isolate_namespace AnyLogin
 
-    initializer 'any_login.assets_precompile', :group => :all do |app|
-      app.config.assets.precompile += ['any_login/person.png']
-    end
-
     initializer 'any_login.helpers' do
       load_provider
       ActiveSupport.on_load :action_controller do
