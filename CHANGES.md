@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.2
+
+- improvements for ActiveAdmin - https://github.com/igorkasyanchuk/any_login/pull/51
+
 ## 1.5.1
 
 - do not use image_tag without sprockets (removed image) + better CSP https://github.com/igorkasyanchuk/any_login/pull/50

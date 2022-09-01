@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    any_login (1.5.1)
+    any_login (1.5.2)
       rails (>= 6.0)
 
 GEM
