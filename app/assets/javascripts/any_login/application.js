@@ -19,5 +19,14 @@ function setupAnyLoginHandlers() {
 }
 
 ['DOMContentLoaded', 'turbolinks:load', 'turbo:load'].forEach(function(e) {
-  window.addEventListener(e, setupAnyLoginHandlers);
+  // window.addEventListener(e, setupAnyLoginHandlers);
+  const forms = document.querySelectorAll('.any_login_form');
+  forms.forEach(form => {
+    const selects = form.querySelectorAll('select');
+    selects.forEach(select => {
+      select.addEventListener('change', () => {
+        form.submit();
+      })
+    })
+  })
 });
