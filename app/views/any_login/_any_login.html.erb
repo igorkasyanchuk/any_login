@@ -11,8 +11,7 @@
         <%= any_login_id_input %>
         <%= any_login_submit %>
 
-        <%# TODO: Fix me %>
-        <span class='current_user_information'><%= current_user_information %></span>
+        <span class='current_user_information'><%= current_user_information(klass) %></span>
         <%= any_login_previous_select(klass) %>
       </span>
     <% end %>
@@ -31,7 +30,7 @@
       or by
       <%= any_login_id_input %>
       <%= any_login_submit %>
-      <span id='current_user_information'><%= current_user_information %></span>
+      <span id='current_user_information'><%= current_user_information(AnyLogin.klass) %></span>
       <%= any_login_previous_select(AnyLogin.klass) %>
     </span>
   <% end %>
