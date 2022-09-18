@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="<%= any_login.css_path %>">
 
 <%# TODO: Style and fix javascript %>
-<div class="any_login_container">
+<div class="any_login">
   <% AnyLogin.klasses.each do |klass| %>
     <%= form_tag any_login.sign_in_path(as: klass), :method => :post, :class => 'any_login_form' do %>
       <span>
