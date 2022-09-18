@@ -1,6 +1,13 @@
 <script src="<%= any_login.js_path %>"></script>
 <link rel="stylesheet" href="<%= any_login.css_path %>">
 
+<div class="any_login_container">
+  <% AnyLogin.klasses.each do |klass| %>
+    <%= form_tag any_login.sign_in_path(as: klass), :method => :post, :class => 'any_login_form' do %>
+    <% end %>
+  <% end %>
+</div>
+
 <div id='any_login' class='<%= any_login_klasses %>'>
   <%= form_tag any_login.sign_in_path, :method => :post, :id => 'any_login_form' do %>
     <label for="any_login_form_toggle" id="any_login_form_toggle_label">
