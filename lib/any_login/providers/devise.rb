@@ -10,11 +10,11 @@ module AnyLogin
         end
 
         def self.any_login_current_user_method(klass)
-          @@any_login_current_user_method ||= "current_#{mapping_key(klass)}".to_sym
+          @@any_login_current_user_method = "current_#{mapping_key(klass)}".to_sym
         end
 
         def self.mapping_key(klass)
-          @@mapping_key ||= ::Devise.mappings.detect {|_key, mapping| mapping.class_name == klass.name }.first
+          @@mapping_key = ::Devise.mappings.detect {|_key, mapping| mapping.class_name == klass.name }.first
         end
 
         def any_login_sign_in
