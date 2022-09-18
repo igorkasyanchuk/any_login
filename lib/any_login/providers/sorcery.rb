@@ -4,8 +4,8 @@ module AnyLogin
 
       module Controller
 
-        def self.any_login_current_user_method
-          @@any_login_current_user_method ||= "current_#{AnyLogin.klass.to_s.parameterize.underscore}".to_sym
+        def self.any_login_current_user_method(klass)
+          @@any_login_current_user_method ||= "current_#{klass.to_s.parameterize.underscore}".to_sym
         end
 
         def any_login_sign_in

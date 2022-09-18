@@ -9,12 +9,12 @@ module AnyLogin
           sign_in Controller.mapping_key, loginable
         end
 
-        def self.any_login_current_user_method
-          @@any_login_current_user_method ||= "current_#{mapping_key}".to_sym
+        def self.any_login_current_user_method(klass)
+          @@any_login_current_user_method ||= "current_#{mapping_key(klass)}".to_sym
         end
 
-        def self.mapping_key
-          @@mapping_key ||= ::Devise.mappings.detect {|_key, mapping| mapping.class_name == AnyLogin.klass.name }.first
+        def self.mapping_key(klass)
+          @@mapping_key ||= ::Devise.mappings.detect {|_key, mapping| mapping.class_name == klass.name }.first
         end
 
         def any_login_sign_in
