@@ -94,3 +94,7 @@
   color: cyan;
   display: inline;
 }
+
+.any_login_form_toggle_label {
+  display: inline-block;
+}
