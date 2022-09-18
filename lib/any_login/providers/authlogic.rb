@@ -10,8 +10,8 @@ module AnyLogin
 
         def any_login_sign_in
           reset_session
-          @loginable = AnyLogin.klass.find(user_id)
-          Object.const_get("#{AnyLogin.klass}Session").create(@loginable)
+          @loginable = klass.find(user_id)
+          Object.const_get("#{klass}Session").create(@loginable)
           redirect_to main_app.send(AnyLogin.redirect_path_after_login)
         end
 
