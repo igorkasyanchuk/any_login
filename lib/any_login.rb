@@ -26,7 +26,7 @@ module AnyLogin
 
   # # ['User', 'Staff', etc]
   mattr_accessor :klass_names
-  @@klass_names = ['User']
+  @@klass_names = [@@klass_name]
 
   # Sign-in Method
   mattr_accessor :sign_in
