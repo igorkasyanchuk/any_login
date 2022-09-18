@@ -92,8 +92,8 @@ module AnyLogin
     yield(self)
   end
 
-  def self.collection
-    Collection.new(collection_raw)
+  def self.collection(klass)
+    Collection.new(collection_raw(klass))
   end
 
   def self.klass
@@ -123,9 +123,9 @@ module AnyLogin
     end
   end
 
-  def self.collection_raw
+  def self.collection_raw(klass)
     @@collection_raw = begin
-      result = AnyLogin.klass.send(AnyLogin.collection_method)
+      result = klass.send(AnyLogin.collection_method)
       if limit == :none
         format_collection_raw(result)
       else
