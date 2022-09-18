@@ -5,7 +5,7 @@
 <div class="any_login">
   <% AnyLogin.klasses.each do |klass| %>
     <%= form_tag any_login.sign_in_path(as: klass), :method => :post, :class => 'any_login_form' do %>
-      <span>
+      <span class='any_login_box'>
         <%= any_login_select(klass) %>
         or by
         <%= any_login_id_input %>

@@ -14,7 +14,7 @@
   padding: 4px 6px;
 }
 
-.any_login #any_login_box {
+.any_login .any_login_box {
   display: none;
   vertical-align: middle;
 }
@@ -77,19 +77,19 @@
   color: yellow;
 }
 
-.any_login #any_login_id_input {
+.any_login .any_login_id_input {
   width: 30px;
 }
 
-.any_login span#current_user_information {
+.any_login span.current_user_information {
   display: inline;
 }
 
-.any_login span#current_user_information span {
+.any_login span.current_user_information span {
   display: inline;
 }
 
-.any_login span#anylogin_back_to_user {
+.any_login span.anylogin_back_to_user {
   padding-left: 15px;
   color: cyan;
   display: inline;
