@@ -1,13 +1,25 @@
 <script src="<%= any_login.js_path %>"></script>
 <link rel="stylesheet" href="<%= any_login.css_path %>">
 
+<%# TODO: Style and fix javascript %>
 <div class="any_login_container">
   <% AnyLogin.klasses.each do |klass| %>
     <%= form_tag any_login.sign_in_path(as: klass), :method => :post, :class => 'any_login_form' do %>
+      <span>
+        <%= any_login_select(klass) %>
+        or by
+        <%= any_login_id_input %>
+        <%= any_login_submit %>
+
+        <%# TODO: Fix me %>
+        <span class='current_user_information'><%= current_user_information %></span>
+        <%= any_login_previous_select %>
+      </span>
     <% end %>
   <% end %>
 </div>
 
+<%# TODO: Delete me %>
 <div id='any_login' class='<%= any_login_klasses %>'>
   <%= form_tag any_login.sign_in_path, :method => :post, :id => 'any_login_form' do %>
     <label for="any_login_form_toggle" id="any_login_form_toggle_label">
@@ -15,7 +27,7 @@
     </label>
     <input type="checkbox" id="any_login_form_toggle" <%= AnyLogin.auto_show ? "checked" : "" %>>
     <span id='any_login_box'>
-      <%= any_login_select %>
+      <%= any_login_select(AnyLogin.klass) %>
       or by
       <%= any_login_id_input %>
       <%= any_login_submit %>
