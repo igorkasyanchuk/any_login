@@ -24,6 +24,10 @@ module AnyLogin
   mattr_accessor :klass_name
   @@klass_name = 'User'
 
+  # # ['User', 'Staff', etc]
+  mattr_accessor :klass_names
+  @@klass_names = ['User']
+
   # Sign-in Method
   mattr_accessor :sign_in
   @@sign_in = nil
