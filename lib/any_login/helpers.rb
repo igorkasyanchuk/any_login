@@ -24,7 +24,7 @@ module AnyLogin
                         else
                           options_for_select(collection.to_a)
                         end
-        select_tag :selected_id, select_options, select_html_options
+        select_tag :selected_id, select_options, select_html_options(klass)
       end
 
       def any_login_previous_select(klass)
@@ -51,7 +51,8 @@ module AnyLogin
         (cookies[AnyLogin.cookie_name].presence || '').split(',').take(AnyLogin.previous_limit)
       end
 
-      def select_html_options(prompt = AnyLogin.select_prompt)
+      def select_html_options(klass)
+        prompt = "Select #{klass}"
         options = {}
         options[:prompt] = prompt
         options
