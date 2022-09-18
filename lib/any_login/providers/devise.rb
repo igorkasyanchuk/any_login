@@ -6,7 +6,7 @@ module AnyLogin
 
         DEFAULT_SIGN_IN = proc do |loginable|
           reset_session
-          sign_in Controller.mapping_key, loginable
+          sign_in Controller.mapping_key(klass), loginable
         end
 
         def self.any_login_current_user_method(klass)
@@ -18,7 +18,7 @@ module AnyLogin
         end
 
         def any_login_sign_in
-          @loginable = AnyLogin.klass.find(user_id)
+          @loginable = klass.find(user_id)
 
           sign_in = AnyLogin.sign_in || DEFAULT_SIGN_IN
           instance_exec(@loginable, &sign_in)
