@@ -81,11 +81,11 @@
   width: 30px;
 }
 
-#any_login span#current_user_information {
+#any_login span.current_user_information {
   display: inline;
 }
 
-#any_login span#current_user_information span {
+#any_login span.current_user_information span {
   display: inline;
 }
 
