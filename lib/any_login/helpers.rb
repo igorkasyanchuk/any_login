@@ -9,7 +9,7 @@ module AnyLogin
     if AnyLogin.enabled
 
       def any_login_id_input
-        text_field_tag :id, '', :placeholder => 'ID', :id => 'any_login_id_input', :required => true
+        text_field_tag :id, '', :placeholder => 'ID', :class => 'any_login_id_input', :required => true
       end
 
       def any_login_submit
@@ -39,7 +39,7 @@ module AnyLogin
         if collection.any?
           select_options = options_for_select(collection)
           [
-            content_tag(:span, id: 'anylogin_back_to_user') do
+            content_tag(:span, class: 'anylogin_back_to_user') do
               "History: "
             end,
             select_tag(:back_to_previous_id, select_options, select_html_options("Back to:"))
