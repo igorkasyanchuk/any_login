@@ -77,7 +77,7 @@
   color: yellow;
 }
 
-#any_login #any_login_id_input {
+#any_login .any_login_id_input {
   width: 30px;
 }
 
@@ -89,7 +89,7 @@
   display: inline;
 }
 
-#any_login span#anylogin_back_to_user {
+#any_login span.anylogin_back_to_user {
   padding-left: 15px;
   color: cyan;
   display: inline;
