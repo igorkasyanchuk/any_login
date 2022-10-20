@@ -16,7 +16,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
     visit "/"
 
     find(".any_login_form_toggle_label").click
-    find('#selected_user_id option:last-of-type').select_option
+    find("select option:last-of-type", match: :first).select_option
 
     visit "/about"
 
