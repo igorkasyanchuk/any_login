@@ -24,7 +24,7 @@ module AnyLogin
                         else
                           options_for_select(collection.to_a)
                         end
-        select_tag "selected_#{klass.to_s.downcase}_id", select_options, select_html_options(klass)
+        select_tag 'selected_id', select_options, select_html_options(klass).merge(id: nil)
       end
 
       def any_login_previous_select(klass)
