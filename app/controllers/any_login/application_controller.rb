@@ -38,7 +38,8 @@ module AnyLogin
     end
 
     def user_id
-      params[:back_to_previous_id].presence || params[:selected_id].presence || params[:id]
+      # TODO: refactor
+      params[:back_to_previous_id].presence || params["selected_#{params[:as].downcase}_id".to_sym].presence || params[:id]
     end
 
     def klass
