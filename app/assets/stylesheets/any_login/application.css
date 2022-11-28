@@ -66,6 +66,7 @@
   cursor: pointer;
   vertical-align: middle;
   fill: #fff;
+  margin: 5px;
 }
 
 #any_login:hover {
