@@ -114,6 +114,7 @@ It will create the initializer file `config/initializers/any_login.rb`.
 
 - **enabled** - enable or disable gem (by default this gem is enabled only in development mode).
 - **klass_name** - class name for "User" object. Defaults to `User`.
+- **klass_names** - class names for multiple model support. Default to `['User']`.
 - **collection_method** - method which returns collection of users. Sample:
   `.all`, `.active`, `.admins`, `.groupped_users`. Value is a simple.
   Defaults to `:all`.
