@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.3
+
+- Remove enable-background directive from user SVG (to fix CSP error in console) https://github.com/igorkasyanchuk/any_login/pull/55
+
 ## 1.5.2
 
 - improvements for ActiveAdmin - https://github.com/igorkasyanchuk/any_login/pull/51
