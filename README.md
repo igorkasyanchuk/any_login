@@ -234,5 +234,8 @@ BUNDLE_GEMFILE=./gemfiles/rails_7.gemfile bundle
 
 ## Other
 
+[<img src="https://opensource-heroes.com/svg/embed/igorkasyanchuk/any_login"
+/>](https://opensource-heroes.com/r/igorkasyanchuk/any_login)
+
 [<img src="https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/more_gems.png?raw=true"
 />](https://www.railsjazz.com/?utm_source=github&utm_medium=bottom&utm_campaign=any_login)
