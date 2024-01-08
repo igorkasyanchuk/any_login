@@ -5,11 +5,8 @@ AnyLogin.setup do |config|
   # # enabled or not
   # config.enabled = Rails.env.to_s == 'development'
 
-  # # Account, User, Person, etc
+  # # Account, User, Person, etc, or ['Account', 'User', 'Person'] for multiple model support
   # config.klass_name = 'User'
-
-  # # ['User', 'Staff', etc]
-  # config.klass_names = ['User']
 
   #  # .all, .active, .admins, .groped_collection, etc ... need to return an array (or hash with arrays) of users
   # config.collection_method = :all

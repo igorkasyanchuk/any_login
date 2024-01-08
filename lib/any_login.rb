@@ -24,10 +24,6 @@ module AnyLogin
   mattr_accessor :klass_name
   @@klass_name = 'User'
 
-  # # ['User', 'Staff', etc]
-  mattr_accessor :klass_names
-  @@klass_names = [@@klass_name]
-
   # Sign-in Method
   mattr_accessor :sign_in
   @@sign_in = nil
@@ -101,7 +97,11 @@ module AnyLogin
   end
 
   def self.klasses
-    @@klasses = AnyLogin.klass_names.map(&:constantize)
+    @@klasses = if AnyLogin.klass_name.is_a?(Array)
+                  AnyLogin.klass_name.map(&:constantize)
+                else
+                  [AnyLogin.klass_name.constantize]
+                end
   end
 
   def self.cookie_name
