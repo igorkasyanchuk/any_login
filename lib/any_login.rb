@@ -52,10 +52,6 @@ module AnyLogin
   mattr_accessor :login_button_label
   @@login_button_label = 'Login'
 
-  # prompt message in select
-  mattr_accessor :select_prompt
-  @@select_prompt = "Select #{AnyLogin.klass_name}"
-
   # show any_login box by default
   mattr_accessor :auto_show
   @@auto_show = false
@@ -90,10 +86,6 @@ module AnyLogin
 
   def self.collection(klass)
     Collection.new(collection_raw(klass))
-  end
-
-  def self.klass
-    @@klass = AnyLogin.klass_name.constantize
   end
 
   def self.klasses

@@ -130,7 +130,6 @@ It will create the initializer file `config/initializers/any_login.rb`.
 - **position** - position of AnyLogin box on page. Possible values: `top_left`,
   `top_right`, `bottom_left`, `bottom_right`. Default: `bottom_left`.
 - **login_button_label** - login button label.
-- **select_prompt** - select prompt message.
 - **auto_show** - automatically show AnyLogin box.
 - **http_basic_authentication_enabled** - Enable HTTP_BASIC authentication.
 - **http_basic_authentication_user_name** - HTTP_BASIC authentication user name.
