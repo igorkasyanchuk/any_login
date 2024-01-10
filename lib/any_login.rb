@@ -52,10 +52,6 @@ module AnyLogin
   mattr_accessor :login_button_label
   @@login_button_label = 'Login'
 
-  # prompt message in select
-  mattr_accessor :select_prompt
-  @@select_prompt = "Select #{AnyLogin.klass_name}"
-
   # show any_login box by default
   mattr_accessor :auto_show
   @@auto_show = false
@@ -88,12 +84,16 @@ module AnyLogin
     yield(self)
   end
 
-  def self.collection
-    Collection.new(collection_raw)
+  def self.collection(klass)
+    Collection.new(collection_raw(klass))
   end
 
-  def self.klass
-    @@klass = AnyLogin.klass_name.constantize
+  def self.klasses
+    @@klasses = if AnyLogin.klass_name.is_a?(Array)
+                  AnyLogin.klass_name.map(&:constantize)
+                else
+                  [AnyLogin.klass_name.constantize]
+                end
   end
 
   def self.cookie_name
@@ -115,9 +115,9 @@ module AnyLogin
     end
   end
 
-  def self.collection_raw
+  def self.collection_raw(klass)
     @@collection_raw = begin
-      result = AnyLogin.klass.send(AnyLogin.collection_method)
+      result = klass.send(AnyLogin.collection_method)
       if limit == :none
         format_collection_raw(result)
       else

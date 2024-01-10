@@ -89,8 +89,8 @@ In `app/lib/anylogin_omniauth.rb`
 ```
 module AnyloginOmniauth
   module Controller
-    def self.any_login_current_user_method
-      @@any_login_current_user_method ||= "current_#{AnyLogin.klass.to_s.parameterize.underscore}".to_sym
+    def self.any_login_current_user_method(klass)
+      @@any_login_current_user_method ||= "current_#{klass.to_s.parameterize.underscore}".to_sym
     end
 
     def any_login_sign_in
@@ -114,7 +114,7 @@ It will create the initializer file `config/initializers/any_login.rb`.
 ### Options
 
 - **enabled** - enable or disable gem (by default this gem is enabled only in development mode).
-- **klass_name** - class name for "User" object. Defaults to `User`.
+- **klass_name** - class name for "User" object. Defaults to `User`. An array of class names is also supported.
 - **collection_method** - method which returns collection of users. Sample:
   `.all`, `.active`, `.admins`, `.groupped_users`. Value is a simple.
   Defaults to `:all`.
@@ -130,7 +130,6 @@ It will create the initializer file `config/initializers/any_login.rb`.
 - **position** - position of AnyLogin box on page. Possible values: `top_left`,
   `top_right`, `bottom_left`, `bottom_right`. Default: `bottom_left`.
 - **login_button_label** - login button label.
-- **select_prompt** - select prompt message.
 - **auto_show** - automatically show AnyLogin box.
 - **http_basic_authentication_enabled** - Enable HTTP_BASIC authentication.
 - **http_basic_authentication_user_name** - HTTP_BASIC authentication user name.

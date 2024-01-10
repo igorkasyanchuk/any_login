@@ -14,10 +14,10 @@ class NavigationTest < ActionDispatch::IntegrationTest
   test "it properly logs users in and allows access to the secret page" do
     visit "/"
 
-    find("#any_login_form_toggle_label").click
+    find(".any_login_form_toggle_label").click
     # There is an instability in the test suite where the option on the dropdown sometimes shows
     # up as `1` and sometimes shows up as `test@test.com`. This works around the issue.
-    find('#selected_id option:last-of-type').select_option
+    find("select option:last-of-type", match: :first).select_option
 
     visit "/about"
 
