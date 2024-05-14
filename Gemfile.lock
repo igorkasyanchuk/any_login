@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     any_login (1.5.3)
-      rails (>= 6.0)
+      rails (>= 6.1)
 
 GEM
   remote: https://rubygems.org/
