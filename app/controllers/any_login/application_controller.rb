@@ -41,6 +41,10 @@ module AnyLogin
       params[:back_to_previous_id].presence || params[:selected_id].presence || params[:id]
     end
 
+    def klass
+      params[:as].constantize
+    end
+
     def previous
       cookies[AnyLogin.cookie_name] ||= ""
     end

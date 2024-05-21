@@ -69,6 +69,7 @@
   cursor: pointer;
   vertical-align: middle;
   fill: #fff;
+  margin: 5px;
 }
 
 #any_login:hover {
@@ -80,20 +81,24 @@
   color: yellow;
 }
 
-#any_login #any_login_id_input {
+#any_login .any_login_id_input {
   width: 30px;
 }
 
-#any_login span#current_user_information {
+#any_login span.current_user_information {
   display: inline;
 }
 
-#any_login span#current_user_information span {
+#any_login span.current_user_information span {
   display: inline;
 }
 
-#any_login span#anylogin_back_to_user {
+#any_login span.anylogin_back_to_user {
   padding-left: 15px;
   color: cyan;
   display: inline;
+}
+
+.any_login_form_toggle_label {
+  display: inline-block;
 }
