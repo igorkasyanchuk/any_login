@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rails', '>= 6.1'
 
   s.add_development_dependency "appraisal"
+  s.add_development_dependency "multi_xml", "0.6.0"
 end
