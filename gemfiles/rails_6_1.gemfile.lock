@@ -119,7 +119,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.2)
     faraday-net_http (3.1.0)
       net-http
-    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0)
     ffi-compiler (1.3.2)
       ffi (>= 1.15.5)
       rake
@@ -160,6 +160,8 @@ GEM
       net-protocol
     nio4r (2.7.3)
     nokogiri (1.16.6-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
@@ -247,6 +249,7 @@ GEM
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
     sqlite3 (1.7.3-x86_64-darwin)
+    sqlite3 (1.7.3-x86_64-linux)
     strscan (3.1.0)
     thor (1.3.1)
     timeout (0.4.1)
@@ -267,6 +270,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   any_login!
