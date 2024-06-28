@@ -3,7 +3,9 @@ log/*.log
 pkg/
 test/rails_apps/*/.sass-cache
 test/rails_apps/*/db/*.sqlite3
+test/rails_apps/**/db/*.sqlite3
 test/rails_apps/*/db/*.sqlite3-journal
+test/rails_apps/**/db/*.sqlite3-journal
 test/rails_apps/*/log/*.log
 test/rails_apps/*/tmp/
 test/rails_apps/*/.sass-cache
@@ -11,3 +13,9 @@ test/rails_apps/*/.sass-cache
 *.sqlite3
 .DS_Store
 **/.DS_Store
+log/*
+
+test/rails_apps/authlogic/db/test*
+test/rails_apps/devise/db/test*
+test/rails_apps/clearance/db/test*
+test/rails_apps/sorcery/db/test*

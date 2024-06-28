@@ -1,3 +1,7 @@
+bundle
+BUNDLE_GEMFILE=./gemfiles/rails_6_1.gemfile bundle
+BUNDLE_GEMFILE=./gemfiles/rails_7.gemfile bundle
+BUNDLE_GEMFILE=./gemfiles/rails_7_1.gemfile bundle
 rm *.gem
 rm -fr test/dummy/log/*.log
 rm -fr test/dummy/tmp/cache

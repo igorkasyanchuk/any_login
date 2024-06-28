@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.4
+
+- Better docs
+- Inline CSS/JS for better compatibility
+- Add support for Rails 7.1 in tests
+
 ## 1.5.3
 
 - Remove enable-background directive from user SVG (to fix CSP error in console) https://github.com/igorkasyanchuk/any_login/pull/55
