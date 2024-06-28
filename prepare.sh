@@ -1,3 +1,7 @@
+bundle
+BUNDLE_GEMFILE=./gemfiles/rails_6_1.gemfile bundle
+BUNDLE_GEMFILE=./gemfiles/rails_7.gemfile bundle
+BUNDLE_GEMFILE=./gemfiles/rails_7_1.gemfile bundle
 mkdir log
 cd test/rails_apps/authlogic/
 bundle exec rails db:migrate

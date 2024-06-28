@@ -1,7 +1,6 @@
 require "rails/test_help"
 require 'capybara/rails'
 require 'capybara/minitest'
-require 'webdrivers/chromedriver'
 
 Rails.backtrace_cleaner.remove_silencers!
 

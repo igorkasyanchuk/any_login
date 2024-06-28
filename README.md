@@ -26,7 +26,7 @@ Give it a try; if you like it please share AnyLogin with friends. If you have an
 
 ## Requirements
 
-Ruby: >= 1.9.3, Rails: >= 4.0. Pre-configured to work with **Devise**, **Authlogic**, **Clearance** or **Sorcery** gems.
+Ruby: >= 3.0, Rails: >= 6.1. Pre-configured to work with **Devise**, **Authlogic**, **Clearance** or **Sorcery** gems.
 
 For Rails < 4.2.7 please use `gem 'any_login', '1.3'`.
 
@@ -246,10 +246,21 @@ and
 To run tests:
 
 ```bash
-bundle exec appraisal rails-7 rails test test/devise/
-bundle exec appraisal rails-7 rails test test/authlogic/
-bundle exec appraisal rails-7 rails test test/clearance/
-bundle exec appraisal rails-7 rails test test/sorcery/
+bundle exec appraisal rails-6-1 bundle exec rails test test/devise/
+bundle exec appraisal rails-6-1 bundle exec rails test test/authlogic/
+bundle exec appraisal rails-6-1 bundle exec rails test test/clearance/
+bundle exec appraisal rails-6-1 bundle exec rails test test/sorcery/
+
+bundle exec appraisal rails-7 bundle exec rails test test/devise/
+bundle exec appraisal rails-7 bundle exec rails test test/authlogic/
+bundle exec appraisal rails-7 bundle exec rails test test/clearance/
+bundle exec appraisal rails-7 bundle exec rails test test/sorcery/
+
+bundle exec appraisal rails-7-1 bundle exec rails test test/devise/
+bundle exec appraisal rails-7-1 bundle exec rails test test/authlogic/
+bundle exec appraisal rails-7-1 bundle exec rails test test/clearance/
+bundle exec appraisal rails-7-1 bundle exec rails test test/sorcery/
+
 ```
 
 If you want to manually tests open `test/rails_apps/devise/` and run `rails s` and open `http://localhost:3000` (and with other gems)
@@ -261,6 +272,9 @@ Note: with Devise it can glitch in dummy app so I suggest to connect to real app
 ```
 
 ## Other
+
+[<img src="https://opensource-heroes.com/svg/embed/igorkasyanchuk/any_login"
+/>](https://opensource-heroes.com/r/igorkasyanchuk/any_login)
 
 [<img src="https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/more_gems.png?raw=true"
 />](https://www.railsjazz.com/?utm_source=github&utm_medium=bottom&utm_campaign=any_login)
