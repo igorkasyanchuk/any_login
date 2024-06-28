@@ -246,6 +246,14 @@ and
 To run tests:
 
 ```bash
+
+bundle exec appraisal rails-6-1 bundle exec test_devise
+bundle exec appraisal rails-6-1 bundle exec test_clearance
+bundle exec appraisal rails-6-1 bundle exec test_authlogic
+bundle exec appraisal rails-6-1 bundle exec test_sorcery
+
+# or
+
 bundle exec appraisal rails-6-1 bundle exec rails test test/devise/
 bundle exec appraisal rails-6-1 bundle exec rails test test/authlogic/
 bundle exec appraisal rails-6-1 bundle exec rails test test/clearance/
