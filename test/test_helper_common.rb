@@ -9,6 +9,8 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 Capybara.default_driver = :selenium_chrome_headless
 Capybara.server = :webrick
+Dir.mkdir('log') unless File.exist?('log')
+Selenium::WebDriver.logger.output = 'log/selenium.log'
 
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests

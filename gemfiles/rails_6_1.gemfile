@@ -7,7 +7,7 @@ gem "rails", "~> 6.1.0"
 group :development, :test do
   gem "capybara"
   gem "selenium-webdriver"
-  gem "sqlite3"
+  gem "sqlite3", "~> 1.4"
   gem "webrick"
   gem "devise"
   gem "authlogic"

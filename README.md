@@ -34,15 +34,15 @@ For Rails < 4.2.7 please use `gem 'any_login', '1.3'`.
 
 1.  Add AnyLogin to your Gemfile:
 
-        gem 'any_login'
+      `gem 'any_login'`
 
 2.  Execute in console:
 
-        bundle install
+      `bundle install`
 
 3.  In application layout (for example `app/views/layouts/application.html.erb`) add the following to the bottom of the page:
 
-        = any_login_here if defined?(AnyLogin)
+      `= any_login_here if defined?(AnyLogin)`
 
 4.  Open your app and on the bottom left corner you will see semi-transparent user icon. Click on it and now you can select any user to log in as without a password.
 
@@ -86,7 +86,8 @@ By default no additional steps are required to make it work with Sorcery gem. If
 If you are utilizing a custom login strategy, you can also utilize it with this gem. Below is an example configuration if a user was utilizing OmniAuth and rails sessions directly as described in [this article](http://railscasts.com/episodes/241-simple-omniauth-revised):
 
 In `app/lib/anylogin_omniauth.rb`
-```
+
+```ruby
 module AnyloginOmniauth
   module Controller
     def self.any_login_current_user_method
@@ -107,7 +108,7 @@ Then in your initializer configure `provider` to your new class. In this example
 
 If you want to customize gem execute in console:
 
-    rails g any_login initializer
+  `rails g any_login initializer`
 
 It will create the initializer file `config/initializers/any_login.rb`.
 
@@ -225,11 +226,57 @@ You can also try to debug your application in production and secure AnyLogin wit
 
 Update gemspec:
 
-```
+```sh
 bundle
 BUNDLE_GEMFILE=./gemfiles/rails_6_1.gemfile bundle
-BUNDLE_GEMFILE=./gemfiles/rails_6.gemfile bundle
 BUNDLE_GEMFILE=./gemfiles/rails_7.gemfile bundle
+BUNDLE_GEMFILE=./gemfiles/rails_7_1.gemfile bundle
+```
+
+## Tests
+
+To setup test apps:
+
+`./prepare.sh`
+
+and
+
+`bundle exec appraisal install`
+
+To run tests:
+
+```bash
+
+bundle exec appraisal rails-6-1 bundle exec test_devise
+bundle exec appraisal rails-6-1 bundle exec test_clearance
+bundle exec appraisal rails-6-1 bundle exec test_authlogic
+bundle exec appraisal rails-6-1 bundle exec test_sorcery
+
+# or
+
+bundle exec appraisal rails-6-1 bundle exec rails test test/devise/
+bundle exec appraisal rails-6-1 bundle exec rails test test/authlogic/
+bundle exec appraisal rails-6-1 bundle exec rails test test/clearance/
+bundle exec appraisal rails-6-1 bundle exec rails test test/sorcery/
+
+bundle exec appraisal rails-7 bundle exec rails test test/devise/
+bundle exec appraisal rails-7 bundle exec rails test test/authlogic/
+bundle exec appraisal rails-7 bundle exec rails test test/clearance/
+bundle exec appraisal rails-7 bundle exec rails test test/sorcery/
+
+bundle exec appraisal rails-7-1 bundle exec rails test test/devise/
+bundle exec appraisal rails-7-1 bundle exec rails test test/authlogic/
+bundle exec appraisal rails-7-1 bundle exec rails test test/clearance/
+bundle exec appraisal rails-7-1 bundle exec rails test test/sorcery/
+
+```
+
+If you want to manually tests open `test/rails_apps/devise/` and run `rails s` and open `http://localhost:3000` (and with other gems)
+
+Note: with Devise it can glitch in dummy app so I suggest to connect to real app using:
+
+```ruby
+  gem 'any_login', path: '../any_login'
 ```
 
 ## Other

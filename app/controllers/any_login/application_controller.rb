@@ -1,6 +1,6 @@
 module AnyLogin
   class ApplicationController < ActionController::Base
-    protect_from_forgery except: :js
+    protect_from_forgery
     before_action :try_not_to_leak_any_login_is_installed
 
     include AnyLogin.provider.constantize::Controller
@@ -17,14 +17,6 @@ module AnyLogin
       head 403 && return unless AnyLogin.verify_access_proc.call(self)
       add_to_previous
       AnyLogin.provider.constantize::Controller.instance_method(:any_login_sign_in).bind(self).call
-    end
-
-    def css
-      send_file AnyLogin::Engine.root.join('app', 'assets', 'stylesheets', 'any_login', 'application.css'), content_type: 'text/css'
-    end
-
-    def js
-      send_file AnyLogin::Engine.root.join('app', 'assets', 'javascripts', 'any_login', 'application.js'), content_type: 'text/javascript'
     end
 
     private
