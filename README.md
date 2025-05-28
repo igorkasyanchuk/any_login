@@ -259,7 +259,7 @@ bundle exec appraisal rails-8-0 bundle exec rails test test/sorcery/
 
 ```
 
-If you want to manually tests open `test/rails_apps/devise/` and run `rails s` and open `http://localhost:3000` (and with other gems)
+If you want to manually tests open `test/rails_apps/devise/` and run `BUNDLE_GEMFILE=../../../gemfiles/rails_8_0.gemfile bundle exec rails s` and open `http://localhost:3000` (and with other gems)
 
 Note: with Devise it can glitch in dummy app so I suggest to connect to real app using:
 
