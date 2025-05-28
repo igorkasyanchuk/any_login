@@ -1,10 +1,14 @@
 # Changelog
 
-## 1.6.0
+## 1.7.0
 
 - deprecate older Rails versions (in CI)
 - add support for Rails 8 (in CI)
 - added CSP support for inline JS/CSS
+
+## 1.6.0
+
+ - missed to add to changelog :)
 
 ## 1.5.4
 
