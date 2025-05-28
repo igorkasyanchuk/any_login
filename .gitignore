@@ -20,4 +20,4 @@ test/rails_apps/devise/db/test*
 test/rails_apps/clearance/db/test*
 test/rails_apps/sorcery/db/test*
 
-gemfiles/rails_8_0.lock
+gemfiles/rails_8_0.gemfile.lock
