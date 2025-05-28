@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "appraisal"
   s.add_development_dependency "multi_xml", "0.6.0"
+  s.add_development_dependency "sqlite3", ">= 2.6.0"
 end

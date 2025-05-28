@@ -228,10 +228,7 @@ You can also try to debug your application in production and secure AnyLogin wit
 Update gemspec:
 
 ```sh
-bundle
-BUNDLE_GEMFILE=./gemfiles/rails_6_1.gemfile bundle
-BUNDLE_GEMFILE=./gemfiles/rails_7.gemfile bundle
-BUNDLE_GEMFILE=./gemfiles/rails_7_1.gemfile bundle
+BUNDLE_GEMFILE=./gemfiles/rails_8_0.gemfile bundle
 ```
 
 ## Tests
@@ -248,27 +245,17 @@ To run tests:
 
 ```bash
 
-bundle exec appraisal rails-6-1 bundle exec test_devise
-bundle exec appraisal rails-6-1 bundle exec test_clearance
-bundle exec appraisal rails-6-1 bundle exec test_authlogic
-bundle exec appraisal rails-6-1 bundle exec test_sorcery
+bundle exec appraisal rails-8-0 bundle exec test_devise
+bundle exec appraisal rails-8-0 bundle exec test_clearance
+bundle exec appraisal rails-8-0 bundle exec test_authlogic
+bundle exec appraisal rails-8-0 bundle exec test_sorcery
 
 # or
 
-bundle exec appraisal rails-6-1 bundle exec rails test test/devise/
-bundle exec appraisal rails-6-1 bundle exec rails test test/authlogic/
-bundle exec appraisal rails-6-1 bundle exec rails test test/clearance/
-bundle exec appraisal rails-6-1 bundle exec rails test test/sorcery/
-
-bundle exec appraisal rails-7 bundle exec rails test test/devise/
-bundle exec appraisal rails-7 bundle exec rails test test/authlogic/
-bundle exec appraisal rails-7 bundle exec rails test test/clearance/
-bundle exec appraisal rails-7 bundle exec rails test test/sorcery/
-
-bundle exec appraisal rails-7-1 bundle exec rails test test/devise/
-bundle exec appraisal rails-7-1 bundle exec rails test test/authlogic/
-bundle exec appraisal rails-7-1 bundle exec rails test test/clearance/
-bundle exec appraisal rails-7-1 bundle exec rails test test/sorcery/
+bundle exec appraisal rails-8-0 bundle exec rails test test/devise/
+bundle exec appraisal rails-8-0 bundle exec rails test test/authlogic/
+bundle exec appraisal rails-8-0 bundle exec rails test test/clearance/
+bundle exec appraisal rails-8-0 bundle exec rails test test/sorcery/
 
 ```
 
