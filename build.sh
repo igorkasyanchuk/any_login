@@ -1,7 +1,5 @@
 bundle lock --add-platform arm64-darwin-22
-BUNDLE_GEMFILE=./gemfiles/rails_6_1.gemfile bundle lock --add-platform arm64-darwin-22
-BUNDLE_GEMFILE=./gemfiles/rails_7.gemfile bundle lock --add-platform arm64-darwin-22
-BUNDLE_GEMFILE=./gemfiles/rails_7_1.gemfile bundle lock --add-platform arm64-darwin-22
+BUNDLE_GEMFILE=./gemfiles/rails_8_0.gemfile bundle lock --add-platform arm64-darwin-22
 rm *.gem
 rm -fr test/dummy/log/*.log
 rm -fr test/dummy/tmp/cache

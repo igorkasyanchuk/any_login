@@ -22,7 +22,6 @@ gemspec
 group :development, :test do
   gem "capybara"
   gem 'selenium-webdriver'
-  gem "sqlite3"
   gem "webrick"
   gem "devise"
   gem "authlogic"
