@@ -6,10 +6,15 @@ src="https://codeclimate.com/github/igorkasyanchuk/any_login/badges/gpa.svg"
 />](https://codeclimate.com/github/igorkasyanchuk/any_login) [<img
 src="https://badge.fury.io/rb/any_login.svg" alt="Gem Version"
 />](http://badge.fury.io/rb/any_login)
-[![RailsJazz](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.railsjazz.com)
+[![My other gems](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.igorkasyanchuk.com/)
 [![https://www.patreon.com/igorkasyanchuk](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/patron.svg?raw=true)](https://www.patreon.com/igorkasyanchuk)
 
-[!["Buy Me A Coffee"](https://github.com/igorkasyanchuk/get-smart/blob/main/docs/snapshot-bmc-button-small.png?raw=true)](https://buymeacoffee.com/igorkasyanchuk)
+<a href="https://igorkasyanchuk.com/apps?ref=any_login">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://igorkasyanchuk.com/versions/v1/banner-dark.svg">
+    <img src="https://igorkasyanchuk.com/versions/v1/banner-light.svg" width="720" alt="More tools from the author: Laki, DiffNotes and more. See all projects at igorkasyanchuk.com/apps">
+  </picture>
+</a>
 
 ## Description
 
@@ -270,6 +275,4 @@ Note: with Devise it can glitch in dummy app so I suggest to connect to real app
 ## Other
 
 [<img src="https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/more_gems.png?raw=true"
-/>](https://www.railsjazz.com/?utm_source=github&utm_medium=bottom&utm_campaign=any_login)
-
-[!["Buy Me A Coffee"](https://github.com/igorkasyanchuk/get-smart/blob/main/docs/snapshot-bmc-button.png?raw=true)](https://buymeacoffee.com/igorkasyanchuk)
+/>](https://www.igorkasyanchuk.com/)
