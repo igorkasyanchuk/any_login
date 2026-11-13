@@ -134,7 +134,9 @@ It will create the initializer file `config/initializers/any_login.rb`.
   attributes to match, e.g. `[:email, :name]` (case-insensitive substring match),
   or a proc that receives the query and returns users, e.g.
   `proc { |query| User.where("email LIKE ?", "#{query}%") }`. Results respect
-  `limit`. Default `nil` (no search field).
+  `limit`. Default `nil` (no search field). Attribute search is a substring
+  match that can't use regular indexes, so on large tables prefer a proc with a
+  prefix match (and `includes` for any associations `name_method` reads).
 - **redirect_path_after_login** - redirect user to path. Default is
   `:root_path`.
 - **login_on** - you can enable login with select field, ID input or both.

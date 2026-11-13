@@ -109,7 +109,7 @@ module AnyLogin
                search_by.call(query)
              else
                pattern = "%#{klass.sanitize_sql_like(query)}%"
-               klass.where(Array(search_by).map { |attribute| klass.arel_table[attribute].matches(pattern) }.reduce(:or))
+               klass.where(Array(search_by).map { |attribute| klass.arel_table[attribute].matches(pattern, '\\') }.reduce(:or))
              end
     return result.to_a if limit == :none
 

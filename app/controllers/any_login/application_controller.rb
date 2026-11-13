@@ -25,7 +25,7 @@ module AnyLogin
 
       query = params[:q].to_s.strip
       users = query.empty? ? [] : AnyLogin.search(query)
-      render json: users.map { |user| { id: user.send(AnyLogin.klass.primary_key), label: AnyLogin.label_for(user) } }
+      render json: users.map { |user| { id: user.id, label: AnyLogin.label_for(user) } }
     end
 
     private

@@ -22,18 +22,32 @@
     });
   }
 
+  function showSearchFailure(select) {
+    select.innerHTML = '';
+    select.add(new Option('Search failed', ''));
+  }
+
   function setupAnyLoginSearch() {
     let input = document.getElementById('any_login_search');
     let select = document.getElementById('selected_id');
-    if (!elementExists(input) || !elementExists(select) || input.dataset.anyLoginSearch) {
+    if (!elementExists(input) || !elementExists(select) || input.anyLoginSearchBound) {
       return;
     }
-    input.dataset.anyLoginSearch = 'ready';
+    input.anyLoginSearchBound = true;
 
-    let initialOptions = select.innerHTML;
+    if (select.dataset.anyLoginOptions === undefined) {
+      select.dataset.anyLoginOptions = select.innerHTML;
+    }
+    let initialOptions = select.dataset.anyLoginOptions;
     let promptText = select.options.length ? select.options[0].text : '';
     let timer = null;
     let request = null;
+
+    input.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+      }
+    });
 
     input.addEventListener('input', function() {
       clearTimeout(timer);
@@ -53,9 +67,18 @@
           credentials: 'same-origin',
           signal: request.signal
         })
-          .then(function(response) { return response.json(); })
+          .then(function(response) {
+            if (!response.ok) {
+              throw new Error('AnyLogin search failed: ' + response.status);
+            }
+            return response.json();
+          })
           .then(function(users) { replaceSelectOptions(select, promptText, users); })
-          .catch(function() {});
+          .catch(function(error) {
+            if (error.name !== 'AbortError') {
+              showSearchFailure(select);
+            }
+          });
       }, 250);
     });
   }

@@ -12,7 +12,6 @@ module AnyLogin
     teardown do
       AnyLogin.search_by = @previous_search_by
       AnyLogin.limit = @previous_limit
-      ::User.delete_all
     end
 
     test "search is disabled by default" do
@@ -30,7 +29,10 @@ module AnyLogin
 
     test "treats LIKE wildcards in the query literally" do
       AnyLogin.search_by = [:email]
+      underscored = ::User.create!(name: "John", email: "john_doe@example.com", password: "password123")
+      ::User.create!(name: "Johnx", email: "johnxdoe@example.com", password: "password123")
 
+      assert_equal [underscored], AnyLogin.search("john_doe")
       assert_empty AnyLogin.search("%")
     end
 
