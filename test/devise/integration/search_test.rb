@@ -51,19 +51,59 @@ class SearchTest < ActionDispatch::IntegrationTest
     AnyLogin.verify_access_proc = previous_proc
   end
 
-  test "signs in a user found by typing" do
+  test "signs in a user picked from the search dropdown" do
     AnyLogin.search_by = [:email, :name]
 
     visit "/"
     find("#any_login_form_toggle_label").click
     fill_in "any_login_search", with: "smith"
-    assert_selector "#selected_id option", text: "alice@example.com"
-    assert_no_selector "#selected_id option", text: "bob@sample.org"
-    find("#selected_id").select("alice@example.com")
+    assert_selector "#any_login_search_results [role=option]", text: "alice@example.com"
+    assert_no_selector "#any_login_search_results [role=option]", text: "bob@sample.org"
+    find("#any_login_search_results [role=option]", text: "alice@example.com").click
     assert_selector "#back_to_previous_id", visible: :all
 
     visit "/about"
 
     assert_text("This is secret page available only for logged in users")
+  end
+
+  test "picks a search result with the keyboard" do
+    AnyLogin.search_by = [:email, :name]
+
+    visit "/"
+    find("#any_login_form_toggle_label").click
+    fill_in "any_login_search", with: "example"
+    assert_selector "#any_login_search_results [role=option][aria-selected=true]", text: "alice@example.com"
+    find("#any_login_search").send_keys(:enter)
+    assert_selector "#back_to_previous_id", visible: :all
+
+    visit "/about"
+
+    assert_text("This is secret page available only for logged in users")
+  end
+
+  test "opens the dropdown above the search field when the box is at the bottom" do
+    AnyLogin.search_by = [:email, :name]
+
+    visit "/"
+    find("#any_login_form_toggle_label").click
+    fill_in "any_login_search", with: "smith"
+    assert_selector "#any_login_search_results [role=option]", text: "alice@example.com"
+
+    list_bottom, input_top = evaluate_script(<<~JS)
+      [document.getElementById("any_login_search_results").getBoundingClientRect().bottom,
+       document.getElementById("any_login_search").getBoundingClientRect().top]
+    JS
+    assert_operator list_bottom, :<=, input_top
+  end
+
+  test "shows a message when nothing matches" do
+    AnyLogin.search_by = [:email, :name]
+
+    visit "/"
+    find("#any_login_form_toggle_label").click
+    fill_in "any_login_search", with: "nobody"
+
+    assert_selector "#any_login_search_results li", text: "No matches"
   end
 end

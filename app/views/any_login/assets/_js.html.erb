@@ -14,53 +14,133 @@
     }
   }
 
-  function replaceSelectOptions(select, promptText, users) {
-    select.innerHTML = '';
-    select.add(new Option(users.length ? promptText : 'No matches', ''));
-    users.forEach(function(user) {
-      select.add(new Option(user.label, user.id));
-    });
-  }
-
-  function showSearchFailure(select) {
-    select.innerHTML = '';
-    select.add(new Option('Search failed', ''));
-  }
-
   function setupAnyLoginSearch() {
     let input = document.getElementById('any_login_search');
-    let select = document.getElementById('selected_id');
-    if (!elementExists(input) || !elementExists(select) || input.anyLoginSearchBound) {
+    let list = document.getElementById('any_login_search_results');
+    let idInput = document.getElementById('any_login_id_input');
+    if (!elementExists(input) || !elementExists(list) || input.anyLoginSearchBound) {
       return;
     }
     input.anyLoginSearchBound = true;
 
-    if (select.dataset.anyLoginOptions === undefined) {
-      select.dataset.anyLoginOptions = select.innerHTML;
-    }
-    let initialOptions = select.dataset.anyLoginOptions;
-    let promptText = select.options.length ? select.options[0].text : '';
     let timer = null;
     let request = null;
+    let users = [];
+    let active = -1;
+
+    function setOpen(open) {
+      list.hidden = !open;
+      input.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function showMessage(text) {
+      users = [];
+      active = -1;
+      list.innerHTML = '';
+      let item = document.createElement('li');
+      item.className = 'any_login_search_message';
+      item.textContent = text;
+      list.appendChild(item);
+      input.removeAttribute('aria-activedescendant');
+      setOpen(true);
+    }
+
+    function highlight(index) {
+      active = index;
+      Array.prototype.forEach.call(list.children, function(item, i) {
+        item.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      if (index >= 0) {
+        input.setAttribute('aria-activedescendant', list.children[index].id);
+        list.children[index].scrollIntoView({ block: 'nearest' });
+      } else {
+        input.removeAttribute('aria-activedescendant');
+      }
+    }
+
+    function showUsers(found) {
+      if (!found.length) {
+        showMessage('No matches');
+        return;
+      }
+      users = found;
+      list.innerHTML = '';
+      found.forEach(function(user, i) {
+        let item = document.createElement('li');
+        item.id = 'any_login_search_option_' + i;
+        item.setAttribute('role', 'option');
+        item.textContent = user.label;
+        item.addEventListener('mousedown', function(event) {
+          event.preventDefault();
+          pick(i);
+        });
+        item.addEventListener('mousemove', function() {
+          if (active !== i) {
+            highlight(i);
+          }
+        });
+        list.appendChild(item);
+      });
+      setOpen(true);
+      highlight(0);
+    }
+
+    function pick(index) {
+      let user = users[index];
+      if (!user) {
+        return;
+      }
+      input.value = user.label;
+      setOpen(false);
+      idInput.value = user.id;
+      document.getElementById('any_login_form').submit();
+    }
 
     input.addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        if (!users.length) {
+          return;
+        }
         event.preventDefault();
+        let step = event.key === 'ArrowDown' ? 1 : -1;
+        setOpen(true);
+        highlight((active + step + users.length) % users.length);
+      } else if (event.key === 'Enter') {
+        event.preventDefault();
+        if (!list.hidden && active >= 0) {
+          pick(active);
+        }
+      } else if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    });
+
+    input.addEventListener('blur', function() {
+      setOpen(false);
+    });
+
+    input.addEventListener('focus', function() {
+      if (list.children.length && input.value.trim().length >= 2) {
+        setOpen(true);
       }
     });
 
     input.addEventListener('input', function() {
       clearTimeout(timer);
-      timer = setTimeout(function() {
-        let query = input.value.trim();
-        if (request) {
-          request.abort();
-        }
-        if (query.length < 2) {
-          select.innerHTML = initialOptions;
-          return;
-        }
+      if (request) {
+        request.abort();
+        request = null;
+      }
+      let query = input.value.trim();
+      if (query.length < 2) {
+        users = [];
+        list.innerHTML = '';
+        setOpen(false);
+        return;
+      }
 
+      timer = setTimeout(function() {
+        showMessage('Searching\u2026');
         request = new AbortController();
         fetch(input.dataset.url + '?q=' + encodeURIComponent(query), {
           headers: { Accept: 'application/json' },
@@ -73,10 +153,10 @@
             }
             return response.json();
           })
-          .then(function(users) { replaceSelectOptions(select, promptText, users); })
+          .then(showUsers)
           .catch(function(error) {
             if (error.name !== 'AbortError') {
-              showSearchFailure(select);
+              showMessage('Search failed');
             }
           });
       }, 250);

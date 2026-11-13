@@ -93,6 +93,68 @@
     display: inline;
   }
 
+  #any_login:focus-within {
+    opacity: 1;
+  }
+
+  #any_login #any_login_search_box {
+    position: relative;
+    display: inline-block;
+  }
+
+  #any_login #any_login_search {
+    width: 200px;
+  }
+
+  #any_login #any_login_search_results {
+    position: absolute;
+    left: 0;
+    z-index: 10001;
+    min-width: 100%;
+    width: max-content;
+    max-width: 480px;
+    max-height: 280px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 4px 0;
+    list-style: none;
+    background: #fff;
+    color: #222;
+    font-size: 14px;
+    line-height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  #any_login #any_login_search_results[hidden] {
+    display: none;
+  }
+
+  #any_login .any_login_search_up #any_login_search_results {
+    bottom: calc(100% + 4px);
+  }
+
+  #any_login .any_login_search_down #any_login_search_results {
+    top: calc(100% + 4px);
+  }
+
+  #any_login #any_login_search_results li {
+    padding: 6px 12px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  #any_login #any_login_search_results li[aria-selected="true"] {
+    background: #5c4383;
+    color: #fff;
+  }
+
+  #any_login #any_login_search_results li.any_login_search_message {
+    color: #777;
+    cursor: default;
+  }
+
   #any_login span#anylogin_back_to_user {
     padding-left: 15px;
     color: cyan;
