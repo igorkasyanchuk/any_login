@@ -14,7 +14,7 @@ group :development, :test do
   gem "clearance"
   gem "sprockets-rails", require: "sprockets/railtie"
   gem "sorcery"
-  gem "json"
+  gem "json", "< 3"
   gem "pry"
   gem "pry-rails"
   gem "pry-byebug"
