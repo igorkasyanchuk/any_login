@@ -20,7 +20,7 @@ module AnyLogin
         direction = AnyLogin.position.to_s.start_with?('top') ? 'down' : 'up'
         content_tag(:span, id: 'any_login_search_box', class: "any_login_search_#{direction}") do
           search_field_tag(nil, '', placeholder: 'Search by name or email', id: 'any_login_search', autocomplete: 'off',
-                                    role: 'combobox', 'aria-expanded': 'false', 'aria-autocomplete': 'list',
+                                    role: 'combobox', 'aria-expanded': 'false', 'aria-busy': 'false', 'aria-autocomplete': 'list',
                                     'aria-controls': 'any_login_search_results', data: { url: any_login.search_path }) +
             content_tag(:ul, '', id: 'any_login_search_results', role: 'listbox', hidden: true)
         end

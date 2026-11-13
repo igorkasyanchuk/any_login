@@ -57,6 +57,7 @@ class SearchTest < ActionDispatch::IntegrationTest
     visit "/"
     find("#any_login_form_toggle_label").click
     fill_in "any_login_search", with: "smith"
+    assert_selector "#any_login_search[aria-busy=false]"
     assert_selector "#any_login_search_results [role=option]", text: "alice@example.com"
     assert_no_selector "#any_login_search_results [role=option]", text: "bob@sample.org"
     find("#any_login_search_results [role=option]", text: "alice@example.com").click
@@ -73,6 +74,7 @@ class SearchTest < ActionDispatch::IntegrationTest
     visit "/"
     find("#any_login_form_toggle_label").click
     fill_in "any_login_search", with: "example"
+    assert_selector "#any_login_search[aria-busy=false]"
     assert_selector "#any_login_search_results [role=option][aria-selected=true]", text: "alice@example.com"
     find("#any_login_search").send_keys(:enter)
     assert_selector "#back_to_previous_id", visible: :all
@@ -88,6 +90,7 @@ class SearchTest < ActionDispatch::IntegrationTest
     visit "/"
     find("#any_login_form_toggle_label").click
     fill_in "any_login_search", with: "smith"
+    assert_selector "#any_login_search[aria-busy=false]"
     assert_selector "#any_login_search_results [role=option]", text: "alice@example.com"
 
     list_bottom, input_top = evaluate_script(<<~JS)
@@ -103,6 +106,7 @@ class SearchTest < ActionDispatch::IntegrationTest
     visit "/"
     find("#any_login_form_toggle_label").click
     fill_in "any_login_search", with: "nobody"
+    assert_selector "#any_login_search[aria-busy=false]"
 
     assert_selector "#any_login_search_results li", text: "No matches"
   end

@@ -17,8 +17,8 @@
   function setupAnyLoginSearch() {
     let input = document.getElementById('any_login_search');
     let list = document.getElementById('any_login_search_results');
-    let idInput = document.getElementById('any_login_id_input');
-    if (!elementExists(input) || !elementExists(list) || input.anyLoginSearchBound) {
+    let select = document.getElementById('selected_id');
+    if (!elementExists(input) || !elementExists(list) || !elementExists(select) || input.anyLoginSearchBound) {
       return;
     }
     input.anyLoginSearchBound = true;
@@ -27,6 +27,10 @@
     let request = null;
     let users = [];
     let active = -1;
+
+    function setBusy(busy) {
+      input.setAttribute('aria-busy', busy ? 'true' : 'false');
+    }
 
     function setOpen(open) {
       list.hidden = !open;
@@ -59,6 +63,7 @@
     }
 
     function showUsers(found) {
+      setBusy(false);
       if (!found.length) {
         showMessage('No matches');
         return;
@@ -92,7 +97,9 @@
       }
       input.value = user.label;
       setOpen(false);
-      idInput.value = user.id;
+      let option = new Option(user.label, user.id, true, true);
+      select.add(option);
+      select.value = String(user.id);
       document.getElementById('any_login_form').submit();
     }
 
@@ -107,7 +114,7 @@
         highlight((active + step + users.length) % users.length);
       } else if (event.key === 'Enter') {
         event.preventDefault();
-        if (!list.hidden && active >= 0) {
+        if (input.getAttribute('aria-busy') !== 'true' && !list.hidden && active >= 0) {
           pick(active);
         }
       } else if (event.key === 'Escape') {
@@ -132,6 +139,7 @@
         request = null;
       }
       let query = input.value.trim();
+      setBusy(query.length >= 2);
       if (query.length < 2) {
         users = [];
         list.innerHTML = '';
@@ -156,6 +164,7 @@
           .then(showUsers)
           .catch(function(error) {
             if (error.name !== 'AbortError') {
+              setBusy(false);
               showMessage('Search failed');
             }
           });
