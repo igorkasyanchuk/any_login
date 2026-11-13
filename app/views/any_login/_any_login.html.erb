@@ -8,6 +8,7 @@
     </label>
     <input type="checkbox" id="any_login_form_toggle" <%= AnyLogin.auto_show ? "checked" : "" %>>
     <span id='any_login_box'>
+      <%= any_login_search_input %>
       <%= any_login_select %>
       or by
       <%= any_login_id_input %>

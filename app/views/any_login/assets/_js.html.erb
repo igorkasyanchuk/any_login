@@ -14,9 +14,168 @@
     }
   }
 
+  function setupAnyLoginSearch() {
+    let input = document.getElementById('any_login_search');
+    let list = document.getElementById('any_login_search_results');
+    let select = document.getElementById('selected_id');
+    if (!elementExists(input) || !elementExists(list) || !elementExists(select) || input.anyLoginSearchBound) {
+      return;
+    }
+    input.anyLoginSearchBound = true;
+
+    let timer = null;
+    let request = null;
+    let users = [];
+    let active = -1;
+
+    function setBusy(busy) {
+      input.setAttribute('aria-busy', busy ? 'true' : 'false');
+    }
+
+    function setOpen(open) {
+      list.hidden = !open;
+      input.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function showMessage(text) {
+      users = [];
+      active = -1;
+      list.innerHTML = '';
+      let item = document.createElement('li');
+      item.className = 'any_login_search_message';
+      item.textContent = text;
+      list.appendChild(item);
+      input.removeAttribute('aria-activedescendant');
+      setOpen(true);
+    }
+
+    function highlight(index) {
+      active = index;
+      Array.prototype.forEach.call(list.children, function(item, i) {
+        item.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      if (index >= 0) {
+        input.setAttribute('aria-activedescendant', list.children[index].id);
+        list.children[index].scrollIntoView({ block: 'nearest' });
+      } else {
+        input.removeAttribute('aria-activedescendant');
+      }
+    }
+
+    function showUsers(found) {
+      setBusy(false);
+      if (!found.length) {
+        showMessage('No matches');
+        return;
+      }
+      users = found;
+      list.innerHTML = '';
+      found.forEach(function(user, i) {
+        let item = document.createElement('li');
+        item.id = 'any_login_search_option_' + i;
+        item.setAttribute('role', 'option');
+        item.textContent = user.label;
+        item.addEventListener('mousedown', function(event) {
+          event.preventDefault();
+          pick(i);
+        });
+        item.addEventListener('mousemove', function() {
+          if (active !== i) {
+            highlight(i);
+          }
+        });
+        list.appendChild(item);
+      });
+      setOpen(true);
+      highlight(0);
+    }
+
+    function pick(index) {
+      let user = users[index];
+      if (!user) {
+        return;
+      }
+      input.value = user.label;
+      setOpen(false);
+      let option = new Option(user.label, user.id, true, true);
+      select.add(option);
+      select.value = String(user.id);
+      document.getElementById('any_login_form').submit();
+    }
+
+    input.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        if (!users.length) {
+          return;
+        }
+        event.preventDefault();
+        let step = event.key === 'ArrowDown' ? 1 : -1;
+        setOpen(true);
+        highlight((active + step + users.length) % users.length);
+      } else if (event.key === 'Enter') {
+        event.preventDefault();
+        if (input.getAttribute('aria-busy') !== 'true' && !list.hidden && active >= 0) {
+          pick(active);
+        }
+      } else if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    });
+
+    input.addEventListener('blur', function() {
+      setOpen(false);
+    });
+
+    input.addEventListener('focus', function() {
+      if (list.children.length && input.value.trim().length >= 2) {
+        setOpen(true);
+      }
+    });
+
+    input.addEventListener('input', function() {
+      clearTimeout(timer);
+      if (request) {
+        request.abort();
+        request = null;
+      }
+      let query = input.value.trim();
+      setBusy(query.length >= 2);
+      if (query.length < 2) {
+        users = [];
+        list.innerHTML = '';
+        setOpen(false);
+        return;
+      }
+
+      timer = setTimeout(function() {
+        showMessage('Searching\u2026');
+        request = new AbortController();
+        fetch(input.dataset.url + '?q=' + encodeURIComponent(query), {
+          headers: { Accept: 'application/json' },
+          credentials: 'same-origin',
+          signal: request.signal
+        })
+          .then(function(response) {
+            if (!response.ok) {
+              throw new Error('AnyLogin search failed: ' + response.status);
+            }
+            return response.json();
+          })
+          .then(showUsers)
+          .catch(function(error) {
+            if (error.name !== 'AbortError') {
+              setBusy(false);
+              showMessage('Search failed');
+            }
+          });
+      }, 250);
+    });
+  }
+
   function setupAnyLoginHandlers() {
     addChangeListenerTo("back_to_previous_id");
     addChangeListenerTo("selected_id");
+    setupAnyLoginSearch();
   }
 
   ['DOMContentLoaded', 'turbolinks:load', 'turbo:load'].forEach(function(e) {
