@@ -16,6 +16,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
 
     find("#any_login_form_toggle_label").click
     find('#selected_id option:last-of-type').select_option
+    assert_selector "#back_to_previous_id", visible: :all
 
     visit "/about"
 
