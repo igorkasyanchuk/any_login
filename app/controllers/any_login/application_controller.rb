@@ -19,6 +19,15 @@ module AnyLogin
       AnyLogin.provider.constantize::Controller.instance_method(:any_login_sign_in).bind(self).call
     end
 
+    def search
+      return head(:forbidden) unless AnyLogin.verify_access_proc.call(self)
+      return head(:not_found) unless AnyLogin.search_enabled?
+
+      query = params[:q].to_s.strip
+      users = query.empty? ? [] : AnyLogin.search(query)
+      render json: users.map { |user| { id: user.send(AnyLogin.klass.primary_key), label: AnyLogin.label_for(user) } }
+    end
+
     private
 
     def try_not_to_leak_any_login_is_installed

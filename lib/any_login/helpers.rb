@@ -14,6 +14,13 @@ module AnyLogin
         end
       end
 
+      def any_login_search_input
+        return unless AnyLogin.search_enabled?
+
+        search_field_tag :any_login_search, '', placeholder: 'Search', id: 'any_login_search', autocomplete: 'off',
+                                                data: { url: any_login.search_path }
+      end
+
       def any_login_submit
         submit_tag AnyLogin.login_button_label
       end

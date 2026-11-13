@@ -64,6 +64,10 @@ module AnyLogin
   mattr_accessor :limit
   @@limit = 10
 
+  # search users as you type: attributes to match (e.g. [:email, :name]) or a proc receiving the query, nil to disable
+  mattr_accessor :search_by
+  @@search_by = nil
+
   # Previous limit, integer or :none
   mattr_accessor :previous_limit
   @@previous_limit = 6
@@ -94,6 +98,26 @@ module AnyLogin
 
   def self.klass
     @@klass = AnyLogin.klass_name.constantize
+  end
+
+  def self.search_enabled?
+    search_by.present?
+  end
+
+  def self.search(query)
+    result = if search_by.respond_to?(:call)
+               search_by.call(query)
+             else
+               pattern = "%#{klass.sanitize_sql_like(query)}%"
+               klass.where(Array(search_by).map { |attribute| klass.arel_table[attribute].matches(pattern) }.reduce(:or))
+             end
+    return result.to_a if limit == :none
+
+    result.is_a?(ActiveRecord::Relation) ? result.limit(limit).to_a : result.take(limit)
+  end
+
+  def self.label_for(user)
+    Array(Collection.new([user]).to_a.first).first
   end
 
   def self.cookie_name

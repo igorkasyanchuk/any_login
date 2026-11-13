@@ -14,9 +14,56 @@
     }
   }
 
+  function replaceSelectOptions(select, promptText, users) {
+    select.innerHTML = '';
+    select.add(new Option(users.length ? promptText : 'No matches', ''));
+    users.forEach(function(user) {
+      select.add(new Option(user.label, user.id));
+    });
+  }
+
+  function setupAnyLoginSearch() {
+    let input = document.getElementById('any_login_search');
+    let select = document.getElementById('selected_id');
+    if (!elementExists(input) || !elementExists(select) || input.dataset.anyLoginSearch) {
+      return;
+    }
+    input.dataset.anyLoginSearch = 'ready';
+
+    let initialOptions = select.innerHTML;
+    let promptText = select.options.length ? select.options[0].text : '';
+    let timer = null;
+    let request = null;
+
+    input.addEventListener('input', function() {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        let query = input.value.trim();
+        if (request) {
+          request.abort();
+        }
+        if (query.length < 2) {
+          select.innerHTML = initialOptions;
+          return;
+        }
+
+        request = new AbortController();
+        fetch(input.dataset.url + '?q=' + encodeURIComponent(query), {
+          headers: { Accept: 'application/json' },
+          credentials: 'same-origin',
+          signal: request.signal
+        })
+          .then(function(response) { return response.json(); })
+          .then(function(users) { replaceSelectOptions(select, promptText, users); })
+          .catch(function() {});
+      }, 250);
+    });
+  }
+
   function setupAnyLoginHandlers() {
     addChangeListenerTo("back_to_previous_id");
     addChangeListenerTo("selected_id");
+    setupAnyLoginSearch();
   }
 
   ['DOMContentLoaded', 'turbolinks:load', 'turbo:load'].forEach(function(e) {

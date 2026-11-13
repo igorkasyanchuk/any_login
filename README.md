@@ -130,6 +130,11 @@ It will create the initializer file `config/initializers/any_login.rb`.
   permissions and any other important information.
 - **limit** - limit number of records in dropdown. Default 10. You can put
   `:none` if you don't want to limit the number of users for select.
+- **search_by** - search users as you type in the AnyLogin box. Pass the
+  attributes to match, e.g. `[:email, :name]` (case-insensitive substring match),
+  or a proc that receives the query and returns users, e.g.
+  `proc { |query| User.where("email LIKE ?", "#{query}%") }`. Results respect
+  `limit`. Default `nil` (no search field).
 - **redirect_path_after_login** - redirect user to path. Default is
   `:root_path`.
 - **login_on** - you can enable login with select field, ID input or both.
