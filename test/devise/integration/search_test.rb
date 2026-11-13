@@ -60,6 +60,7 @@ class SearchTest < ActionDispatch::IntegrationTest
     assert_selector "#selected_id option", text: "alice@example.com"
     assert_no_selector "#selected_id option", text: "bob@sample.org"
     find("#selected_id").select("alice@example.com")
+    assert_selector "#back_to_previous_id", visible: :all
 
     visit "/about"
 
