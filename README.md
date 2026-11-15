@@ -9,11 +9,8 @@ src="https://badge.fury.io/rb/any_login.svg" alt="Gem Version"
 [![My other gems](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.igorkasyanchuk.com/)
 [![https://www.patreon.com/igorkasyanchuk](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/patron.svg?raw=true)](https://www.patreon.com/igorkasyanchuk)
 
-<a href="https://igorkasyanchuk.com/apps?ref=any_login">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://igorkasyanchuk.com/versions/v1/banner-dark.svg">
-    <img src="https://igorkasyanchuk.com/versions/v1/banner-light.svg" width="720" alt="More tools from the author: Laki, DiffNotes and more. See all projects at igorkasyanchuk.com/apps">
-  </picture>
+<a href="https://www.igorkasyanchuk.com/visit/laki?ref=any_login">
+  <img src="https://www.igorkasyanchuk.com/versions/v2/laki-banner.gif" width="720" alt="Laki: run a team of AI coding agents. Lose track of none. Free at laki.sh">
 </a>
 
 ## Description
