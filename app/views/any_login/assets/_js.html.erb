@@ -14,9 +14,213 @@
     }
   }
 
+  function setupAnyLoginSearch() {
+    let input = document.getElementById('any_login_search');
+    let list = document.getElementById('any_login_search_results');
+    let select = document.getElementById('selected_id');
+    if (!elementExists(input) || !elementExists(list) || !elementExists(select) || input.anyLoginSearchBound) {
+      return;
+    }
+    input.anyLoginSearchBound = true;
+
+    let timer = null;
+    let request = null;
+    let initialGroups = JSON.parse(input.dataset.initial || '[]');
+    let users = [];
+    let options = [];
+    let active = -1;
+
+    function setBusy(busy) {
+      input.setAttribute('aria-busy', busy ? 'true' : 'false');
+    }
+
+    function setOpen(open) {
+      list.hidden = !open;
+      input.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function clearList() {
+      users = [];
+      options = [];
+      active = -1;
+      list.innerHTML = '';
+      input.removeAttribute('aria-activedescendant');
+    }
+
+    function showMessage(text) {
+      clearList();
+      let item = document.createElement('li');
+      item.className = 'any_login_search_message';
+      item.textContent = text;
+      list.appendChild(item);
+      setOpen(true);
+    }
+
+    function highlight(index) {
+      active = index;
+      options.forEach(function(item, i) {
+        item.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      if (index >= 0) {
+        input.setAttribute('aria-activedescendant', options[index].id);
+        options[index].scrollIntoView({ block: 'nearest' });
+      } else {
+        input.removeAttribute('aria-activedescendant');
+      }
+    }
+
+    function addOption(user) {
+      let index = users.length;
+      let item = document.createElement('li');
+      item.id = 'any_login_search_option_' + index;
+      item.setAttribute('role', 'option');
+      item.setAttribute('aria-selected', 'false');
+      item.textContent = user.label;
+      item.addEventListener('mousedown', function(event) {
+        event.preventDefault();
+        pick(index);
+      });
+      item.addEventListener('mousemove', function() {
+        if (active !== index) {
+          highlight(index);
+        }
+      });
+      users.push(user);
+      options.push(item);
+      list.appendChild(item);
+    }
+
+    function render(groups, activeIndex) {
+      clearList();
+      groups.forEach(function(group) {
+        if (!group.users.length) {
+          return;
+        }
+        if (group.label) {
+          let header = document.createElement('li');
+          header.className = 'any_login_search_group';
+          header.setAttribute('role', 'presentation');
+          header.textContent = group.label;
+          list.appendChild(header);
+        }
+        group.users.forEach(addOption);
+      });
+      setOpen(users.length > 0);
+      highlight(users.length ? activeIndex : -1);
+    }
+
+    function showInitial() {
+      render(initialGroups, -1);
+    }
+
+    function showUsers(found) {
+      setBusy(false);
+      if (!found.length) {
+        showMessage('No matches');
+        return;
+      }
+      render([{ label: null, users: found }], 0);
+    }
+
+    function pick(index) {
+      let user = users[index];
+      if (!user) {
+        return;
+      }
+      input.value = user.label;
+      setOpen(false);
+      let option = new Option(user.label, user.id, true, true);
+      select.add(option);
+      select.value = String(user.id);
+      document.getElementById('any_login_form').submit();
+    }
+
+    input.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        if (list.hidden) {
+          reopen();
+        }
+        if (!users.length) {
+          return;
+        }
+        event.preventDefault();
+        let step = event.key === 'ArrowDown' ? 1 : -1;
+        if (active < 0) {
+          highlight(step > 0 ? 0 : users.length - 1);
+        } else {
+          highlight((active + step + users.length) % users.length);
+        }
+      } else if (event.key === 'Enter') {
+        event.preventDefault();
+        if (input.getAttribute('aria-busy') !== 'true' && !list.hidden && active >= 0) {
+          pick(active);
+        }
+      } else if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    });
+
+    input.addEventListener('blur', function() {
+      setOpen(false);
+    });
+
+    function reopen() {
+      if (input.value.trim().length < 2) {
+        showInitial();
+      } else if (list.children.length) {
+        setOpen(true);
+      }
+    }
+
+    input.addEventListener('focus', reopen);
+    input.addEventListener('click', function() {
+      if (list.hidden) {
+        reopen();
+      }
+    });
+
+    input.addEventListener('input', function() {
+      clearTimeout(timer);
+      if (request) {
+        request.abort();
+        request = null;
+      }
+      let query = input.value.trim();
+      setBusy(query.length >= 2);
+      if (query.length < 2) {
+        showInitial();
+        return;
+      }
+
+      timer = setTimeout(function() {
+        showMessage('Searching\u2026');
+        request = new AbortController();
+        fetch(input.dataset.url + '?q=' + encodeURIComponent(query), {
+          headers: { Accept: 'application/json' },
+          credentials: 'same-origin',
+          signal: request.signal
+        })
+          .then(function(response) {
+            if (!response.ok) {
+              throw new Error('AnyLogin search failed: ' + response.status);
+            }
+            return response.json();
+          })
+          .then(showUsers)
+          .catch(function(error) {
+            if (error.name !== 'AbortError') {
+              setBusy(false);
+              showMessage('Search failed');
+            }
+          });
+      }, 250);
+    });
+  }
+
   function setupAnyLoginHandlers() {
     addChangeListenerTo("back_to_previous_id");
     addChangeListenerTo("selected_id");
+    setupAnyLoginSearch();
   }
 
   ['DOMContentLoaded', 'turbolinks:load', 'turbo:load'].forEach(function(e) {

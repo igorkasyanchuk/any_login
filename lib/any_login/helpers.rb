@@ -12,19 +12,48 @@ module AnyLogin
         text_field_tag :id, '', placeholder: 'ID', id: 'any_login_id_input', required: true
       end
 
+      def any_login_search_input
+        return unless AnyLogin.search_enabled?
+
+        direction = AnyLogin.position.to_s.start_with?('top') ? 'down' : 'up'
+        content_tag(:span, id: 'any_login_search_box', class: "any_login_search_#{direction}") do
+          search_field_tag(nil, '', placeholder: 'Search or pick a user', id: 'any_login_search', autocomplete: 'off',
+                                    role: 'combobox', 'aria-expanded': 'false', 'aria-busy': 'false', 'aria-autocomplete': 'list',
+                                    'aria-controls': 'any_login_search_results',
+                                    data: { url: any_login.search_path, initial: any_login_search_initial_groups }) +
+            content_tag(:ul, '', id: 'any_login_search_results', role: 'listbox', hidden: true)
+        end
+      end
+
       def any_login_submit
         submit_tag AnyLogin.login_button_label
       end
 
+      def any_login_search_initial_groups
+        collection = any_login_collection
+        groups = collection.grouped? ? collection.to_a : [[nil, collection.to_a]]
+        groups.map do |label, options|
+          users = options.map do |option|
+            option_label, id = option.is_a?(Array) ? option : [option, option]
+            { id: id, label: option_label }
+          end
+          { label: label && Array(label).first.to_s, users: users }
+        end
+      end
+
       def any_login_select
-        collection = AnyLogin.collection
+        collection = any_login_collection
         select_options =
                         if collection.grouped?
                           grouped_options_for_select(collection.to_a)
                         else
                           options_for_select(collection.to_a)
                         end
-        select_tag :selected_id, select_options, select_html_options
+        select_tag :selected_id, select_options, select_html_options.merge(hidden: AnyLogin.search_enabled?)
+      end
+
+      def any_login_collection
+        @any_login_collection ||= AnyLogin.collection
       end
 
       def any_login_previous_select

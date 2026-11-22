@@ -35,6 +35,9 @@ AnyLogin.setup do |config|
   # # limit, integer or :none
   # config.limit = 10
 
+  # # search users as you type: attributes to match or a proc receiving the query
+  # config.search_by = [:email, :name]
+
   # # Enable http basic authentication
   # config.http_basic_authentication_enabled = false
 
