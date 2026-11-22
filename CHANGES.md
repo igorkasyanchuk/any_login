@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.0
+
+- search users as you type: new `search_by` option (attributes or a proc) and `GET /any_login/search` endpoint
+- render the ID field on the first `any_login_id_input` call
+
 ## 1.7.0
 
 - deprecate older Rails versions (in CI)
