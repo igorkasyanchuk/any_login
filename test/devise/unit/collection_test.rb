@@ -29,7 +29,7 @@ module AnyLogin
 
         AnyLogin.name_method = ->(e) { e.id }
         assert_equal [1, 2], collection.to_a
-      rescue
+      ensure
         AnyLogin.name_method = prev
       end
     end
@@ -67,7 +67,7 @@ module AnyLogin
           ["user", [3, 4]]
         ]
         assert_equal expected, collection.to_a
-      rescue
+      ensure
         AnyLogin.name_method = prev
       end
     end

@@ -18,6 +18,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
     # There is an instability in the test suite where the option on the dropdown sometimes shows
     # up as `1` and sometimes shows up as `test@test.com`. This works around the issue.
     find('#selected_id option:last-of-type').select_option
+    assert_selector "#back_to_previous_id", visible: :all
 
     visit "/about"
 

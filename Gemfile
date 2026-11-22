@@ -29,7 +29,7 @@ group :development, :test do
   gem 'sprockets-rails', :require => 'sprockets/railtie'
   gem "sorcery"
 
-  gem 'json'
+  gem 'json', '< 3'
 
   gem "pry"
   gem "pry-rails"
